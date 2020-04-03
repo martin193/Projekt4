@@ -14,7 +14,7 @@ public class MainClass {
     System.out.println("Martin");
     }
     public void Tjena() {
-        System.out.print("tjena");
+        System.out.println("tjena");
         System.out.println("WAzzuupp");
         System.out.println("matilda");
                 System.out.println("martin");
