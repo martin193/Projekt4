@@ -13,7 +13,7 @@ public class MainClass {
     public void Metod() {
     System.out.println("Martin");
     }
-    public void tjena() {
+    public void Tjena() {
         System.out.print("tjena");
     }
 }
