@@ -11,6 +11,7 @@
 public class bloggo {
     public void Valkommen() 
     {
-        System.out.println("välkommen");
+        System.out.println("hej");
+        System.out.println("ohej");
     }
 }
