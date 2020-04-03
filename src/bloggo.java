@@ -13,6 +13,6 @@ public class bloggo {
     {
         System.out.println("hej");
         System.out.println("ohej");
-        System.out.println("bbhjjbhh");
+        System.out.println("jennifer");
     }
 }
