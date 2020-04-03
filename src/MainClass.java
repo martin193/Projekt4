@@ -11,7 +11,7 @@
 public class MainClass {
     
     public void Metod() {
-    System.out.println("HejHej");
+    System.out.println("Simon");
     }
     
 }
