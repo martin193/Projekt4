@@ -10,14 +10,7 @@
  */
 public class MainClass {
     
-    public void Metod() {
-    System.out.println("Martin");
-    }
-    public void Tjena() {
-        System.out.println("tjena");
-        System.out.println("WAzzuupp");
-        System.out.println("matilda");
-                System.out.println("martin");
-
+    public static void main(String[] args) {
+    
     }
 }
