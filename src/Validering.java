@@ -77,5 +77,35 @@ public class Validering {
             //annars returneras false
         }
     }
+    public static boolean korrektTelnr(JTextField kollaRuta)
+    {
+        int nummer = (kollaRuta.getText().length());
+                
+         
+        if (nummer != 10) 
+        {
+            JOptionPane.showMessageDialog(null, "Telefonnumret är i fel format");
+            kollaRuta.requestFocus();
+            return false;
+        } 
+        else {
+            return true;
+        } 
+        
+    }
+    public static boolean korrektLosenord(JTextField kollaRuta)
+    {
+          
+        if (kollaRuta.getText().length()>4)         
+        {
+            return true;
+        } 
+        else 
+        {
+            JOptionPane.showMessageDialog(null, "Lösenordet är för kort");
+            kollaRuta.requestFocus();
+            return false;
+        }
+    }
     
 }

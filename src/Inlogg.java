@@ -98,12 +98,9 @@ public class Inlogg extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
-        String mail = txfEpost.getText();
         
-        if(Validering.korrektEmail(mail)){
-            JOptionPane.showMessageDialog(null,"Korrekt mail!");
     }//GEN-LAST:event_btnLoggaInActionPerformed
-    }
+    
     /**
      * @param args the command line arguments
      */
