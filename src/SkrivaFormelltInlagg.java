@@ -8,12 +8,12 @@
  *
  * @author Sarah
  */
-public class SkrivaFormelltInlägg extends javax.swing.JFrame {
+public class SkrivaFormelltInlagg extends javax.swing.JFrame {
 
     /**
      * Creates new form SkrivaFormelltInlägg
      */
-    public SkrivaFormelltInlägg() {
+    public SkrivaFormelltInlagg() {
         initComponents();
     }
 
@@ -26,7 +26,7 @@ public class SkrivaFormelltInlägg extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        btnPubliceraFormelltInlagg = new javax.swing.JButton();
         txaNyttInlägg = new java.awt.TextArea();
         cbKategori = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
@@ -34,13 +34,15 @@ public class SkrivaFormelltInlägg extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txfNyKategori = new javax.swing.JTextField();
-        btLäggTillKategori = new javax.swing.JButton();
+        btnLaggTillKategori = new javax.swing.JButton();
         txfKategori = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        btnAvbryt = new javax.swing.JButton();
+        btnLaggUppFil = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Publicera");
+        btnPubliceraFormelltInlagg.setText("Publicera");
 
         cbKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -54,9 +56,13 @@ public class SkrivaFormelltInlägg extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
         jLabel4.setText("Hittade du ingen som passar?");
 
-        btLäggTillKategori.setText("Lägg till");
+        btnLaggTillKategori.setText("Lägg till");
 
-        jButton2.setText("Avbryt");
+        btnAvbryt.setText("Avbryt");
+
+        btnLaggUppFil.setText("Välj");
+
+        jLabel5.setText("Ladda upp fil");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -66,9 +72,9 @@ public class SkrivaFormelltInlägg extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnAvbryt, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(318, 318, 318)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -82,8 +88,12 @@ public class SkrivaFormelltInlägg extends javax.swing.JFrame {
                                         .addComponent(txfKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(29, 29, 29)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(btLäggTillKategori)))))
+                                            .addComponent(btnPubliceraFormelltInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnLaggTillKategori)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(27, 27, 27)
+                                        .addComponent(btnLaggUppFil))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txaNyttInlägg, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(184, 184, 184)
@@ -112,15 +122,19 @@ public class SkrivaFormelltInlägg extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(txfKategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btLäggTillKategori))
+                            .addComponent(btnLaggTillKategori))
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnLaggUppFil)
+                            .addComponent(jLabel5))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 181, Short.MAX_VALUE)
                         .addComponent(txaNyttInlägg, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnPubliceraFormelltInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAvbryt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46))
         );
 
@@ -144,33 +158,36 @@ public class SkrivaFormelltInlägg extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SkrivaFormelltInlägg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SkrivaFormelltInlagg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SkrivaFormelltInlägg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SkrivaFormelltInlagg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SkrivaFormelltInlägg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SkrivaFormelltInlagg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SkrivaFormelltInlägg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SkrivaFormelltInlagg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SkrivaFormelltInlägg().setVisible(true);
+                new SkrivaFormelltInlagg().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btLäggTillKategori;
+    private javax.swing.JButton btnAvbryt;
+    private javax.swing.JButton btnLaggTillKategori;
+    private javax.swing.JButton btnLaggUppFil;
+    private javax.swing.JButton btnPubliceraFormelltInlagg;
     private javax.swing.JComboBox<String> cbKategori;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private java.awt.TextArea txaNyttInlägg;
     private javax.swing.JTextField txfKategori;
     private javax.swing.JTextField txfNyKategori;
