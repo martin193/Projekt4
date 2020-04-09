@@ -98,7 +98,8 @@ public class Inlogg extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
-        
+        dispose();
+        new MinaInlagg().setVisible(true);
     }//GEN-LAST:event_btnLoggaInActionPerformed
     
     /**
