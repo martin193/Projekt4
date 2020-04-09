@@ -47,6 +47,11 @@ public class MinaInlagg extends javax.swing.JFrame {
         btnVisaInformella.setText("Visa informella inlägg");
 
         btnAvbryt.setText("Avbryt");
+        btnAvbryt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvbrytActionPerformed(evt);
+            }
+        });
 
         lblValjInlagg.setText("Välj inlägg:");
 
@@ -122,6 +127,11 @@ public class MinaInlagg extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAvbrytActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvbrytActionPerformed
+        this.dispose();
+        new Inlogg().setVisible(true);
+    }//GEN-LAST:event_btnAvbrytActionPerformed
 
 
 
