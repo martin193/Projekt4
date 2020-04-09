@@ -14,5 +14,6 @@ public class bloggo {
         System.out.println("hej");
         System.out.println("ohej");
         System.out.println("jennifer");
+        System.out.println("jennifer");
     }
 }
