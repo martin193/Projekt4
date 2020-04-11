@@ -99,7 +99,7 @@ public class Inlogg extends javax.swing.JFrame {
 
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
         dispose();
-        new MinaInlagg().setVisible(true);
+        new AnvStartsida().setVisible(true);
     }//GEN-LAST:event_btnLoggaInActionPerformed
    
 
