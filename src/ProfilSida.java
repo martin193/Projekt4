@@ -35,7 +35,7 @@ public class ProfilSida extends javax.swing.JFrame {
         jtxtMailAdress = new javax.swing.JTextField();
         jtxtNyttLosen = new javax.swing.JTextField();
         jtxtTelefonnr = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnTillbaka = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,10 +63,10 @@ public class ProfilSida extends javax.swing.JFrame {
 
         jtxtTelefonnr.setText("jTextField5");
 
-        jButton1.setText("Tillbaka");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnTillbaka.setText("Tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnTillbakaActionPerformed(evt);
             }
         });
 
@@ -104,7 +104,7 @@ public class ProfilSida extends javax.swing.JFrame {
                         .addGap(0, 213, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(btnTillbaka)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -129,7 +129,7 @@ public class ProfilSida extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jtxtTelefonnr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnTillbaka)
                 .addContainerGap())
         );
 
@@ -140,13 +140,13 @@ public class ProfilSida extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtNamnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         this.dispose();
         new AnvStartsida().setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnTillbakaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnTillbaka;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
