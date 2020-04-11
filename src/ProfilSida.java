@@ -30,12 +30,10 @@ public class ProfilSida extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jtxtNamn = new javax.swing.JTextField();
         jtxtMailAdress = new javax.swing.JTextField();
         jtxtNyttLosen = new javax.swing.JTextField();
-        jtxtRepeteraLosen = new javax.swing.JTextField();
         jtxtTelefonnr = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
@@ -50,8 +48,6 @@ public class ProfilSida extends javax.swing.JFrame {
 
         jLabel4.setText("Nytt lösenord");
 
-        jLabel5.setText("Repetera lösenord");
-
         jLabel6.setText("Telefonnummer");
 
         jtxtNamn.setText("jTextField1");
@@ -64,8 +60,6 @@ public class ProfilSida extends javax.swing.JFrame {
         jtxtMailAdress.setText("jTextField2");
 
         jtxtNyttLosen.setText("jTextField3");
-
-        jtxtRepeteraLosen.setText("jTextField4");
 
         jtxtTelefonnr.setText("jTextField5");
 
@@ -104,11 +98,6 @@ public class ProfilSida extends javax.swing.JFrame {
                                 .addComponent(jtxtNyttLosen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(jtxtRepeteraLosen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
                                 .addComponent(jLabel6)
                                 .addGap(18, 18, 18)
                                 .addComponent(jtxtTelefonnr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -137,13 +126,9 @@ public class ProfilSida extends javax.swing.JFrame {
                     .addComponent(jtxtNyttLosen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jtxtRepeteraLosen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jtxtTelefonnr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -156,7 +141,8 @@ public class ProfilSida extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxtNamnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new AnvStartsida().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -165,12 +151,10 @@ public class ProfilSida extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField jtxtMailAdress;
     private javax.swing.JTextField jtxtNamn;
     private javax.swing.JTextField jtxtNyttLosen;
-    private javax.swing.JTextField jtxtRepeteraLosen;
     private javax.swing.JTextField jtxtTelefonnr;
     // End of variables declaration//GEN-END:variables
 }

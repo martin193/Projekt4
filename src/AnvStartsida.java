@@ -118,6 +118,7 @@ public class AnvStartsida extends javax.swing.JFrame {
 
     private void btnSeProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeProfilActionPerformed
         this.dispose();
+        new ProfilSida().setVisible(true);
     }//GEN-LAST:event_btnSeProfilActionPerformed
 
     private void btnSeFormellBloggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeFormellBloggActionPerformed
