@@ -1,4 +1,7 @@
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -126,30 +129,58 @@ public class InformellBlogg extends javax.swing.JFrame {
             try
             {
             
-                String fraga= "SELECT Rubrik FROM INFORMELL_BLOGG";
-                String fraga2= "SELECT Text FROM INFORMELL_BLOGG";
+                String fraga= "SELECT RUBRIK FROM INFORMELL_BLOGG";
+                String fraga2= "SELECT TEXT FROM INFORMELL_BLOGG";
 
             
-                ArrayList<String> rubrik = idb.fetchColumn(fraga);
-                ArrayList<String> text = idb.fetchColumn(fraga2);
+                //ArrayList<String> rubrik = idb.fetchColumn(fraga);
+                //ArrayList<String> rubrik = GetQuery(fraga);
+                //ArrayList<String> text = GetQuery2(fraga2);
                 
-                String resultat = "";          
+                String rubrik = GetQuery(fraga);
+                
+                //String resultat = "";          
             
-                for(int i=0; i<rubrik.size(); i++)
+                /*for(int i=0; i<rubrik.size(); i++)
                 {
                     resultat+=rubrik.get(i) + "\n " + text.get(i) + "\n";
                 }    
             
-                bloggRuta.setText(resultat);
+                bloggRuta.setText(resultat);*/
                 
-                //loopar igenom listorna och skriver ut namnen i textrutan
             }
             catch (Exception bla)
             {
                 JOptionPane.showMessageDialog(null, "Något gick fel!");
             }
         
-    }                                            
+    }           
+    public String GetQuery(String s)
+    {
+	DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
+	Connection connection=obj_DB_Connection.get_connection();
+	PreparedStatement ps=null;
+        String rubrik = null;
+	try {
+	    String query= s;
+	    ps=connection.prepareStatement(query);
+	    ResultSet rs=ps.executeQuery();
+	    while(rs.next()){
+                rubrik = rs.getString(1);
+                String resultat = "";          
+            
+                
+                
+                resultat+=rubrik + "\n";
+                
+                bloggRuta.append(resultat);
+                
+	    }
+	} catch (Exception e) {
+	    System.out.println(e);
+	} 
+        return rubrik;
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
