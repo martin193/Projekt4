@@ -3,6 +3,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,11 +16,14 @@ import java.sql.SQLException;
  * @author martinnoe
  */
 public class ProfilSida extends javax.swing.JFrame {
+    
+    private String epost;
 
     /**
      * Creates new form ProfilSida
      */
-    public ProfilSida() {
+    public ProfilSida(String e) {
+        epost = e;
         initComponents();
         setText();
     }
@@ -161,7 +165,7 @@ public class ProfilSida extends javax.swing.JFrame {
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         this.dispose();
-        new AnvStartsida().setVisible(true);
+        new AnvStartsida(epost).setVisible(true);
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     private void btnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionPerformed
@@ -169,19 +173,21 @@ public class ProfilSida extends javax.swing.JFrame {
         String email = txtMailAdress.getText();
         String losenord = txtNyttLosen.getText();
         String telnr = txtTelefonnr.getText();
-        String Q = "UPDATE ANVANDARE SET FORNAMN = '"+fornamn +"' WHERE ANVANDARID=2";
+        String Q = "UPDATE ANVANDARE SET FORNAMN = '"+fornamn +"', EPOST='"+email+"', LOSENORD='"+losenord+"', TELNR='"+telnr+"'WHERE EPOST='"+epost+"'";
+        epost = email;
         try {
             updateAnvandare(Q);
+            JOptionPane.showMessageDialog(null, "Ändringen lyckades!");
         }catch(Exception e)
         {System.out.println(e);
         }
     }//GEN-LAST:event_btnChangeActionPerformed
 
     public void setText(){
-        txtNamn.setText(getQuery("SELECT FORNAMN FROM ANVANDARE WHERE ANVANDARID=2"));
-        txtMailAdress.setText(getQuery("SELECT EPOST FROM ANVANDARE WHERE ANVANDARID=2"));
-        txtNyttLosen.setText(getQuery("SELECT LOSENORD FROM ANVANDARE WHERE ANVANDARID=2"));
-        txtTelefonnr.setText(getQuery("SELECT TELNR FROM ANVANDARE WHERE ANVANDARID=2"));
+        txtNamn.setText(getQuery("SELECT FORNAMN FROM ANVANDARE WHERE EPOST='"+epost+"'"));
+        txtMailAdress.setText(epost);
+        txtNyttLosen.setText(getQuery("SELECT LOSENORD FROM ANVANDARE WHERE EPOST='"+epost+"'"));
+        txtTelefonnr.setText(getQuery("SELECT TELNR FROM ANVANDARE WHERE EPOST='"+epost+"'"));
     }
     
     public String getQuery(String q){
