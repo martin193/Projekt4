@@ -2,6 +2,7 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,8 +20,13 @@ public class FormellBlogg extends javax.swing.JFrame {
      */
     public FormellBlogg() {
         initComponents();
+
         this.setLocationRelativeTo(null);
+
         fyllCbKategorier();
+        fyllBloggRuta();
+        txtFormell.setLineWrap(true);
+        txtFormell.setEditable(false);
     }
 
     /**
@@ -32,23 +38,17 @@ public class FormellBlogg extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
         cbxFormellKategori = new javax.swing.JComboBox<>();
-        txtFormell = new java.awt.TextArea();
         btNyFormell = new javax.swing.JButton();
-        btVisaFormella = new javax.swing.JButton();
+        btVisaMinaFormella = new javax.swing.JButton();
         btnTillbaka = new javax.swing.JButton();
         btnFiltreraKategori = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtFormell = new javax.swing.JTextArea();
+        btnVisaAllaFormella = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jTextField1.setFont(new java.awt.Font("Cambria", 1, 24)); // NOI18N
-        jTextField1.setText("Formella bloggen");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
 
         cbxFormellKategori.setToolTipText("");
 
@@ -59,7 +59,7 @@ public class FormellBlogg extends javax.swing.JFrame {
             }
         });
 
-        btVisaFormella.setText("Visa mina inlägg");
+        btVisaMinaFormella.setText("Visa mina inlägg");
 
         btnTillbaka.setText("Tillbaka");
         btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
@@ -75,52 +75,73 @@ public class FormellBlogg extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Cambria", 1, 24)); // NOI18N
+        jLabel1.setText("   Formell Blogg");
+        jLabel1.setOpaque(true);
+
+        txtFormell.setColumns(20);
+        txtFormell.setRows(5);
+        jScrollPane1.setViewportView(txtFormell);
+
+        btnVisaAllaFormella.setText("Visa alla inlägg");
+        btnVisaAllaFormella.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisaAllaFormellaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(283, 283, 283))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(cbxFormellKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnFiltreraKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1)
+                        .addGap(51, 51, 51)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btNyFormell)
+                            .addComponent(btVisaMinaFormella, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                            .addComponent(btnVisaAllaFormella, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(38, 38, 38))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtFormell, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btNyFormell, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btVisaFormella, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(42, 42, 42))))
+                        .addComponent(cbxFormellKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnFiltreraKategori)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 297, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(293, 293, 293))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxFormellKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnFiltreraKategori))
-                .addGap(71, 71, 71)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFormell, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(198, 198, 198)
                         .addComponent(btNyFormell, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
-                        .addComponent(btVisaFormella, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addGap(31, 31, 31)
+                        .addComponent(btVisaMinaFormella, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnVisaAllaFormella, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbxFormellKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnFiltreraKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -148,10 +169,6 @@ public class FormellBlogg extends javax.swing.JFrame {
         }
     }
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void btNyFormellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNyFormellActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btNyFormellActionPerformed
@@ -160,6 +177,77 @@ public class FormellBlogg extends javax.swing.JFrame {
         this.dispose();
         new AnvStartsida().setVisible(true);
     }//GEN-LAST:event_btnTillbakaActionPerformed
+
+    private void fyllBloggRuta() {
+        txtFormell.setText("");
+
+        try {
+            String fraga = "select * from FORMELL_BLOGG";
+            String text = GetQuery(fraga);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            System.out.print("Internt felmeddelande: " + ex);
+        }
+
+    }
+
+    public String GetQuery(String s) {
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+
+        String rubrik = null;
+        String text = null;
+        String kategori = null;
+        String anvandarID = null;
+
+        try {
+            String query = s;
+            ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                rubrik = rs.getString(1);
+                text = rs.getString(2);
+                kategori = rs.getString(5);
+                anvandarID = rs.getString(4);
+
+                String anvandare = GetAnvandare(anvandarID);
+
+                String resultat = "";
+                resultat += "Rubrik: " + rubrik + "\nFörfattare: " + anvandare + "\nKategori: " + kategori + "\n" + text + "\n" + "\n";
+                txtFormell.append(resultat);
+
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return rubrik;
+    }
+
+    public String GetAnvandare(String anvandarID) {
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        String fornamn = null;
+        String efternamn = null;
+        try {
+            String query = "select * from ANVANDARE where ANVANDARID = " + anvandarID;
+            ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                fornamn = rs.getString(2);
+                efternamn = rs.getString(3);
+
+                System.out.println("getanvandare: " + fornamn + efternamn);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        String namn = fornamn + " " + efternamn;
+        return namn;
+    }
 
     private void btnFiltreraKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltreraKategoriActionPerformed
         txtFormell.setText("");
@@ -174,6 +262,8 @@ public class FormellBlogg extends javax.swing.JFrame {
         String rubrik = null;
         String text = null;
         String kategori2 = null;
+        String anvandarID = null;
+
         try {
             String query = fraga;
             ps = connection.prepareStatement(query);
@@ -182,9 +272,12 @@ public class FormellBlogg extends javax.swing.JFrame {
                 rubrik = rs.getString(1);
                 text = rs.getString(2);
                 kategori2 = rs.getString(5);
+                anvandarID = rs.getString(4);
+
+                String anvandare = GetAnvandare(anvandarID);
 
                 String resultat = "";
-                resultat += rubrik + "\n" + "Kategori: " + kategori2 + "\n" + text + "\n" + "\n";
+                resultat += "Rubrik: " + rubrik + "\nFörfattare: " + anvandare + "\nKategori: " + kategori2 + "\n" + text + "\n" + "\n";
                 txtFormell.append(resultat);
             }
         } catch (Exception e) {
@@ -192,14 +285,20 @@ public class FormellBlogg extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnFiltreraKategoriActionPerformed
 
+    private void btnVisaAllaFormellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaAllaFormellaActionPerformed
+        fyllBloggRuta();
+    }//GEN-LAST:event_btnVisaAllaFormellaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btNyFormell;
-    private javax.swing.JButton btVisaFormella;
+    private javax.swing.JButton btVisaMinaFormella;
     private javax.swing.JButton btnFiltreraKategori;
     private javax.swing.JButton btnTillbaka;
+    private javax.swing.JButton btnVisaAllaFormella;
     private javax.swing.JComboBox<String> cbxFormellKategori;
-    private javax.swing.JTextField jTextField1;
-    private java.awt.TextArea txtFormell;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea txtFormell;
     // End of variables declaration//GEN-END:variables
 }
