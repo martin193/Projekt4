@@ -117,8 +117,8 @@ public class Inlogg extends javax.swing.JFrame {
             String fraga = "SELECT Losenord from ANVANDARE where Epost = '" + epost + "'";
             String fraga2 = "SELECT AnvandarID from ANVANDARE where Epost = '" + epost + "'";
 
-            String losenord2 = GetQuery(fraga);
-            String anvandarID = GetQuery(fraga2);
+            String losenord2 = GetQuery();
+            String anvandarID = GetQuery();
 
             if (losenord.equals(losenord2)) {
                 dispose();
@@ -132,19 +132,24 @@ public class Inlogg extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
-    public String GetQuery(String s)
+    public String GetQuery()
     {
-        String namn = null;
+	DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
+	Connection connection=obj_DB_Connection.get_connection();
+	PreparedStatement ps=null;
+        String losen = null;
 	try {
-            String query= s ;
-            Connection con = DriverManager.getConnection("jdbc:mysql://db4free.net:3306/team4databas","marcusbatan","MsJvyxCm#4JQz8B");
-            PreparedStatement ps= con.prepareStatement(query);
+	    String query="select Losenord from ANVANDARE where Epost='Roby@katt.se'";
+	    ps=connection.prepareStatement(query);
 	    ResultSet rs=ps.executeQuery();
-	    namn = rs.getString(1);
-	} catch (SQLException e) {
+	    while(rs.next()){
+	        System.out.println(rs.getString("Losenord"));
+                losen = rs.getString("Losenord");
+	    }
+	} catch (Exception e) {
 	    System.out.println(e);
-	}
-        return namn;
+	} 
+        return losen;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
