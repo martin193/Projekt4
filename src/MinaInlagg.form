@@ -24,9 +24,9 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-              <Component id="btnAvbryt" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="32" max="32767" attributes="0"/>
+              <EmptySpace min="37" max="32767" attributes="0"/>
+              <Component id="btnTillbaka" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <Group type="103" groupAlignment="1" attributes="0">
@@ -95,7 +95,7 @@
               <EmptySpace pref="29" max="32767" attributes="0"/>
               <Component id="txaHeltInlagg" min="-2" pref="130" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-              <Component id="btnAvbryt" min="-2" max="-2" attributes="0"/>
+              <Component id="btnTillbaka" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -119,14 +119,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Visa informella inl&#xe4;gg"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnAvbryt">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Avbryt"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAvbrytActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbxInlagg">
       <Properties>
@@ -159,6 +151,14 @@
       </Properties>
     </Component>
     <Component class="java.awt.TextArea" name="txaHeltInlagg">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnTillbaka">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tillbaka"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTillbakaActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

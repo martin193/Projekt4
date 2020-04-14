@@ -15,6 +15,7 @@ public class ProfilSida extends javax.swing.JFrame {
      */
     public ProfilSida() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

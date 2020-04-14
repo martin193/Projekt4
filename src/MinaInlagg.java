@@ -15,6 +15,7 @@ public class MinaInlagg extends javax.swing.JFrame {
      */
     public MinaInlagg() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -29,13 +30,13 @@ public class MinaInlagg extends javax.swing.JFrame {
         lblRubrik = new javax.swing.JLabel();
         btnVisaFormella = new javax.swing.JButton();
         btnVisaInformella = new javax.swing.JButton();
-        btnAvbryt = new javax.swing.JButton();
         cbxInlagg = new javax.swing.JComboBox<>();
         lblValjInlagg = new javax.swing.JLabel();
         btnVisaHeltInlagg = new javax.swing.JButton();
         btnRedigeraInlagg = new javax.swing.JButton();
         btnRaderaInlagg = new javax.swing.JButton();
         txaHeltInlagg = new java.awt.TextArea();
+        btnTillbaka = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,13 +47,6 @@ public class MinaInlagg extends javax.swing.JFrame {
 
         btnVisaInformella.setText("Visa informella inlägg");
 
-        btnAvbryt.setText("Avbryt");
-        btnAvbryt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAvbrytActionPerformed(evt);
-            }
-        });
-
         lblValjInlagg.setText("Välj inlägg:");
 
         btnVisaHeltInlagg.setText("Visa hela inlägget");
@@ -61,14 +55,21 @@ public class MinaInlagg extends javax.swing.JFrame {
 
         btnRaderaInlagg.setText("Radera inlägg");
 
+        btnTillbaka.setText("Tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(btnAvbryt)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnTillbaka)
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -121,24 +122,24 @@ public class MinaInlagg extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(txaHeltInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19)
-                .addComponent(btnAvbryt)
+                .addComponent(btnTillbaka)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAvbrytActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvbrytActionPerformed
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         this.dispose();
-        new Inlogg().setVisible(true);
-    }//GEN-LAST:event_btnAvbrytActionPerformed
+        new AnvStartsida().setVisible(true);
+    }//GEN-LAST:event_btnTillbakaActionPerformed
 
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAvbryt;
     private javax.swing.JButton btnRaderaInlagg;
     private javax.swing.JButton btnRedigeraInlagg;
+    private javax.swing.JButton btnTillbaka;
     private javax.swing.JButton btnVisaFormella;
     private javax.swing.JButton btnVisaHeltInlagg;
     private javax.swing.JButton btnVisaInformella;

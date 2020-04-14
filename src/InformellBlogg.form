@@ -36,7 +36,10 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="textArea1" min="-2" pref="395" max="-2" attributes="0"/>
                       <EmptySpace pref="36" max="32767" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jButton1" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnTillbaka" alignment="1" min="-2" pref="102" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
@@ -71,7 +74,9 @@
               <Component id="jButton1" min="-2" pref="40" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Component id="jButton2" min="-2" pref="42" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="196" max="32767" attributes="0"/>
+              <EmptySpace pref="138" max="32767" attributes="0"/>
+              <Component id="btnTillbaka" min="-2" pref="48" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -111,6 +116,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Visa mina inl&#xe4;gg"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnTillbaka">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tillbaka"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTillbakaActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -15,6 +15,7 @@ public class FormellBlogg extends javax.swing.JFrame {
      */
     public FormellBlogg() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -32,7 +33,7 @@ public class FormellBlogg extends javax.swing.JFrame {
         txtFormell = new java.awt.TextArea();
         btNyFormell = new javax.swing.JButton();
         btVisaFormella = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnTillbaka = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,10 +59,10 @@ public class FormellBlogg extends javax.swing.JFrame {
 
         btVisaFormella.setText("Visa mina inlägg");
 
-        jButton1.setText("Tillbaka");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnTillbaka.setText("Tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnTillbakaActionPerformed(evt);
             }
         });
 
@@ -91,7 +92,7 @@ public class FormellBlogg extends javax.swing.JFrame {
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(283, 283, 283))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -111,7 +112,7 @@ public class FormellBlogg extends javax.swing.JFrame {
                         .addGap(35, 35, 35)
                         .addComponent(btVisaFormella, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -126,17 +127,17 @@ public class FormellBlogg extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btNyFormellActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         this.dispose();
         new AnvStartsida().setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnTillbakaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btNyFormell;
     private javax.swing.JButton btVisaFormella;
+    private javax.swing.JButton btnTillbaka;
     private javax.swing.JComboBox<String> cbxFormellKategori;
-    private javax.swing.JButton jButton1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private java.awt.TextArea txtFormell;
