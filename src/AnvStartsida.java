@@ -15,6 +15,7 @@ public class AnvStartsida extends javax.swing.JFrame {
      */
     public AnvStartsida() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
