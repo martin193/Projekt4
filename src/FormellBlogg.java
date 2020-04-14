@@ -52,7 +52,6 @@ public class FormellBlogg extends javax.swing.JFrame {
 
         jTextField2.setText("Filtrera på kategori");
 
-        cbxFormellKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbxFormellKategori.setToolTipText("");
 
         btNyFormell.setText("Skapa nytt blogginlägg");
