@@ -6,7 +6,6 @@ import javax.swing.JOptionPane;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author jenni
@@ -19,6 +18,7 @@ public class Inlogg extends javax.swing.JFrame {
     public Inlogg() {
         initComponents();
         this.setLocationRelativeTo(null);
+        lblFelMeddelande.setText("");
     }
 
     /**
@@ -36,6 +36,7 @@ public class Inlogg extends javax.swing.JFrame {
         txfEpost = new javax.swing.JTextField();
         pwfLosenord = new javax.swing.JPasswordField();
         btnLoggaIn = new javax.swing.JButton();
+        lblFelMeddelande = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,6 +54,8 @@ public class Inlogg extends javax.swing.JFrame {
             }
         });
 
+        lblFelMeddelande.setForeground(new java.awt.Color(255, 0, 0));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -66,15 +69,16 @@ public class Inlogg extends javax.swing.JFrame {
                         .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblValkommen)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblEpostInlogg, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txfEpost))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(pwfLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblEpostInlogg, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txfEpost, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(pwfLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblFelMeddelande, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -89,7 +93,8 @@ public class Inlogg extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pwfLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pwfLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFelMeddelande, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(57, 57, 57)
                 .addComponent(btnLoggaIn)
                 .addContainerGap(69, Short.MAX_VALUE))
@@ -99,14 +104,34 @@ public class Inlogg extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
-        dispose();
-        new AnvStartsida().setVisible(true);
+        lblFelMeddelande.setText("");
+        String epost = txfEpost.getText();
+        String losenord = new String(pwfLosenord.getPassword());
+
+        try {
+            String fraga = "SELECT Losenord from ANVANDARE where Epost = '" + epost + "'";
+            String fraga2 = "SELECT AnvandarID from ANVANDARE where Epost = '" + epost + "'";
+
+            String losenord2 = ibd.fetchSingle(fraga);
+            String anvandarID = ibd.fetchSingle(fraga2);
+
+            if (losenord.equals(losenord2)) {
+                dispose();
+                new AnvStartsida().setVisible(true);
+
+            } else {
+                lblFelMeddelande.setText("Felaktigt lösenord");
+            }
+        } catch (Exception ex) {
+            lblFelMeddelande.setText("Något gick fel");
+        }
     }//GEN-LAST:event_btnLoggaInActionPerformed
-   
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLoggaIn;
     private javax.swing.JLabel lblEpostInlogg;
+    private javax.swing.JLabel lblFelMeddelande;
     private javax.swing.JLabel lblLosenord;
     private javax.swing.JLabel lblValkommen;
     private javax.swing.JPasswordField pwfLosenord;

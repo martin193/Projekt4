@@ -6,12 +6,10 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class skapaAnvandare extends javax.swing.JFrame {
-    public static void main(String[] args){
-    
+    public static void main(String[] args) {
      skapaAnvandare obj_DAO = new skapaAnvandare();
 	obj_DAO.Check_Data();
     }
-    
         public void Check_Data(){
 	DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
 	Connection connection=obj_DB_Connection.get_connection();
