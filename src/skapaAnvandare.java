@@ -157,7 +157,7 @@ public class skapaAnvandare extends javax.swing.JFrame {
                         if (Validering.korrektLosenord(txfLosenord)){
                             String id = "2";
                             String fraga = "INSERT into ANVANDARE values ('" + id + "', '" + fornamn + "', '" + efternamn +
-                                    "', '" + mail + "', '" + telnr + "', '" + losenord + "', '" + admin + "')";
+                                    "', '" + mail + "', '" + telnr + "', '" + losenord + "', '" + admin + "','TEST','T')";
                             
                             uppdateraAnvandare(fraga);
                             
