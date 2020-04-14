@@ -1,4 +1,9 @@
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /*
@@ -112,8 +117,8 @@ public class Inlogg extends javax.swing.JFrame {
             String fraga = "SELECT Losenord from ANVANDARE where Epost = '" + epost + "'";
             String fraga2 = "SELECT AnvandarID from ANVANDARE where Epost = '" + epost + "'";
 
-            String losenord2 = ibd.fetchSingle(fraga);
-            String anvandarID = ibd.fetchSingle(fraga2);
+            String losenord2 = GetQuery(fraga);
+            String anvandarID = GetQuery(fraga2);
 
             if (losenord.equals(losenord2)) {
                 dispose();
@@ -127,6 +132,20 @@ public class Inlogg extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
+    public String GetQuery(String s)
+    {
+        String namn = null;
+	try {
+            String query= s ;
+            Connection con = DriverManager.getConnection("jdbc:mysql://db4free.net:3306/team4databas","marcusbatan","MsJvyxCm#4JQz8B");
+            PreparedStatement ps= con.prepareStatement(query);
+	    ResultSet rs=ps.executeQuery();
+	    namn = rs.getString(1);
+	} catch (SQLException e) {
+	    System.out.println(e);
+	}
+        return namn;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLoggaIn;
