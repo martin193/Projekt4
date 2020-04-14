@@ -24,25 +24,6 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txfLosenord" pref="153" max="32767" attributes="0"/>
-                  <Component id="txfTelnr" max="32767" attributes="0"/>
-                  <Component id="txfMail" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txfEfternamn" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txfFornamn" alignment="0" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="197" max="-2" attributes="0"/>
@@ -56,6 +37,26 @@
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="cboxAdministrator" max="32767" attributes="0"/>
+                  <Component id="txfLosenord" pref="153" max="32767" attributes="0"/>
+                  <Component id="txfTelnr" max="32767" attributes="0"/>
+                  <Component id="txfMail" alignment="0" max="32767" attributes="0"/>
+                  <Component id="txfEfternamn" alignment="0" max="32767" attributes="0"/>
+                  <Component id="txfFornamn" alignment="0" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -93,7 +94,9 @@
                   <Component id="txfLosenord" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="44" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="cboxAdministrator" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="17" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnLaggTill" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnAvbryt" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -155,6 +158,11 @@
     <Component class="javax.swing.JButton" name="btnAvbryt">
       <Properties>
         <Property name="text" type="java.lang.String" value="Avbryt"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="cboxAdministrator">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Administrat&#xf6;r"/>
       </Properties>
     </Component>
   </SubComponents>

@@ -55,6 +55,7 @@ public class skapaAnvandare extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         btnLaggTill = new javax.swing.JButton();
         btnAvbryt = new javax.swing.JButton();
+        cboxAdministrator = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,26 +80,12 @@ public class skapaAnvandare extends javax.swing.JFrame {
 
         btnAvbryt.setText("Avbryt");
 
+        cboxAdministrator.setText("Administratör");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(107, 107, 107)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txfLosenord, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                    .addComponent(txfTelnr)
-                    .addComponent(txfMail)
-                    .addComponent(txfEfternamn)
-                    .addComponent(txfFornamn))
-                .addGap(110, 110, 110))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -110,6 +97,23 @@ public class skapaAnvandare extends javax.swing.JFrame {
                         .addGap(30, 30, 30)
                         .addComponent(btnAvbryt)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(107, 107, 107)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cboxAdministrator, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txfLosenord, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                    .addComponent(txfTelnr)
+                    .addComponent(txfMail)
+                    .addComponent(txfEfternamn)
+                    .addComponent(txfFornamn))
+                .addGap(110, 110, 110))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,7 +142,9 @@ public class skapaAnvandare extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txfLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cboxAdministrator)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLaggTill)
                     .addComponent(btnAvbryt))
@@ -154,6 +160,13 @@ public class skapaAnvandare extends javax.swing.JFrame {
         String mail = txfMail.getText();
         String telnr = txfTelnr.getText();
         String losenord = txfLosenord.getText();
+        boolean adminstatus = cboxAdministrator.isSelected(); 
+        
+        String admin = "F";
+        
+        if(adminstatus){
+            admin = "T";
+        }
         
         
         if (Validering.baraBokstaver(txfFornamn) && Validering.textFaltHarVarde(txfFornamn)){
@@ -161,7 +174,13 @@ public class skapaAnvandare extends javax.swing.JFrame {
                 if (Validering.korrektEmail(mail)){
                     if (Validering.korrektTelnr(txfTelnr)){
                         if (Validering.korrektLosenord(txfLosenord)){
-                            JOptionPane.showMessageDialog(null, "Det gick ju bra");
+                            String id = idb.getAutoIncrement("ANVANDARE", "ANVANDARID");
+                            String fraga = "INSERT into ANVANDARE values ('" + id + "', '" + fornamn + "', '" + efternamn +
+                                    "', '" + mail + "', '" + telnr + "', '" + losenord + "', '" + admin + "')";
+                            
+                            idb.insert(fraga);
+                            
+                            JOptionPane.showMessageDialog(null, "Användare tillagd");
                         }
                     }
                     
@@ -176,6 +195,7 @@ public class skapaAnvandare extends javax.swing.JFrame {
         
         
         
+        
     }//GEN-LAST:event_btnLaggTillActionPerformed
 
 
@@ -183,6 +203,7 @@ public class skapaAnvandare extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAvbryt;
     private javax.swing.JButton btnLaggTill;
+    private javax.swing.JCheckBox cboxAdministrator;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
