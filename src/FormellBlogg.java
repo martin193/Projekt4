@@ -1,9 +1,13 @@
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Sarah
@@ -16,6 +20,7 @@ public class FormellBlogg extends javax.swing.JFrame {
     public FormellBlogg() {
         initComponents();
         this.setLocationRelativeTo(null);
+        fyllCbKategorier();
     }
 
     /**
@@ -118,6 +123,26 @@ public class FormellBlogg extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void fyllCbKategorier() {
+        String fraga = "SELECT KATEGORI from FORMELL_BLOGG";
+
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        String kategori = null;
+        try {
+            String query = fraga;
+            ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                kategori = rs.getString(1);
+                cbxFormellKategori.addItem(kategori);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
