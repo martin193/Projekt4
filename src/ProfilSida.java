@@ -2,6 +2,7 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -42,7 +43,7 @@ public class ProfilSida extends javax.swing.JFrame {
         txtNyttLosen = new javax.swing.JTextField();
         txtTelefonnr = new javax.swing.JTextField();
         btnTillbaka = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnChange = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,10 +78,10 @@ public class ProfilSida extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnChange.setText("Spara");
+        btnChange.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnChangeActionPerformed(evt);
             }
         });
 
@@ -113,7 +114,7 @@ public class ProfilSida extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton1)
+                                    .addComponent(btnChange)
                                     .addComponent(jLabel6))
                                 .addGap(18, 18, 18)
                                 .addComponent(txtTelefonnr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -145,7 +146,7 @@ public class ProfilSida extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(txtTelefonnr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btnChange)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(btnTillbaka)
                 .addContainerGap())
@@ -163,8 +164,18 @@ public class ProfilSida extends javax.swing.JFrame {
         new AnvStartsida().setVisible(true);
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionPerformed
+        String fornamn = txtNamn.getText();
+        String email = txtMailAdress.getText();
+        String losenord = txtNyttLosen.getText();
+        String telnr = txtTelefonnr.getText();
+        String Q = "UPDATE ANVANDARE SET FORNAMN = '"+fornamn +"' WHERE ANVANDARID=2";
+        try {
+            updateAnvandare(Q);
+        }catch(Exception e)
+        {System.out.println(e);
+        }
+    }//GEN-LAST:event_btnChangeActionPerformed
 
     public void setText(){
         txtNamn.setText(getQuery("SELECT FORNAMN FROM ANVANDARE WHERE ANVANDARID=2"));
@@ -190,9 +201,22 @@ public class ProfilSida extends javax.swing.JFrame {
 	} 
         return svar;
     }
+    
+    public void updateAnvandare(String Q) {
+        DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
+	Connection connection=obj_DB_Connection.get_connection();
+	PreparedStatement ps=null;
+	try {
+	    String query= Q;
+	    ps=connection.prepareStatement(query);
+	    ps.executeUpdate();
+	} catch (SQLException e) {
+	    System.out.println(e);
+	}
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnChange;
     private javax.swing.JButton btnTillbaka;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
