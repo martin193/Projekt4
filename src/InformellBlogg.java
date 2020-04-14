@@ -1,4 +1,8 @@
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,6 +21,8 @@ public class InformellBlogg extends javax.swing.JFrame {
     public InformellBlogg() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        fyllBloggRuta();
     }
 
     /**
@@ -31,7 +37,7 @@ public class InformellBlogg extends javax.swing.JFrame {
         lblRubrik = new javax.swing.JLabel();
         lblKategori = new javax.swing.JLabel();
         cbxKategorier = new javax.swing.JComboBox<>();
-        textArea1 = new java.awt.TextArea();
+        bloggRuta = new java.awt.TextArea();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         btnTillbaka = new javax.swing.JButton();
@@ -68,7 +74,7 @@ public class InformellBlogg extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(textArea1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bloggRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -93,7 +99,7 @@ public class InformellBlogg extends javax.swing.JFrame {
                     .addComponent(lblKategori, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbxKategorier, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textArea1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(bloggRuta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(152, 152, 152)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -112,14 +118,47 @@ public class InformellBlogg extends javax.swing.JFrame {
         new AnvStartsida().setVisible(true);
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
+    private void fyllBloggRuta() {                                             
+           
+        
+        bloggRuta.setText("");
+        
+            try
+            {
+            
+                String fraga= "SELECT Rubrik FROM INFORMELL_BLOGG";
+                String fraga2= "SELECT Text FROM INFORMELL_BLOGG";
+
+            
+                ArrayList<String> rubrik = idb.fetchColumn(fraga);
+                ArrayList<String> text = idb.fetchColumn(fraga2);
+                
+                String resultat = "";          
+            
+                for(int i=0; i<rubrik.size(); i++)
+                {
+                    resultat+=rubrik.get(i) + "\n " + text.get(i) + "\n";
+                }    
+            
+                bloggRuta.setText(resultat);
+                
+                //loopar igenom listorna och skriver ut namnen i textrutan
+            }
+            catch (Exception bla)
+            {
+                JOptionPane.showMessageDialog(null, "Något gick fel!");
+            }
+        
+    }                                            
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.TextArea bloggRuta;
     private javax.swing.JButton btnTillbaka;
     private javax.swing.JComboBox<String> cbxKategorier;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel lblKategori;
     private javax.swing.JLabel lblRubrik;
-    private java.awt.TextArea textArea1;
     // End of variables declaration//GEN-END:variables
 }
