@@ -117,8 +117,8 @@ public class Inlogg extends javax.swing.JFrame {
             String fraga = "SELECT Losenord from ANVANDARE where Epost = '" + epost + "'";
             String fraga2 = "SELECT AnvandarID from ANVANDARE where Epost = '" + epost + "'";
 
-            String losenord2 = GetQuery();
-            String anvandarID = GetQuery();
+            String losenord2 = GetQuery(fraga);
+            String anvandarID = GetQuery(fraga2);
 
             if (losenord.equals(losenord2)) {
                 dispose();
@@ -132,19 +132,18 @@ public class Inlogg extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
-    public String GetQuery()
+    public String GetQuery(String s)
     {
 	DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
 	Connection connection=obj_DB_Connection.get_connection();
 	PreparedStatement ps=null;
         String losen = null;
 	try {
-	    String query="select Losenord from ANVANDARE where Epost='Roby@katt.se'";
+	    String query= s;
 	    ps=connection.prepareStatement(query);
 	    ResultSet rs=ps.executeQuery();
 	    while(rs.next()){
-	        System.out.println(rs.getString("Losenord"));
-                losen = rs.getString("Losenord");
+                losen = rs.getString(1);
 	    }
 	} catch (Exception e) {
 	    System.out.println(e);

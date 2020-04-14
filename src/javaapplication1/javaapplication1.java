@@ -12,14 +12,12 @@ public class javaapplication1 {
 	DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
 	Connection connection=obj_DB_Connection.get_connection();
 	PreparedStatement ps=null;
-        String losen = null;
 	try {
-	    String query="select Losenord from ANVANDARE where Epost='Roby@katt.se'";
+	    String query="select fornamn from ANVANDARE where Epost='Roby@katt.se'";
 	    ps=connection.prepareStatement(query);
 	    ResultSet rs=ps.executeQuery();
 	    while(rs.next()){
-	        System.out.println(rs.getString("Losenord"));
-                losen = rs.getString("Losenord");
+	        System.out.println(rs.getString(1));
 	    }
 	} catch (Exception e) {
 	    System.out.println(e);
