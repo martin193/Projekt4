@@ -2,6 +2,7 @@ package javaapplication1;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class javaapplication1 {
     public static void main(String[] args) {
@@ -13,13 +14,10 @@ public class javaapplication1 {
 	Connection connection=obj_DB_Connection.get_connection();
 	PreparedStatement ps=null;
 	try {
-	    String query="select fornamn from ANVANDARE where Epost='Roby@katt.se'";
+	    String query="INSERT INTO ANVANDARE VALUES (3, 'Martin', 'Testsson','martin@test.se','123123123','password123','T','123123','T');";
 	    ps=connection.prepareStatement(query);
-	    ResultSet rs=ps.executeQuery();
-	    while(rs.next()){
-	        System.out.println(rs.getString(1));
-	    }
-	} catch (Exception e) {
+	    ps.executeUpdate();
+	} catch (SQLException e) {
 	    System.out.println(e);
 	} 
     }

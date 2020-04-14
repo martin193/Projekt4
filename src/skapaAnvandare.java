@@ -6,25 +6,6 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class skapaAnvandare extends javax.swing.JFrame {
-    public static void main(String[] args) {
-     skapaAnvandare obj_DAO = new skapaAnvandare();
-	obj_DAO.Check_Data();
-    }
-        public void Check_Data(){
-	DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
-	Connection connection=obj_DB_Connection.get_connection();
-	PreparedStatement ps=null;
-	try {
-	    String query="select * from ANVANDARE";
-	    ps=connection.prepareStatement(query);
-	    ResultSet rs=ps.executeQuery();
-	    while(rs.next()){
-	        System.out.println("ANVANDARE- "+rs.getString("FORNAMN"));
-	    }
-	} catch (SQLException e) {
-	    System.out.println(e);
-	}
-    }
 
     /**
      * Creates new form skapaAnvandare
@@ -174,11 +155,11 @@ public class skapaAnvandare extends javax.swing.JFrame {
                 if (Validering.korrektEmail(mail)){
                     if (Validering.korrektTelnr(txfTelnr)){
                         if (Validering.korrektLosenord(txfLosenord)){
-                            String id = idb.getAutoIncrement("ANVANDARE", "ANVANDARID");
+                            String id = "2";
                             String fraga = "INSERT into ANVANDARE values ('" + id + "', '" + fornamn + "', '" + efternamn +
                                     "', '" + mail + "', '" + telnr + "', '" + losenord + "', '" + admin + "')";
                             
-                            idb.insert(fraga);
+                            uppdateraAnvandare(fraga);
                             
                             JOptionPane.showMessageDialog(null, "Användare tillagd");
                         }
@@ -197,7 +178,19 @@ public class skapaAnvandare extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnLaggTillActionPerformed
-
+    
+    private void uppdateraAnvandare(String Q){
+        	DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
+	Connection connection=obj_DB_Connection.get_connection();
+	PreparedStatement ps=null;
+	try {
+	    String query= Q;
+	    ps=connection.prepareStatement(query);
+	    ps.executeUpdate();
+	} catch (SQLException e) {
+	    System.out.println(e);
+	}
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
