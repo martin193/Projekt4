@@ -5,7 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class testardatabas {
-    
+    public static void main(String[] args) {
+    }
         public String Anvandare(){
             String namn = null;
 	try {
@@ -19,5 +20,6 @@ public class testardatabas {
 	}
         return namn;
     }
+        String test = Anvandare();       
 }
 
