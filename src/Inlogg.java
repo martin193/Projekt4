@@ -18,6 +18,7 @@ public class Inlogg extends javax.swing.JFrame {
      */
     public Inlogg() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
