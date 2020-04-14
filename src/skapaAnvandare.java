@@ -155,7 +155,7 @@ public class skapaAnvandare extends javax.swing.JFrame {
                 if (Validering.korrektEmail(mail)){
                     if (Validering.korrektTelnr(txfTelnr)){
                         if (Validering.korrektLosenord(txfLosenord)){
-                            String id = "2";
+                            String id = "3";
                             String fraga = "INSERT into ANVANDARE values ('" + id + "', '" + fornamn + "', '" + efternamn +
                                     "', '" + mail + "', '" + telnr + "', '" + losenord + "', '" + admin + "','-','T')";
                             
