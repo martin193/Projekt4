@@ -1,3 +1,8 @@
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,7 +20,7 @@ public class ProfilSida extends javax.swing.JFrame {
      */
     public ProfilSida() {
         initComponents();
-        txtNamn.setText("Hej");
+        setText();
     }
 
     /**
@@ -160,7 +165,31 @@ public class ProfilSida extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     }//GEN-LAST:event_jButton1ActionPerformed
-  
+
+    public void setText(){
+        txtNamn.setText(getQuery("SELECT FORNAMN FROM ANVANDARE WHERE ANVANDARID=2"));
+        txtMailAdress.setText(getQuery("SELECT EPOST FROM ANVANDARE WHERE ANVANDARID=2"));
+        txtNyttLosen.setText(getQuery("SELECT LOSENORD FROM ANVANDARE WHERE ANVANDARID=2"));
+        txtTelefonnr.setText(getQuery("SELECT TELNR FROM ANVANDARE WHERE ANVANDARID=2"));
+    }
+    
+    public String getQuery(String q){
+        String svar = null;
+        DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
+	Connection connection=obj_DB_Connection.get_connection();
+	PreparedStatement ps=null;
+	try {
+	    String query= q;
+	    ps=connection.prepareStatement(query);
+	    ResultSet rs=ps.executeQuery();
+	    while(rs.next()){
+                svar = rs.getString(1);
+	    }
+	} catch (Exception e) {
+	    System.out.println(e);
+	} 
+        return svar;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTillbaka;
     private javax.swing.JButton jButton1;
