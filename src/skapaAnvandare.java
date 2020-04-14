@@ -1,17 +1,32 @@
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author oskar
- */
 public class skapaAnvandare extends javax.swing.JFrame {
+    public static void main(String[] args){
+    
+     skapaAnvandare obj_DAO = new skapaAnvandare();
+	obj_DAO.Check_Data();
+    }
+    
+        public void Check_Data(){
+	DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
+	Connection connection=obj_DB_Connection.get_connection();
+	PreparedStatement ps=null;
+	try {
+	    String query="select * from ANVANDARE";
+	    ps=connection.prepareStatement(query);
+	    ResultSet rs=ps.executeQuery();
+	    while(rs.next()){
+	        System.out.println("ANVANDARE- "+rs.getString("FORNAMN"));
+	    }
+	} catch (SQLException e) {
+	    System.out.println(e);
+	}
+    }
 
     /**
      * Creates new form skapaAnvandare
