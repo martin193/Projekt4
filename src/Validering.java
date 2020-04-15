@@ -1,5 +1,6 @@
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /*
@@ -45,6 +46,23 @@ public class Validering {
     }
     
     public static boolean textFaltHarVarde(JTextField kollaRuta)
+    { 
+        boolean resultat = true;
+        if(kollaRuta.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "Rutan är tom!");
+            resultat=false;
+            kollaRuta.requestFocus();
+        }
+           
+        return resultat;
+        
+        //kollar om angivet värde är ifyllt eller tomt och returnerar true eller false
+        
+        //requestFocus gör att rutan där det felaktiva värdet har angetts kommer markeras åt användaren
+    }
+    
+        public static boolean textAreaHarVarde(JTextArea kollaRuta)
     { 
         boolean resultat = true;
         if(kollaRuta.getText().isEmpty())
