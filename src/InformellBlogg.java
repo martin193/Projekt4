@@ -61,7 +61,7 @@ public class InformellBlogg extends javax.swing.JFrame {
         lblRubrik = new javax.swing.JLabel();
         cbxKategorier = new javax.swing.JComboBox<>();
         bloggRuta = new java.awt.TextArea();
-        jButton1 = new javax.swing.JButton();
+        btnNyttInlagg = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         btnTillbaka = new javax.swing.JButton();
         btnFiltreraKategori = new javax.swing.JButton();
@@ -71,7 +71,12 @@ public class InformellBlogg extends javax.swing.JFrame {
         lblRubrik.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lblRubrik.setText("Informella bloggen");
 
-        jButton1.setText("Skriv ett nytt blogginlägg!");
+        btnNyttInlagg.setText("Skriv ett nytt blogginlägg!");
+        btnNyttInlagg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNyttInlaggActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Visa mina inlägg");
 
@@ -100,7 +105,7 @@ public class InformellBlogg extends javax.swing.JFrame {
                         .addComponent(bloggRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnNyttInlagg, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnTillbaka, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
@@ -136,7 +141,7 @@ public class InformellBlogg extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(152, 152, 152)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnNyttInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
@@ -161,7 +166,7 @@ public class InformellBlogg extends javax.swing.JFrame {
         try
         {
             
-            String fraga= "SELECT * FROM INFORMELL_BLOGG JOIN KATEGORI_INFORMELL ON KATEGORIID = KATEGORI WHERE KATEGORI = '" + kategori + "'";
+            String fraga= "SELECT * FROM INFORMELL_BLOGG JOIN KATEGORI_INFORMELL ON KATEGORIID = KATEGORI WHERE KATEGORINAMN = '" + kategori + "'";
                 
                 
             String rubrik = GetQuery(fraga);
@@ -175,6 +180,11 @@ public class InformellBlogg extends javax.swing.JFrame {
          
     }//GEN-LAST:event_btnFiltreraKategoriActionPerformed
 
+    private void btnNyttInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNyttInlaggActionPerformed
+        this.dispose();
+        new SkrivaInformelltInlagg().setVisible(true);
+    }//GEN-LAST:event_btnNyttInlaggActionPerformed
+
     private void fyllBloggRuta() {                                             
            
         
@@ -183,7 +193,7 @@ public class InformellBlogg extends javax.swing.JFrame {
             try
             {
             
-                String fraga= "SELECT * FROM INFORMELL_BLOGG JOIN KATEGORI_INFORMELL ON KATEGORIID = KATEGORI";
+                String fraga= "SELECT * FROM INFORMELL_BLOGG JOIN KATEGORI_INFORMELL ON KATEGORIID = KATEGORI JOIN ANVANDARE ON ANVANDARE.ANVANDARID = INFORMELL_BLOGG.ANVANDARID";
                 
                 
                 String rubrik = GetQuery(fraga);
@@ -205,6 +215,8 @@ public class InformellBlogg extends javax.swing.JFrame {
         String rubrik = null;
         String text = null;
         String kategori = null;
+        String fornamn = null;
+        String efternamn = null;
 	try {
 	    String query= s;
 	    ps=connection.prepareStatement(query);
@@ -213,10 +225,13 @@ public class InformellBlogg extends javax.swing.JFrame {
                 rubrik = rs.getString(1);
                 text = rs.getString(2);
                 kategori = rs.getString(8);
+                fornamn = rs.getString(11);
+                efternamn = rs.getString(12);
+                
                 
                 String resultat = "";                      
                 
-                resultat+=rubrik + "\n" + "Kategori: " + kategori + "\n" + text +  "\n" + "\n";
+                resultat+=rubrik + "\n" + "Författare: " + fornamn + ' ' + efternamn + "\n" + "Kategori: " + kategori + "\n" + text +  "\n" + "\n";
                 
                 bloggRuta.append(resultat);
                 
@@ -231,9 +246,9 @@ public class InformellBlogg extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.TextArea bloggRuta;
     private javax.swing.JButton btnFiltreraKategori;
+    private javax.swing.JButton btnNyttInlagg;
     private javax.swing.JButton btnTillbaka;
     private javax.swing.JComboBox<String> cbxKategorier;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel lblRubrik;
     // End of variables declaration//GEN-END:variables
