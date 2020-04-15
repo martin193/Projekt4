@@ -122,7 +122,7 @@ public class Inlogg extends javax.swing.JFrame {
 
             if (losenord.equals(losenord2)) {
                 dispose();
-                new AnvStartsida().setVisible(true);
+                new AnvStartsida(epost).setVisible(true);
 
             } else {
                 lblFelMeddelande.setText("Felaktigt lösenord");

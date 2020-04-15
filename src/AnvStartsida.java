@@ -10,12 +10,19 @@
  */
 public class AnvStartsida extends javax.swing.JFrame {
 
+    private String epost;
+
     /**
      * Creates new form AnvStartsida
      */
     public AnvStartsida() {
         initComponents();
         this.setLocationRelativeTo(null);
+    }
+    
+    public AnvStartsida(String e){
+        epost = e;
+        initComponents();
     }
 
     /**
@@ -65,6 +72,11 @@ public class AnvStartsida extends javax.swing.JFrame {
         });
 
         btnLoggaUt.setText("Logga ut");
+        btnLoggaUt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoggaUtActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel1.setText("Välkommen till din sida!");
@@ -119,12 +131,12 @@ public class AnvStartsida extends javax.swing.JFrame {
 
     private void btnSeProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeProfilActionPerformed
         this.dispose();
-        new ProfilSida().setVisible(true);
+        new ProfilSida(epost).setVisible(true);
     }//GEN-LAST:event_btnSeProfilActionPerformed
 
     private void btnSeFormellBloggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeFormellBloggActionPerformed
         this.dispose();
-        new FormellBlogg().setVisible(true);
+        new FormellBlogg(epost).setVisible(true);
     }//GEN-LAST:event_btnSeFormellBloggActionPerformed
 
     private void btnSeInformellBloggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeInformellBloggActionPerformed
@@ -136,6 +148,11 @@ public class AnvStartsida extends javax.swing.JFrame {
         this.dispose();
         new MinaInlagg().setVisible(true);
     }//GEN-LAST:event_btnSeInläggActionPerformed
+
+    private void btnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaUtActionPerformed
+       this.dispose();
+       new Inlogg().setVisible(true);
+    }//GEN-LAST:event_btnLoggaUtActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

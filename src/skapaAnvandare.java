@@ -159,7 +159,7 @@ public class skapaAnvandare extends javax.swing.JFrame {
                             String fraga = "INSERT into ANVANDARE values ('" + id + "', '" + fornamn + "', '" + efternamn +
                                     "', '" + mail + "', '" + telnr + "', '" + losenord + "', '" + admin + "','-','T')";
                             
-                            uppdateraAnvandare(fraga);
+                            skapaAnvandare(fraga);
                             
                             JOptionPane.showMessageDialog(null, "Användare tillagd");
                         }
@@ -179,7 +179,7 @@ public class skapaAnvandare extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnLaggTillActionPerformed
     
-    private void uppdateraAnvandare(String Q){
+    private void skapaAnvandare(String Q){
         	DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
 	Connection connection=obj_DB_Connection.get_connection();
 	PreparedStatement ps=null;
