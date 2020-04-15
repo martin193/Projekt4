@@ -164,7 +164,7 @@ public class SkrivaInformelltInlagg extends javax.swing.JFrame {
                 //String fraga = ("INFORMELL_BLOGG", "INLAGGSID");
                 
                         
-                GetQuery(fraga);
+               // GetQuery(fraga);
    
                 
                 
@@ -188,7 +188,7 @@ public class SkrivaInformelltInlagg extends javax.swing.JFrame {
 	    ps=connection.prepareStatement(query);
 	    ResultSet rs=ps.executeQuery();
 	    while(rs.next()){
-                idNy = rs.getAutoIncrement;
+                //idNy = rs.getAutoIncrement;
 
                 
                 
@@ -200,7 +200,7 @@ public class SkrivaInformelltInlagg extends javax.swing.JFrame {
 	} catch (Exception e) {
 	    System.out.println(e);
 	} 
-        return rubrik;
+        return "hej";
     }
 
 

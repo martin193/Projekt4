@@ -185,35 +185,53 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAvbrytActionPerformed
 
     //Lägger till nytt blogginlägg i databas FORMELL_BLOGG
-    //EJ KLART!!!!!! 
+    //INLÄGGSID, TIDPUNKT och FIL EJ KLART!!!!!!   
     private void btnPubliceraFormelltInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPubliceraFormelltInlaggActionPerformed
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
         if (Validering.textFaltHarVarde(txtNyRubrik) && Validering.textAreaHarVarde(txaNyttInlägg)) {
 
             String rubrik = txtNyRubrik.getText();
-            String kategori = cbKategori.getSelectedItem().toString();
+            String kategoriID = GetKategoriID();
             String text = txaNyttInlägg.getText();
-            //String inlaggsID = idb.getAutoIncrement("ALIEN", "ALIEN_ID"); 
             String forfattareID = GetForfattare();
-            //String tidpunkt =
-            //String fil =
+            String inlaggsID = "10"; //String inlaggsID = idb.getAutoIncrement("ALIEN", "ALIEN_ID"); 
+            String tidpunkt = "2020-04-15"; //String tidpunkt = automatiskt datum
+            String fil = null; //String fil = ????
+            try {
+                String query = "insert into FORMELL_BLOGG values ('" + rubrik + "', '" + text + "', " + inlaggsID 
+                        + ", " + forfattareID + ", " + fil + ", " + tidpunkt + ", " + kategoriID + ")";
+                ps = connection.prepareStatement(query);
+                ps.setString(1, rubrik);
+                ps.setString(2, text);
+                ps.setString(3, inlaggsID);
+                ps.setString(4, forfattareID);
+                ps.setString(5, fil);
+                ps.setString(6, tidpunkt);
+                ps.setString(7, kategoriID);
+                ps.execute();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
 
         }
     }//GEN-LAST:event_btnPubliceraFormelltInlaggActionPerformed
 
-    //Lägger till ny kategori i databas KATEGORI_FORMELL
+//Lägger till ny kategori i databas KATEGORI_FORMELL
+//AUTO INCREMENT FUNGERAR EJ FÖR ID!!!
     private void btnLaggTillNyKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillNyKategoriActionPerformed
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
         Connection connection = obj_DB_Connection.get_connection();
         PreparedStatement ps = null;
         String kategoriNamn = txtKategori.getText();
-        String id = "3";
+        String id = "3"; //ändra denna till auto increment!
         try {
             String query = "insert into KATEGORI_FORMELL values ('" + kategoriNamn + "', " + id + ")";
             ps = connection.prepareStatement(query);
             ps.setString(1, kategoriNamn);
             ps.setString(2, id);
             ps.execute();
-            //ResultSet rs = ps.executeQuery();
 
             fyllCbKategori();
 
@@ -222,6 +240,27 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLaggTillNyKategoriActionPerformed
 
+        public String GetKategoriID()
+    {
+	DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
+	Connection connection=obj_DB_Connection.get_connection();
+	PreparedStatement ps=null;
+        String kategoriID = null;
+	try {
+            String kategori = cbKategori.getSelectedItem().toString();
+	    String query= "select * from KATEGORI_FORMELL where KATEGORINAMN = '" + kategori + "'";
+	    ps=connection.prepareStatement(query);
+	    ResultSet rs=ps.executeQuery();
+	    while(rs.next()){
+                kategoriID = rs.getString(2);
+	    }
+	} catch (Exception e) {
+	    System.out.println(e);
+	} 
+        return kategoriID;
+    }
+    
+    
     // Returnerar ID för den användare som är inloggad.  
     public String GetForfattare() {
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();

@@ -178,12 +178,11 @@ public class FormellBlogg extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     //Fyller BloggRuta med inlägg från FORMELL_BLOGG
-    //KATEGORIER FIUNGERAR EJ!!!!
     private void fyllBloggRuta() {
         txtFormell.setText("");
 
         try {
-            String fraga = "select * from FORMELL_BLOGG";
+            String fraga = "SELECT * FROM FORMELL_BLOGG JOIN KATEGORI_FORMELL ON KATEGORIID = KATEGORI";
             String text = GetQuery(fraga);
 
         } catch (Exception ex) {
@@ -193,7 +192,6 @@ public class FormellBlogg extends javax.swing.JFrame {
     }
 
     //Databaskoppling för att fylla BloggRuta.
-    //KATEGORIER FUNGERAR EJ!!!!!!
     public String GetQuery(String s) {
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
         Connection connection = obj_DB_Connection.get_connection();
@@ -212,7 +210,7 @@ public class FormellBlogg extends javax.swing.JFrame {
             while (rs.next()) {
                 rubrik = rs.getString(1);
                 text = rs.getString(2);
-                kategori = rs.getString(5);
+                kategori = rs.getString(8);
                 anvandarID = rs.getString(4);
 
                 String anvandare = GetForfattare(anvandarID);
@@ -251,12 +249,10 @@ public class FormellBlogg extends javax.swing.JFrame {
     }
 
     //Filtrerar formella blogginlägg utifrån KATEGORI_FORMELL.
-    //KATEGORI FUNGERAR EJ!!!!
     private void btnFiltreraKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltreraKategoriActionPerformed
-        txtFormell.setText("");
+        txtFormell.setText("");       
         String kategori = cbxFormellKategori.getSelectedItem().toString();
-
-        String fraga = "SELECT * from FORMELL_BLOGG where KATEGORI = '" + kategori + "'";
+        String fraga = "SELECT * FROM FORMELL_BLOGG JOIN KATEGORI_FORMELL ON KATEGORIID = KATEGORI WHERE KATEGORINAMN = '" + kategori + "'";
 
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
         Connection connection = obj_DB_Connection.get_connection();
@@ -274,7 +270,7 @@ public class FormellBlogg extends javax.swing.JFrame {
             while (rs.next()) {
                 rubrik = rs.getString(1);
                 text = rs.getString(2);
-                kategori2 = rs.getString(5);
+                kategori2 = rs.getString(8);
                 anvandarID = rs.getString(4);
 
                 String anvandare = GetForfattare(anvandarID);
@@ -293,16 +289,13 @@ public class FormellBlogg extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVisaAllaFormellaActionPerformed
 
     //Visar formella blogginlägg den inloggade användaren skrivit.
-    //KATEGORI FUNGERAR EJ!!!
     private void btVisaMinaFormellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisaMinaFormellaActionPerformed
         txtFormell.setText("");
-        
 
-        try {
-            String fraga = "select * from FORMELL_BLOGG where ANVANDARID = (select ANVANDARID from ANVANDARE where EPOST = '" + epost + "')";
+        try {         
+            String fraga = "select * from FORMELL_BLOGG JOIN KATEGORI_FORMELL ON KATEGORIID = "
+                  + "KATEGORI where ANVANDARID = (select ANVANDARID from ANVANDARE where EPOST = '" + epost + "')";           
             String text = GetQuery(fraga);
-            
-            System.out.println(epost);
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
