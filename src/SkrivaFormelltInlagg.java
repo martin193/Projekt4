@@ -37,7 +37,7 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        btnAvbryt = new javax.swing.JButton();
+        btnTillbaka = new javax.swing.JButton();
         btnLaggUppFil = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -68,10 +68,10 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
         jLabel4.setText("Hittade du ingen som passar?");
 
-        btnAvbryt.setText("Avbryt");
-        btnAvbryt.addActionListener(new java.awt.event.ActionListener() {
+        btnTillbaka.setText("Tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAvbrytActionPerformed(evt);
+                btnTillbakaActionPerformed(evt);
             }
         });
 
@@ -108,7 +108,7 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
                 .addGap(164, 164, 164)
                 .addComponent(btnPubliceraFormelltInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAvbryt, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(48, 48, 48)
@@ -172,7 +172,7 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
                         .addComponent(jScrollPane1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAvbryt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPubliceraFormelltInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -180,9 +180,9 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAvbrytActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvbrytActionPerformed
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         this.dispose();
-    }//GEN-LAST:event_btnAvbrytActionPerformed
+    }//GEN-LAST:event_btnTillbakaActionPerformed
 
     //Lägger till nytt blogginlägg i databas FORMELL_BLOGG
     //INLÄGGSID, TIDPUNKT och FIL EJ KLART!!!!!!   
@@ -193,23 +193,23 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
         if (Validering.textFaltHarVarde(txtNyRubrik) && Validering.textAreaHarVarde(txaNyttInlägg)) {
 
             String rubrik = txtNyRubrik.getText();
-            String kategoriID = GetKategoriID();
+            int kategoriID = GetKategoriID();
             String text = txaNyttInlägg.getText();
-            String forfattareID = GetForfattare();
-            String inlaggsID = "10"; //String inlaggsID = idb.getAutoIncrement("ALIEN", "ALIEN_ID"); 
+            int forfattareID = GetForfattare();
+            int inlaggsID = 5; //String inlaggsID = idb.getAutoIncrement("ALIEN", "ALIEN_ID"); 
             String tidpunkt = "2020-04-15"; //String tidpunkt = automatiskt datum
             String fil = null; //String fil = ????
             try {
-                String query = "insert into FORMELL_BLOGG values ('" + rubrik + "', '" + text + "', " + inlaggsID 
-                        + ", " + forfattareID + ", " + fil + ", " + tidpunkt + ", " + kategoriID + ")";
+                String query = "insert into FORMELL_BLOGG (RUBRIK, TEXT, INLAGGSID, ANVANDARID, FIL, TIDPUNKT, KATEGORI) values"
+                        + " (?, ?, ?, ?, ?, ?, ?)";
                 ps = connection.prepareStatement(query);
                 ps.setString(1, rubrik);
                 ps.setString(2, text);
-                ps.setString(3, inlaggsID);
-                ps.setString(4, forfattareID);
+                ps.setInt(3, inlaggsID);
+                ps.setInt(4, forfattareID);
                 ps.setString(5, fil);
                 ps.setString(6, tidpunkt);
-                ps.setString(7, kategoriID);
+                ps.setInt(7, kategoriID);
                 ps.execute();
             } catch (Exception e) {
                 System.out.println(e);
@@ -225,9 +225,9 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
         Connection connection = obj_DB_Connection.get_connection();
         PreparedStatement ps = null;
         String kategoriNamn = txtKategori.getText();
-        String id = "3"; //ändra denna till auto increment!
+        String id = "5"; //ändra denna till auto increment!
         try {
-            String query = "insert into KATEGORI_FORMELL values ('" + kategoriNamn + "', " + id + ")";
+            String query = "insert into KATEGORI_FORMELL (KATEGORINAMN, KATEGORIID) values (?, ?)";
             ps = connection.prepareStatement(query);
             ps.setString(1, kategoriNamn);
             ps.setString(2, id);
@@ -240,19 +240,19 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLaggTillNyKategoriActionPerformed
 
-        public String GetKategoriID()
+        public int GetKategoriID()
     {
 	DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
 	Connection connection=obj_DB_Connection.get_connection();
 	PreparedStatement ps=null;
-        String kategoriID = null;
+        int kategoriID = 0;
 	try {
             String kategori = cbKategori.getSelectedItem().toString();
 	    String query= "select * from KATEGORI_FORMELL where KATEGORINAMN = '" + kategori + "'";
 	    ps=connection.prepareStatement(query);
 	    ResultSet rs=ps.executeQuery();
 	    while(rs.next()){
-                kategoriID = rs.getString(2);
+                kategoriID = rs.getInt(2);
 	    }
 	} catch (Exception e) {
 	    System.out.println(e);
@@ -262,17 +262,17 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
     
     
     // Returnerar ID för den användare som är inloggad.  
-    public String GetForfattare() {
+    public int GetForfattare() {
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
         Connection connection = obj_DB_Connection.get_connection();
         PreparedStatement ps = null;
-        String anvandarID = null;
+        int anvandarID = 0;
         try {
             String query = "select * from ANVANDARE where EPOST = '" + epost + "'";
             ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                anvandarID = rs.getString(1);
+                anvandarID = rs.getInt(1);
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -302,10 +302,10 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAvbryt;
     private javax.swing.JButton btnLaggTillNyKategori;
     private javax.swing.JButton btnLaggUppFil;
     private javax.swing.JButton btnPubliceraFormelltInlagg;
+    private javax.swing.JButton btnTillbaka;
     private javax.swing.JComboBox<String> cbKategori;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
