@@ -253,7 +253,6 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
             int forfattareID = GetForfattare();
             int inlaggsID = GetAutoId(fraga); 
             String tidpunkt = "2020-04-15"; //String tidpunkt = automatiskt datum
-            byte[] photo = null; //String fil = ????
             try {
                 String query = "insert into FORMELL_BLOGG (RUBRIK, TEXT, INLAGGSID, ANVANDARID, PHOTO, TIDPUNKT, KATEGORI) values"
                         + " (?, ?, ?, ?, ?, ?, ?)";
