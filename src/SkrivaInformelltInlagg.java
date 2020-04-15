@@ -160,47 +160,46 @@ public class SkrivaInformelltInlagg extends javax.swing.JFrame {
 
     private void btnPostaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostaActionPerformed
         try
+                
                 {
-                //String fraga = ("INFORMELL_BLOGG", "INLAGGSID");
+           
+                String fraga = ("SELECT INLAGGSID FROM INFORMELL_BLOGG");
                 
                         
-               // GetQuery(fraga);
+                int grej = GetQuery(fraga);
    
                 
-                
+                //"select * from FORMELL_BLOGG JOIN KATEGORI_FORMELL ON KATEGORIID = KATEGORI where ANVANDARID = (select ANVANDARID from ANVANDARE where EPOST = '" + epost + "')";
                 
                 }
                 catch (Exception bla)
                 {
                     System.out.println("naj");
-                }   
+                }                                             
     }//GEN-LAST:event_btnPostaActionPerformed
 
-    public String GetQuery(String s)
+    public int GetQuery(String s)
     {
 	DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
 	Connection connection=obj_DB_Connection.get_connection();
 	PreparedStatement ps=null;
-        String idNy = null;
+        int idNy = 0;
 
 	try {
 	    String query= s;
 	    ps=connection.prepareStatement(query);
 	    ResultSet rs=ps.executeQuery();
 	    while(rs.next()){
-                //idNy = rs.getAutoIncrement;
-
-                
-                
-                
-                JOptionPane.showMessageDialog(null, " nästa id: " + idNy);
-                
-                
+                idNy = rs.getInt(1);
+                            
 	    }
 	} catch (Exception e) {
 	    System.out.println(e);
 	} 
-        return "hej";
+        idNy = idNy + 1;
+        JOptionPane.showMessageDialog(null, " nästa id: " + idNy);
+        return idNy;
+
     }
 
 
