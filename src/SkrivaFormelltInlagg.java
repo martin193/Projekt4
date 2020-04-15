@@ -2,6 +2,7 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -192,11 +193,13 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
         PreparedStatement ps = null;
         if (Validering.textFaltHarVarde(txtNyRubrik) && Validering.textAreaHarVarde(txaNyttInlägg)) {
 
+            String fraga = ("select INLAGGSID from FORMELL_BLOGG");
+            
             String rubrik = txtNyRubrik.getText();
             int kategoriID = GetKategoriID();
             String text = txaNyttInlägg.getText();
             int forfattareID = GetForfattare();
-            int inlaggsID = 5; //String inlaggsID = idb.getAutoIncrement("ALIEN", "ALIEN_ID"); 
+            int inlaggsID = GetAutoId(fraga); 
             String tidpunkt = "2020-04-15"; //String tidpunkt = automatiskt datum
             String fil = null; //String fil = ????
             try {
@@ -211,6 +214,8 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
                 ps.setString(6, tidpunkt);
                 ps.setInt(7, kategoriID);
                 ps.execute();
+                
+                JOptionPane.showMessageDialog(null, "Inlägg publicerat!");
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -219,48 +224,72 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPubliceraFormelltInlaggActionPerformed
 
 //Lägger till ny kategori i databas KATEGORI_FORMELL
-//AUTO INCREMENT FUNGERAR EJ FÖR ID!!!
     private void btnLaggTillNyKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillNyKategoriActionPerformed
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
         Connection connection = obj_DB_Connection.get_connection();
         PreparedStatement ps = null;
+        
+        String fraga = ("select KATEGORIID from KATEGORI_FORMELL");
+        
         String kategoriNamn = txtKategori.getText();
-        String id = "5"; //ändra denna till auto increment!
+        int id = GetAutoId(fraga);
         try {
             String query = "insert into KATEGORI_FORMELL (KATEGORINAMN, KATEGORIID) values (?, ?)";
             ps = connection.prepareStatement(query);
             ps.setString(1, kategoriNamn);
-            ps.setString(2, id);
+            ps.setInt(2, id);
             ps.execute();
 
+            cbKategori.removeAllItems();
             fyllCbKategori();
+            cbKategori.setSelectedItem(kategoriNamn);
+            txtKategori.setText("");
+            
+            JOptionPane.showMessageDialog(null, "Kategori tillagd!");
 
         } catch (Exception e) {
             System.out.println(e);
         }
     }//GEN-LAST:event_btnLaggTillNyKategoriActionPerformed
 
-        public int GetKategoriID()
-    {
-	DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
-	Connection connection=obj_DB_Connection.get_connection();
-	PreparedStatement ps=null;
-        int kategoriID = 0;
-	try {
-            String kategori = cbKategori.getSelectedItem().toString();
-	    String query= "select * from KATEGORI_FORMELL where KATEGORINAMN = '" + kategori + "'";
-	    ps=connection.prepareStatement(query);
-	    ResultSet rs=ps.executeQuery();
-	    while(rs.next()){
-                kategoriID = rs.getInt(2);
-	    }
-	} catch (Exception e) {
-	    System.out.println(e);
-	} 
-        return kategoriID;
+    //Tar emot en SQL-fråga som parameter för att sedan returnera nästa lediga ID för den tabell som r specificerad i SQL-frågan.
+    public int GetAutoId(String o) {
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        int idNy = 1;
+        try {
+            String query = o;
+            ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                idNy = idNy + 1;   
+            }
+        } catch (Exception ex) {
+            System.out.println("Internt felmeddelande: " + ex);
+        }
+        return idNy;
     }
     
-    
+    public int GetKategoriID() {
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        int kategoriID = 0;
+        try {
+            String kategori = cbKategori.getSelectedItem().toString();
+            String query = "select * from KATEGORI_FORMELL where KATEGORINAMN = '" + kategori + "'";
+            ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                kategoriID = rs.getInt(2);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return kategoriID;
+    }
+
     // Returnerar ID för den användare som är inloggad.  
     public int GetForfattare() {
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
