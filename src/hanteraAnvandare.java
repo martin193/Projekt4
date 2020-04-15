@@ -1,9 +1,15 @@
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author oskar
@@ -15,6 +21,7 @@ public class hanteraAnvandare extends javax.swing.JFrame {
      */
     public hanteraAnvandare() {
         initComponents();
+        fillBox();
     }
 
     /**
@@ -43,10 +50,16 @@ public class hanteraAnvandare extends javax.swing.JFrame {
         btnUppdatera = new javax.swing.JButton();
         btnTaBort = new javax.swing.JButton();
         btnAvbryt = new javax.swing.JButton();
+        btnFyllLista = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         boxAnvandare.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        boxAnvandare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxAnvandareActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Välj Användare");
 
@@ -63,10 +76,22 @@ public class hanteraAnvandare extends javax.swing.JFrame {
         jLabel7.setText("Adminstatus");
 
         btnUppdatera.setText("Uppdatera");
+        btnUppdatera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUppdateraActionPerformed(evt);
+            }
+        });
 
         btnTaBort.setText("Ta bort");
 
         btnAvbryt.setText("Avbryt");
+
+        btnFyllLista.setText("Fyll lista");
+        btnFyllLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFyllListaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,17 +101,17 @@ public class hanteraAnvandare extends javax.swing.JFrame {
                 .addGap(75, 75, 75)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnFyllLista, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(txfTelnr, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(36, 36, 36)
@@ -99,8 +124,11 @@ public class hanteraAnvandare extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(txfMail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(txfEfternamn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txfLosenord, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addGap(119, 119, 119))
+                                            .addComponent(txfLosenord, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(txfTelnr, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(166, 166, 166))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
@@ -124,7 +152,9 @@ public class hanteraAnvandare extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(boxAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(47, 47, 47)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnFyllLista)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txfFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -159,11 +189,94 @@ public class hanteraAnvandare extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnUppdateraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUppdateraActionPerformed
+        String epost = boxAnvandare.getSelectedItem().toString();
+        String fornamn = txfFornamn.getText();
+        String efternamn = txfEfternamn.getText();
+        String email = txfMail.getText();
+        String losenord = txfLosenord.getText();
+        String telnr = txfTelnr.getText();
+        String Q = "UPDATE ANVANDARE SET FORNAMN = '"+fornamn+"',EFTERNAMN='"+efternamn+"', EPOST='"+email+"', LOSENORD='"+losenord+"', TELNR='"+telnr+"'WHERE EPOST='"+epost+"'";
+        fillBox();
+        try {
+            updateAnvandare(Q);
+            JOptionPane.showMessageDialog(null, "Ändringen lyckades!");
+        }catch(Exception e)
+        {System.out.println(e);
+        }
+    }//GEN-LAST:event_btnUppdateraActionPerformed
+
+    private void boxAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxAnvandareActionPerformed
+
+    }//GEN-LAST:event_boxAnvandareActionPerformed
+
+    private void btnFyllListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFyllListaActionPerformed
+        setText();
+    }//GEN-LAST:event_btnFyllListaActionPerformed
+
+    private void fillBox() {
+        boxAnvandare.removeAllItems();
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        try {
+            String query = "SELECT * FROM ANVANDARE";
+            ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                boxAnvandare.addItem(rs.getString("EPOST"));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public String getQuery(String q) {
+        String svar = null;
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        try {
+            String query = q;
+            ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                svar = rs.getString(1);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return svar;
+    }
+
+    public void setText() {
+        String epost = boxAnvandare.getSelectedItem().toString();
+        txfFornamn.setText(getQuery("SELECT FORNAMN FROM ANVANDARE WHERE EPOST='" + epost + "'"));
+        txfEfternamn.setText(getQuery("SELECT EFTERNAMN FROM ANVANDARE WHERE EPOST='" + epost + "'"));
+        txfMail.setText(epost);
+        txfLosenord.setText(getQuery("SELECT LOSENORD FROM ANVANDARE WHERE EPOST='" + epost + "'"));
+        txfTelnr.setText(getQuery("SELECT TELNR FROM ANVANDARE WHERE EPOST='" + epost + "'"));
+
+    }
+
+    public void updateAnvandare(String Q) {
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        try {
+            String query = Q;
+            ps = connection.prepareStatement(query);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> boxAnvandare;
     private javax.swing.JButton btnAvbryt;
+    private javax.swing.JButton btnFyllLista;
     private javax.swing.JButton btnTaBort;
     private javax.swing.JButton btnUppdatera;
     private javax.swing.JCheckBox checkAdmin;
