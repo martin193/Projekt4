@@ -23,6 +23,7 @@ public class AnvStartsida extends javax.swing.JFrame {
     public AnvStartsida(String e){
         epost = e;
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
