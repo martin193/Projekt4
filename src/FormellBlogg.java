@@ -177,7 +177,8 @@ public class FormellBlogg extends javax.swing.JFrame {
     }
 
     private void btNyFormellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNyFormellActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new SkrivaFormelltInlagg(epost).setVisible(true);
     }//GEN-LAST:event_btNyFormellActionPerformed
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
@@ -298,8 +299,10 @@ public class FormellBlogg extends javax.swing.JFrame {
         
 
         try {
-            String fraga = "select * from FORMELL_BLOGG where ANVANDARID = (select ANVANDARID from ANVANDARE where EPOST = '" + epost + "'";
+            String fraga = "select * from FORMELL_BLOGG where ANVANDARID = (select ANVANDARID from ANVANDARE where EPOST = '" + epost + "')";
             String text = GetQuery(fraga);
+            
+            System.out.println(epost);
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
