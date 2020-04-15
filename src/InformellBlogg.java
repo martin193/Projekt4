@@ -129,24 +129,11 @@ public class InformellBlogg extends javax.swing.JFrame {
             try
             {
             
-                String fraga= "SELECT RUBRIK FROM INFORMELL_BLOGG";
-                String fraga2= "SELECT TEXT FROM INFORMELL_BLOGG";
-
-            
-                //ArrayList<String> rubrik = idb.fetchColumn(fraga);
-                //ArrayList<String> rubrik = GetQuery(fraga);
-                //ArrayList<String> text = GetQuery2(fraga2);
+                String fraga= "SELECT * FROM INFORMELL_BLOGG";
+                
                 
                 String rubrik = GetQuery(fraga);
                 
-                //String resultat = "";          
-            
-                /*for(int i=0; i<rubrik.size(); i++)
-                {
-                    resultat+=rubrik.get(i) + "\n " + text.get(i) + "\n";
-                }    
-            
-                bloggRuta.setText(resultat);*/
                 
             }
             catch (Exception bla)
@@ -161,17 +148,20 @@ public class InformellBlogg extends javax.swing.JFrame {
 	Connection connection=obj_DB_Connection.get_connection();
 	PreparedStatement ps=null;
         String rubrik = null;
+        String text = null;
+        String kategori = null;
 	try {
 	    String query= s;
 	    ps=connection.prepareStatement(query);
 	    ResultSet rs=ps.executeQuery();
 	    while(rs.next()){
                 rubrik = rs.getString(1);
-                String resultat = "";          
-            
+                text = rs.getString(2);
+                kategori = rs.getString(5);
                 
+                String resultat = "";                      
                 
-                resultat+=rubrik + "\n";
+                resultat+=rubrik + "\n" + "Kategori: " + kategori + "\n" + text +  "\n" + "\n";
                 
                 bloggRuta.append(resultat);
                 
