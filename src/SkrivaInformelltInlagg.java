@@ -1,3 +1,9 @@
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -54,6 +60,11 @@ public class SkrivaInformelltInlagg extends javax.swing.JFrame {
         lblSkapaKategori.setText("Skapa en ny!");
 
         btnPosta.setText("Posta inlägg");
+        btnPosta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPostaActionPerformed(evt);
+            }
+        });
 
         btnAvbryt.setText("Avbryt");
         btnAvbryt.addActionListener(new java.awt.event.ActionListener() {
@@ -147,6 +158,50 @@ public class SkrivaInformelltInlagg extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnAvbrytActionPerformed
 
+    private void btnPostaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostaActionPerformed
+        try
+                {
+                //String fraga = ("INFORMELL_BLOGG", "INLAGGSID");
+                
+                        
+                GetQuery(fraga);
+   
+                
+                
+                
+                }
+                catch (Exception bla)
+                {
+                    System.out.println("naj");
+                }   
+    }//GEN-LAST:event_btnPostaActionPerformed
+
+    public String GetQuery(String s)
+    {
+	DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
+	Connection connection=obj_DB_Connection.get_connection();
+	PreparedStatement ps=null;
+        String idNy = null;
+
+	try {
+	    String query= s;
+	    ps=connection.prepareStatement(query);
+	    ResultSet rs=ps.executeQuery();
+	    while(rs.next()){
+                idNy = rs.getAutoIncrement;
+
+                
+                
+                
+                JOptionPane.showMessageDialog(null, " nästa id: " + idNy);
+                
+                
+	    }
+	} catch (Exception e) {
+	    System.out.println(e);
+	} 
+        return rubrik;
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
