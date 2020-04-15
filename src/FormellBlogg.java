@@ -15,10 +15,11 @@ import javax.swing.JOptionPane;
  */
 public class FormellBlogg extends javax.swing.JFrame {
 
+    private String epost;
     /**
      * Creates new form FormellBlogg
      */
-    public FormellBlogg() {
+    public FormellBlogg(String e) {
         initComponents();
 
         this.setLocationRelativeTo(null);
@@ -27,6 +28,7 @@ public class FormellBlogg extends javax.swing.JFrame {
         fyllBloggRuta();
         txtFormell.setLineWrap(true);
         txtFormell.setEditable(false);
+        epost = e;
     }
 
     /**
@@ -60,6 +62,11 @@ public class FormellBlogg extends javax.swing.JFrame {
         });
 
         btVisaMinaFormella.setText("Visa mina inlägg");
+        btVisaMinaFormella.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVisaMinaFormellaActionPerformed(evt);
+            }
+        });
 
         btnTillbaka.setText("Tillbaka");
         btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
@@ -189,7 +196,6 @@ public class FormellBlogg extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.print("Internt felmeddelande: " + ex);
         }
-
     }
 
     public String GetQuery(String s) {
@@ -213,7 +219,7 @@ public class FormellBlogg extends javax.swing.JFrame {
                 kategori = rs.getString(5);
                 anvandarID = rs.getString(4);
 
-                String anvandare = GetAnvandare(anvandarID);
+                String anvandare = GetForfattare(anvandarID);
 
                 String resultat = "";
                 resultat += "Rubrik: " + rubrik + "\nFörfattare: " + anvandare + "\nKategori: " + kategori + "\n" + text + "\n" + "\n";
@@ -226,7 +232,7 @@ public class FormellBlogg extends javax.swing.JFrame {
         return rubrik;
     }
 
-    public String GetAnvandare(String anvandarID) {
+    public String GetForfattare(String anvandarID) {
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
         Connection connection = obj_DB_Connection.get_connection();
         PreparedStatement ps = null;
@@ -239,8 +245,6 @@ public class FormellBlogg extends javax.swing.JFrame {
             while (rs.next()) {
                 fornamn = rs.getString(2);
                 efternamn = rs.getString(3);
-
-                System.out.println("getanvandare: " + fornamn + efternamn);
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -274,7 +278,7 @@ public class FormellBlogg extends javax.swing.JFrame {
                 kategori2 = rs.getString(5);
                 anvandarID = rs.getString(4);
 
-                String anvandare = GetAnvandare(anvandarID);
+                String anvandare = GetForfattare(anvandarID);
 
                 String resultat = "";
                 resultat += "Rubrik: " + rubrik + "\nFörfattare: " + anvandare + "\nKategori: " + kategori2 + "\n" + text + "\n" + "\n";
@@ -288,6 +292,20 @@ public class FormellBlogg extends javax.swing.JFrame {
     private void btnVisaAllaFormellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaAllaFormellaActionPerformed
         fyllBloggRuta();
     }//GEN-LAST:event_btnVisaAllaFormellaActionPerformed
+
+    private void btVisaMinaFormellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisaMinaFormellaActionPerformed
+        txtFormell.setText("");
+        
+
+        try {
+            String fraga = "select * from FORMELL_BLOGG where ANVANDARID = (select ANVANDARID from ANVANDARE where EPOST = '" + epost + "'";
+            String text = GetQuery(fraga);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            System.out.print("Internt felmeddelande: " + ex);
+        }
+    }//GEN-LAST:event_btVisaMinaFormellaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
