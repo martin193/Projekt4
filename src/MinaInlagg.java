@@ -1,3 +1,9 @@
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -44,12 +50,27 @@ public class MinaInlagg extends javax.swing.JFrame {
         lblRubrik.setText("Alla mina blogginlägg");
 
         btnVisaFormella.setText("Visa formella inlägg");
+        btnVisaFormella.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisaFormellaActionPerformed(evt);
+            }
+        });
 
         btnVisaInformella.setText("Visa informella inlägg");
+        btnVisaInformella.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisaInformellaActionPerformed(evt);
+            }
+        });
 
         lblValjInlagg.setText("Välj inlägg:");
 
         btnVisaHeltInlagg.setText("Visa hela inlägget");
+        btnVisaHeltInlagg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisaHeltInlaggActionPerformed(evt);
+            }
+        });
 
         btnRedigeraInlagg.setText("Redigera inlägg");
 
@@ -66,10 +87,6 @@ public class MinaInlagg extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnTillbaka)
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -98,8 +115,13 @@ public class MinaInlagg extends javax.swing.JFrame {
                 .addGap(85, 85, 85))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txaHeltInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnTillbaka)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(txaHeltInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,11 +151,132 @@ public class MinaInlagg extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         this.dispose();
         new AnvStartsida().setVisible(true);
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
+//    public String GetQuery(String s) {
+//        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+//        Connection connection = obj_DB_Connection.get_connection();
+//        PreparedStatement ps = null;
+//
+//        String anvandarID = null;
+//
+//        try {
+//            String query = s;
+//            ps = connection.prepareStatement(query);
+//            ResultSet rs = ps.executeQuery();
+//
+//            while (rs.next()) {
+//                anvandarID = rs.getString(4);
+//
+//                String anvandare = hamtaAnvandare(anvandarID);
+//
+//                String resultat = "";
+//            }
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+//        return ;
+//    }
+//
+//    public String hamtaAnvandare(String id) {
+//        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+//        Connection connection = obj_DB_Connection.get_connection();
+//        PreparedStatement ps = null;
+//        try {
+//            String query = "select * from ANVANDARE where ANVANDARID = " + id;
+//            ps = connection.prepareStatement(query);
+//            ResultSet rs = ps.executeQuery();
+//            while (rs.next()) {
+//                anvandare = rs.getString(1);
+//            }
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+//        return ;
+//    }
+    
+    private void btnVisaInformellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaInformellaActionPerformed
+          DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
+	  Connection connection=obj_DB_Connection.get_connection();
+	  PreparedStatement ps=null;
+          String inlagg = null;
+          
+         try{
+           String sql = "SELECT RUBRIK FROM INFORMELL_BLOGG JOIN ANVANDARE ON INFORMELL_BLOGG.ANVANDARID = ANVANDARE.ANVANDARID WHERE ANVANDARE.ANVANDARID = 1" ;
+           ps = connection.prepareStatement(sql);
+           ResultSet rs = ps.executeQuery();
+           
+           while(rs.next()){
+               inlagg = rs.getString(1);
+               cbxInlagg.addItem(inlagg);
+           } 
+        }
+         catch(Exception e){
+             JOptionPane.showMessageDialog(null, "Ett fel uppstod!");
+         }  
+    }//GEN-LAST:event_btnVisaInformellaActionPerformed
+
+    
+    private void btnVisaHeltInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaHeltInlaggActionPerformed
+          DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
+	  Connection connection=obj_DB_Connection.get_connection();
+	  PreparedStatement ps=null;
+          String inlagg = null;
+          
+          try{
+              String rubrik = cbxInlagg.getSelectedItem().toString();
+              
+              String sql = "SELECT * FROM INFORMELL_BLOGG WHERE RUBRIK = " + rubrik + ";";
+              ps = connection.prepareStatement(sql);
+              ResultSet rs = ps.executeQuery();
+              String informell = rs.getString(1);
+           
+//              String sql2 = "SELECT * FROM FORMELL_BLOGG WHERE RUBRIK = " + rubrik + ";";
+//              ps = connection.prepareStatement(sql2);
+//              ResultSet rs2 = ps.executeQuery();
+//           
+              if(informell != null){
+                  String sql3 = "SELECT TEXT FROM INFORMELL_BLOGG WHERE RUBRIK = " + rubrik + ";";
+                  ps = connection.prepareStatement(sql);
+                  ResultSet rs3 = ps.executeQuery();
+                  inlagg = rs3.getString(2);
+                  txaHeltInlagg.setText(inlagg);
+              }
+              
+          }
+          catch(Exception e){
+              System.out.println("Något gick fel!" + e);
+          }
+    }//GEN-LAST:event_btnVisaHeltInlaggActionPerformed
+
+    
+    private void btnVisaFormellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaFormellaActionPerformed
+          DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
+	  Connection connection=obj_DB_Connection.get_connection();
+	  PreparedStatement ps=null;
+          String inlagg = null;
+          
+         try{
+           String sql = "SELECT RUBRIK FROM FORMELL_BLOGG JOIN ANVANDARE ON INFORMELL_BLOGG.ANVANDARID = ANVANDARE.ANVANDARID WHERE ANVANDARE.ANVANDARID = 1" ;
+           ps = connection.prepareStatement(sql);
+           ResultSet rs = ps.executeQuery();
+           
+           while(rs.next()){
+               inlagg = rs.getString(1);
+               cbxInlagg.addItem(inlagg);
+           } 
+        }
+         catch(Exception e){
+             JOptionPane.showMessageDialog(null, "Ett fel uppstod!");
+         }  
+    }//GEN-LAST:event_btnVisaFormellaActionPerformed
+
+    
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
