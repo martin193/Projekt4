@@ -24,6 +24,7 @@ public class MinaInlagg extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         fyllCbxFormella();
         fyllCbxInformella();
+        txaHeltInlagg.setEditable(false);
     }
 
     /**
@@ -63,6 +64,11 @@ public class MinaInlagg extends javax.swing.JFrame {
         });
 
         btnRaderaInlagg.setText("Radera inlägg");
+        btnRaderaInlagg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRaderaInlaggActionPerformed(evt);
+            }
+        });
 
         btnTillbaka.setText("Tillbaka");
         btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
@@ -171,27 +177,43 @@ public class MinaInlagg extends javax.swing.JFrame {
 	  Connection connection=obj_DB_Connection.get_connection();
 	  PreparedStatement ps=null;
           String inlagg = null;
+          txaHeltInlagg.setText("");
           
-          try{
-              String rubrik = cbxFormella.getSelectedItem().toString();
-              
-              String sql = "SELECT * FROM INFORMELL_BLOGG WHERE RUBRIK = " + rubrik + ";";
-              ps = connection.prepareStatement(sql);
-              ResultSet rs = ps.executeQuery();
-              String informell = rs.getString(1);
-           
-//              String sql2 = "SELECT * FROM FORMELL_BLOGG WHERE RUBRIK = " + rubrik + ";";
-//              ps = connection.prepareStatement(sql2);
-//              ResultSet rs2 = ps.executeQuery();
-//           
-              if(informell != null){
-                  String sql3 = "SELECT TEXT FROM INFORMELL_BLOGG WHERE RUBRIK = " + rubrik + ";";
+          try {
+              String formellRubrik = cbxFormella.getSelectedItem().toString();
+              String informellRubrik = cbxInformella.getSelectedItem().toString();
+ 
+
+              if(formellRubrik != null && informellRubrik.equals("")){
+                  String sql = "SELECT TEXT FROM FORMELL_BLOGG WHERE RUBRIK = '" + formellRubrik +"'";
                   ps = connection.prepareStatement(sql);
                   ResultSet rs3 = ps.executeQuery();
-                  inlagg = rs3.getString(2);
+                  
+                  while(rs3.next()) {
+                  inlagg = rs3.getString(1);
                   txaHeltInlagg.setText(inlagg);
+                  }
+
               }
               
+             else if(informellRubrik != null && formellRubrik.equals("")) {
+                  String sql2 = "SELECT TEXT FROM INFORMELL_BLOGG WHERE RUBRIK = '" + informellRubrik +"'";
+                  ps = connection.prepareStatement(sql2);
+                  ResultSet rs = ps.executeQuery();
+                  
+                  while(rs.next()) {
+                  inlagg = rs.getString(1);
+                  txaHeltInlagg.setText(inlagg);
+                  }
+              }
+              
+              else if(formellRubrik != null && informellRubrik != null) {
+                  JOptionPane.showMessageDialog(null, "Välj endast en rubrik!");
+              }
+              
+              else {
+                  JOptionPane.showMessageDialog(null, "Välj en rubrik!");
+              }
           }
           catch(Exception e){
               System.out.println("Något gick fel!" + e);
@@ -209,12 +231,56 @@ public class MinaInlagg extends javax.swing.JFrame {
         this.dispose();
         new RedigeraInformelltInlagg().setVisible(true);
     }//GEN-LAST:event_btnRedigeraInformellaActionPerformed
+
+    private void btnRaderaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRaderaInlaggActionPerformed
+        DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
+	  Connection connection=obj_DB_Connection.get_connection();
+	  PreparedStatement ps=null;
+          
+          
+          try{
+              
+              String formellRubrik = cbxFormella.getSelectedItem().toString();
+              String informellRubrik = cbxInformella.getSelectedItem().toString();
+              
+              if(formellRubrik != null && informellRubrik.equals("")){
+                  
+                  String sql = "DELETE FROM FORMELL_BLOGG WHERE RUBRIK = '" + formellRubrik +"'";
+                  ps = connection.prepareStatement(sql);
+                  ps.executeUpdate();
+                
+                  JOptionPane.showMessageDialog(null, "Inlägget har raderats!");
+              }
+             
+              
+             else if(informellRubrik != null && formellRubrik.equals("")) {
+                  String sql2 = "DELETE FROM INFORMELL_BLOGG WHERE RUBRIK = '" + informellRubrik +"'";
+                  ps = connection.prepareStatement(sql2);
+                  ps.executeUpdate();
+                  
+                  JOptionPane.showMessageDialog(null, "Inlägget har raderats!");
+                 
+              }
+              
+              else if(formellRubrik != null && informellRubrik != null) {
+                  JOptionPane.showMessageDialog(null, "Välj endast en rubrik!");
+              }
+              
+          }
+              
+          
+          catch(Exception e) {
+              System.out.println("Något gick fel!" + e);
+          }
+          
+    }//GEN-LAST:event_btnRaderaInlaggActionPerformed
  private void fyllCbxFormella() {
      
      DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
 	  Connection connection=obj_DB_Connection.get_connection();
 	  PreparedStatement ps=null;
           String inlagg = null;
+          cbxFormella.addItem("");
           
          try{
            String sql = "SELECT RUBRIK FROM FORMELL_BLOGG JOIN ANVANDARE ON FORMELL_BLOGG.ANVANDARID = ANVANDARE.ANVANDARID WHERE ANVANDARE.ANVANDARID = 1" ;
@@ -236,6 +302,7 @@ public class MinaInlagg extends javax.swing.JFrame {
 	  Connection connection=obj_DB_Connection.get_connection();
 	  PreparedStatement ps=null;
           String inlagg = null;
+          cbxInformella.addItem("");
           
          try{
            String sql = "SELECT RUBRIK FROM INFORMELL_BLOGG JOIN ANVANDARE ON INFORMELL_BLOGG.ANVANDARID = ANVANDARE.ANVANDARID WHERE ANVANDARE.ANVANDARID = 1" ;
@@ -251,6 +318,8 @@ public class MinaInlagg extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(null, "Ett fel uppstod!");
          }  
     }
+ 
+ 
      
  
      
