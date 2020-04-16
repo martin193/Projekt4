@@ -22,6 +22,8 @@ public class MinaInlagg extends javax.swing.JFrame {
     public MinaInlagg() {
         initComponents();
         this.setLocationRelativeTo(null);
+        fyllCbxFormella();
+        fyllCbxInformella();
     }
 
     /**
@@ -34,36 +36,24 @@ public class MinaInlagg extends javax.swing.JFrame {
     private void initComponents() {
 
         lblRubrik = new javax.swing.JLabel();
-        btnVisaFormella = new javax.swing.JButton();
-        btnVisaInformella = new javax.swing.JButton();
-        cbxInlagg = new javax.swing.JComboBox<>();
-        lblValjInlagg = new javax.swing.JLabel();
+        lblValjFormell = new javax.swing.JLabel();
         btnVisaHeltInlagg = new javax.swing.JButton();
-        btnRedigeraInlagg = new javax.swing.JButton();
         btnRaderaInlagg = new javax.swing.JButton();
         txaHeltInlagg = new java.awt.TextArea();
         btnTillbaka = new javax.swing.JButton();
+        lblValjInformell = new javax.swing.JLabel();
+        cbxInformella = new javax.swing.JComboBox<>();
+        cbxFormella = new javax.swing.JComboBox<>();
+        btnRedigeraFormella = new javax.swing.JButton();
+        btnRedigeraInformella = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblRubrik.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lblRubrik.setText("Alla mina blogginlägg");
 
-        btnVisaFormella.setText("Visa formella inlägg");
-        btnVisaFormella.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVisaFormellaActionPerformed(evt);
-            }
-        });
-
-        btnVisaInformella.setText("Visa informella inlägg");
-        btnVisaInformella.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVisaInformellaActionPerformed(evt);
-            }
-        });
-
-        lblValjInlagg.setText("Välj inlägg:");
+        lblValjFormell.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lblValjFormell.setText("Visa rubriker (formella inlägg) :");
 
         btnVisaHeltInlagg.setText("Visa hela inlägget");
         btnVisaHeltInlagg.addActionListener(new java.awt.event.ActionListener() {
@@ -71,8 +61,6 @@ public class MinaInlagg extends javax.swing.JFrame {
                 btnVisaHeltInlaggActionPerformed(evt);
             }
         });
-
-        btnRedigeraInlagg.setText("Redigera inlägg");
 
         btnRaderaInlagg.setText("Radera inlägg");
 
@@ -83,67 +71,87 @@ public class MinaInlagg extends javax.swing.JFrame {
             }
         });
 
+        lblValjInformell.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lblValjInformell.setText("Visa rubriker (informella inlägg):");
+
+        btnRedigeraFormella.setText("Redigera formellt inlägg");
+        btnRedigeraFormella.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRedigeraFormellaActionPerformed(evt);
+            }
+        });
+
+        btnRedigeraInformella.setText("Redigera informellt inlägg");
+        btnRedigeraInformella.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRedigeraInformellaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(btnVisaFormella)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnVisaInformella))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(172, 172, 172)
-                                .addComponent(lblRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(51, 51, 51)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnVisaHeltInlagg)
-                                    .addComponent(lblValjInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(38, 38, 38)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnRedigeraInlagg)
-                                        .addGap(30, 30, 30)
-                                        .addComponent(btnRaderaInlagg))
-                                    .addComponent(cbxInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(85, 85, 85))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(btnVisaHeltInlagg)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRedigeraFormella)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRedigeraInformella)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRaderaInlagg)
+                        .addGap(0, 73, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnTillbaka)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(txaHeltInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(62, 62, 62))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnTillbaka))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(lblValjFormell, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblValjInformell, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cbxInformella, 0, 225, Short.MAX_VALUE)
+                                    .addComponent(cbxFormella, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(172, 172, 172)
+                                .addComponent(lblRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(106, 106, 106)
+                .addComponent(txaHeltInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(68, 68, 68)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblValjFormell, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(cbxFormella, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnVisaFormella)
-                    .addComponent(btnVisaInformella))
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblValjInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                    .addComponent(lblValjInformell)
+                    .addComponent(cbxInformella, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVisaHeltInlagg)
-                    .addComponent(btnRedigeraInlagg)
-                    .addComponent(btnRaderaInlagg))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(txaHeltInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
+                    .addComponent(btnRaderaInlagg)
+                    .addComponent(btnRedigeraFormella)
+                    .addComponent(btnRedigeraInformella))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txaHeltInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
                 .addComponent(btnTillbaka)
                 .addContainerGap())
         );
@@ -157,69 +165,6 @@ public class MinaInlagg extends javax.swing.JFrame {
         new AnvStartsida().setVisible(true);
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
-//    public String GetQuery(String s) {
-//        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
-//        Connection connection = obj_DB_Connection.get_connection();
-//        PreparedStatement ps = null;
-//
-//        String anvandarID = null;
-//
-//        try {
-//            String query = s;
-//            ps = connection.prepareStatement(query);
-//            ResultSet rs = ps.executeQuery();
-//
-//            while (rs.next()) {
-//                anvandarID = rs.getString(4);
-//
-//                String anvandare = hamtaAnvandare(anvandarID);
-//
-//                String resultat = "";
-//            }
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
-//        return ;
-//    }
-//
-//    public String hamtaAnvandare(String id) {
-//        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
-//        Connection connection = obj_DB_Connection.get_connection();
-//        PreparedStatement ps = null;
-//        try {
-//            String query = "select * from ANVANDARE where ANVANDARID = " + id;
-//            ps = connection.prepareStatement(query);
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()) {
-//                anvandare = rs.getString(1);
-//            }
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
-//        return ;
-//    }
-    
-    private void btnVisaInformellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaInformellaActionPerformed
-          DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
-	  Connection connection=obj_DB_Connection.get_connection();
-	  PreparedStatement ps=null;
-          String inlagg = null;
-          
-         try{
-           String sql = "SELECT RUBRIK FROM INFORMELL_BLOGG JOIN ANVANDARE ON INFORMELL_BLOGG.ANVANDARID = ANVANDARE.ANVANDARID WHERE ANVANDARE.ANVANDARID = 1" ;
-           ps = connection.prepareStatement(sql);
-           ResultSet rs = ps.executeQuery();
-           
-           while(rs.next()){
-               inlagg = rs.getString(1);
-               cbxInlagg.addItem(inlagg);
-           } 
-        }
-         catch(Exception e){
-             JOptionPane.showMessageDialog(null, "Ett fel uppstod!");
-         }  
-    }//GEN-LAST:event_btnVisaInformellaActionPerformed
-
     
     private void btnVisaHeltInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaHeltInlaggActionPerformed
           DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
@@ -228,7 +173,7 @@ public class MinaInlagg extends javax.swing.JFrame {
           String inlagg = null;
           
           try{
-              String rubrik = cbxInlagg.getSelectedItem().toString();
+              String rubrik = cbxFormella.getSelectedItem().toString();
               
               String sql = "SELECT * FROM INFORMELL_BLOGG WHERE RUBRIK = " + rubrik + ";";
               ps = connection.prepareStatement(sql);
@@ -251,44 +196,82 @@ public class MinaInlagg extends javax.swing.JFrame {
           catch(Exception e){
               System.out.println("Något gick fel!" + e);
           }
+          
+          
     }//GEN-LAST:event_btnVisaHeltInlaggActionPerformed
 
-    
-    private void btnVisaFormellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaFormellaActionPerformed
-          DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
+    private void btnRedigeraFormellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedigeraFormellaActionPerformed
+        this.dispose();
+        new RedigeraFormelltInlagg().setVisible(true);
+    }//GEN-LAST:event_btnRedigeraFormellaActionPerformed
+
+    private void btnRedigeraInformellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedigeraInformellaActionPerformed
+        this.dispose();
+        new RedigeraInformelltInlagg().setVisible(true);
+    }//GEN-LAST:event_btnRedigeraInformellaActionPerformed
+ private void fyllCbxFormella() {
+     
+     DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
 	  Connection connection=obj_DB_Connection.get_connection();
 	  PreparedStatement ps=null;
           String inlagg = null;
           
          try{
-           String sql = "SELECT RUBRIK FROM FORMELL_BLOGG JOIN ANVANDARE ON INFORMELL_BLOGG.ANVANDARID = ANVANDARE.ANVANDARID WHERE ANVANDARE.ANVANDARID = 1" ;
+           String sql = "SELECT RUBRIK FROM FORMELL_BLOGG JOIN ANVANDARE ON FORMELL_BLOGG.ANVANDARID = ANVANDARE.ANVANDARID WHERE ANVANDARE.ANVANDARID = 1" ;
            ps = connection.prepareStatement(sql);
            ResultSet rs = ps.executeQuery();
            
            while(rs.next()){
                inlagg = rs.getString(1);
-               cbxInlagg.addItem(inlagg);
+               cbxFormella.addItem(inlagg);
            } 
         }
          catch(Exception e){
              JOptionPane.showMessageDialog(null, "Ett fel uppstod!");
          }  
-    }//GEN-LAST:event_btnVisaFormellaActionPerformed
-
+    }
+ 
+ private void fyllCbxInformella() {
+     DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
+	  Connection connection=obj_DB_Connection.get_connection();
+	  PreparedStatement ps=null;
+          String inlagg = null;
+          
+         try{
+           String sql = "SELECT RUBRIK FROM INFORMELL_BLOGG JOIN ANVANDARE ON INFORMELL_BLOGG.ANVANDARID = ANVANDARE.ANVANDARID WHERE ANVANDARE.ANVANDARID = 1" ;
+           ps = connection.prepareStatement(sql);
+           ResultSet rs = ps.executeQuery();
+           
+           while(rs.next()){
+               inlagg = rs.getString(1);
+               cbxInformella.addItem(inlagg);
+           } 
+        }
+         catch(Exception e){
+             JOptionPane.showMessageDialog(null, "Ett fel uppstod!");
+         }  
+    }
+     
+ 
+     
+ 
+    
     
     
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRaderaInlagg;
-    private javax.swing.JButton btnRedigeraInlagg;
+    private javax.swing.JButton btnRedigeraFormella;
+    private javax.swing.JButton btnRedigeraInformella;
     private javax.swing.JButton btnTillbaka;
-    private javax.swing.JButton btnVisaFormella;
     private javax.swing.JButton btnVisaHeltInlagg;
-    private javax.swing.JButton btnVisaInformella;
-    private javax.swing.JComboBox<String> cbxInlagg;
+    private javax.swing.JComboBox<String> cbxFormella;
+    private javax.swing.JComboBox<String> cbxInformella;
     private javax.swing.JLabel lblRubrik;
-    private javax.swing.JLabel lblValjInlagg;
+    private javax.swing.JLabel lblValjFormell;
+    private javax.swing.JLabel lblValjInformell;
     private java.awt.TextArea txaHeltInlagg;
     // End of variables declaration//GEN-END:variables
 }
+
