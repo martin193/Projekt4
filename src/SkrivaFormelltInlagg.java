@@ -222,7 +222,8 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
         PreparedStatement ps = null;
         if (Validering.textFaltHarVarde(txtNyRubrik) && Validering.textAreaHarVarde(txaNyttInlägg)) {
 
-            String fraga = ("select INLAGGSID from FORMELL_BLOGG");
+            //String fraga = ("select INLAGGSID from FORMELL_BLOGG");
+            String fraga = "select max(INLAGGSID) from FORMELL_BLOGG";
 
             String rubrik = txtNyRubrik.getText();
             int kategoriID = GetKategoriID();
@@ -311,22 +312,21 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
         Connection connection = obj_DB_Connection.get_connection();
         PreparedStatement ps = null;
-        //int idNy = 1;
-        int max = 0;
+        int idNy = 1;
         try {
             String query = o;
             ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                max = rs.getInt(3);
+                idNy = rs.getInt(query);
                 //idNy = idNy + 1;
             }
         } catch (Exception ex) {
             System.out.println("Internt felmeddelande: " + ex);
         }
-        //return idNy;
-        System.out.print(max);
-        return max;
+        System.out.print(idNy);
+        return idNy;
+        
     }
 
 
