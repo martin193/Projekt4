@@ -3,7 +3,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 
 
@@ -17,6 +19,8 @@ import javax.swing.JOptionPane;
  * @author jenni
  */
 public class InformellBlogg extends javax.swing.JFrame {
+    
+    //public JLabel test;
 
     /**
      * Creates new form InformellBlogg
@@ -235,6 +239,8 @@ public class InformellBlogg extends javax.swing.JFrame {
                 
                 bloggRuta.append(resultat);
                 
+                skrivBloggPost();
+                
 	    }
 	} catch (Exception e) {
 	    System.out.println(e);
@@ -242,6 +248,20 @@ public class InformellBlogg extends javax.swing.JFrame {
         return rubrik;
     }
 
+    public void skrivBloggPost(){
+        
+        JPanel contactlist = new JPanel();
+        getContentPane().add(contactlist);
+        
+        //test = new JLabel(); 
+        //test.setText("waa");
+        JLabel test;
+        test = new JLabel("waaa");
+        
+        contactlist.add(test);
+        
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.TextArea bloggRuta;
@@ -252,4 +272,6 @@ public class InformellBlogg extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel lblRubrik;
     // End of variables declaration//GEN-END:variables
+String rubrik = null;
+
 }
