@@ -1,3 +1,9 @@
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -18,14 +24,57 @@ public class AnvStartsida extends javax.swing.JFrame {
     public AnvStartsida() {
         initComponents();
         this.setLocationRelativeTo(null);
+        kollaAdmin();
     }
     
     public AnvStartsida(String e){
         epost = e;
         initComponents();
         this.setLocationRelativeTo(null);
+        kollaAdmin();
+    }
+    
+    //Kollar om användaren är admin och sätter vissa knappar synliga i sådana fall
+    public void kollaAdmin()
+    {
+        try
+        {
+        String fraga = "SELECT ADMIN FROM ANVANDARE WHERE EPOST = '" + epost + "'"; 
+        String svar = getQuery(fraga);
+        
+        if(svar.equals("T"))
+        {
+        btnAdmProfiler.setVisible(true);
+        }
+        else
+        {
+        btnAdmProfiler.setVisible(false);
+        }
+        
+        }
+        catch(Exception ex){
+        JOptionPane.showMessageDialog(null, "Något gick fel!");
+        }
     }
 
+    
+        public String getQuery(String q){
+        String svar = null;
+        DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
+	Connection connection=obj_DB_Connection.get_connection();
+	PreparedStatement ps=null;
+	try {
+	    String query= q;
+	    ps=connection.prepareStatement(query);
+	    ResultSet rs=ps.executeQuery();
+	    while(rs.next()){
+                svar = rs.getString(1);
+	    }
+	} catch (Exception e) {
+	    System.out.println(e);
+	} 
+        return svar;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,6 +90,7 @@ public class AnvStartsida extends javax.swing.JFrame {
         btnSeProfil = new javax.swing.JButton();
         btnLoggaUt = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btnAdmProfiler = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,6 +132,13 @@ public class AnvStartsida extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel1.setText("Välkommen till din sida!");
 
+        btnAdmProfiler.setText("Hantera profiler");
+        btnAdmProfiler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdmProfilerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -103,11 +160,13 @@ public class AnvStartsida extends javax.swing.JFrame {
                         .addComponent(btnSeInformellBlogg))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnSeInlägg))
+                        .addComponent(btnSeInlägg)
+                        .addGap(263, 263, 263)
+                        .addComponent(btnAdmProfiler))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(144, 144, 144)
                         .addComponent(jLabel1)))
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,7 +180,9 @@ public class AnvStartsida extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnSeInformellBlogg)
                 .addGap(18, 18, 18)
-                .addComponent(btnSeInlägg)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSeInlägg)
+                    .addComponent(btnAdmProfiler))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
                 .addComponent(btnLoggaUt)
                 .addContainerGap())
@@ -155,8 +216,14 @@ public class AnvStartsida extends javax.swing.JFrame {
        new Inlogg().setVisible(true);
     }//GEN-LAST:event_btnLoggaUtActionPerformed
 
+    private void btnAdmProfilerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmProfilerActionPerformed
+        this.dispose();
+        new hanteraAnvandare().setVisible(true);
+    }//GEN-LAST:event_btnAdmProfilerActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdmProfiler;
     private javax.swing.JButton btnLoggaUt;
     private javax.swing.JButton btnSeFormellBlogg;
     private javax.swing.JButton btnSeInformellBlogg;

@@ -85,6 +85,11 @@ public class hanteraAnvandare extends javax.swing.JFrame {
         btnTaBort.setText("Ta bort");
 
         btnAvbryt.setText("Avbryt");
+        btnAvbryt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvbrytActionPerformed(evt);
+            }
+        });
 
         btnFyllLista.setText("Fyll lista");
         btnFyllLista.addActionListener(new java.awt.event.ActionListener() {
@@ -213,6 +218,11 @@ public class hanteraAnvandare extends javax.swing.JFrame {
     private void btnFyllListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFyllListaActionPerformed
         setText();
     }//GEN-LAST:event_btnFyllListaActionPerformed
+
+    private void btnAvbrytActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvbrytActionPerformed
+        this.dispose();
+        new AnvStartsida().setVisible(true);
+    }//GEN-LAST:event_btnAvbrytActionPerformed
 
     private void fillBox() {
         boxAnvandare.removeAllItems();

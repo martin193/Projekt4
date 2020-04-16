@@ -44,13 +44,15 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnSeInlägg" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="263" max="-2" attributes="0"/>
+                      <Component id="btnAdmProfiler" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="148" max="32767" attributes="0"/>
+              <EmptySpace pref="53" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -67,7 +69,10 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnSeInformellBlogg" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btnSeInlägg" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnSeInlägg" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAdmProfiler" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="119" max="32767" attributes="0"/>
               <Component id="btnLoggaUt" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -123,6 +128,14 @@
         </Property>
         <Property name="text" type="java.lang.String" value="V&#xe4;lkommen till din sida!"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnAdmProfiler">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Hantera profiler"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdmProfilerActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
