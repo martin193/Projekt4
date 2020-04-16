@@ -57,7 +57,7 @@ public class RedigeraFormelltInlagg extends javax.swing.JFrame {
 
         btnLaddaUppNyFil.setText("Välj");
 
-        btnUppdateraFormelltInlagg.setText("Uppdatera blogginlägg");
+        btnUppdateraFormelltInlagg.setText("Redigera blogginlägg");
         btnUppdateraFormelltInlagg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUppdateraFormelltInlaggActionPerformed(evt);
@@ -326,13 +326,15 @@ public class RedigeraFormelltInlagg extends javax.swing.JFrame {
         String text = txaRedigeraText.getText();
         String inlaggsID = lblInlaggsID.getText();
         try {
-            String query = "update FORMELL_BLOGG set RUBRIK = '" + rubrik + "', TEXT = '" + text + "', " +
-                    "KATEGORI = " + kategoriID + " where INLAGGSID = " + inlaggsID; //FIL SKA LÄGGAS TILL!!!!!!!!!!!!!!1
+            String query = "update FORMELL_BLOGG set RUBRIK = '" + rubrik + "', TEXT = '" + text + "', "
+                    + "KATEGORI = " + kategoriID + " where INLAGGSID = " + inlaggsID; //FIL SKA LÄGGAS TILL!!!!!!!!!!!!!!1
 
             ps = connection.prepareStatement(query);
             ps.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Inlägg uppdaterat!");
+            cbVisaRubriker.removeAllItems();
+            fyllCbRubriker();
 
         } catch (Exception e) {
             System.out.println(e);
@@ -377,7 +379,7 @@ public class RedigeraFormelltInlagg extends javax.swing.JFrame {
         return kategoriNamn;
     }
 
-    //Tar emot en SQL-fråga som parameter för att sedan returnera nästa lediga ID för den tabell som r specificerad i SQL-frågan.
+    //Tar emot en SQL-fråga som parameter för att sedan returnera nästa lediga ID för den tabell som är specificerad i SQL-frågan.
     public int GetAutoId(String o) {
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
         Connection connection = obj_DB_Connection.get_connection();
