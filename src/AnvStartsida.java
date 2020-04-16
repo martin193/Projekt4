@@ -219,7 +219,7 @@ public class AnvStartsida extends javax.swing.JFrame {
 
     private void btnSeInformellBloggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeInformellBloggActionPerformed
         this.dispose();
-        new InformellBlogg().setVisible(true);
+        new InformellBlogg(epost).setVisible(true);
     }//GEN-LAST:event_btnSeInformellBloggActionPerformed
 
     private void btnSeInläggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeInläggActionPerformed
