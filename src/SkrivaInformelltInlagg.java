@@ -2,6 +2,8 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 
 /*
@@ -162,6 +164,10 @@ public class SkrivaInformelltInlagg extends javax.swing.JFrame {
         try
                 
                 {
+                
+                String tidpunkt = hemtaDatum();
+                
+                JOptionPane.showMessageDialog(null, "datum: " + tidpunkt);
            
                 String fraga = ("SELECT INLAGGSID FROM INFORMELL_BLOGG");
                 
@@ -202,6 +208,13 @@ public class SkrivaInformelltInlagg extends javax.swing.JFrame {
 
     }
 
+    public String hemtaDatum(){
+    
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+        LocalDateTime now = LocalDateTime.now();  
+        return dtf.format(now);
+    
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAvbryt;
