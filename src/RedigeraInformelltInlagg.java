@@ -249,30 +249,35 @@ public class RedigeraInformelltInlagg extends javax.swing.JFrame {
         }
     }
 
+    //Redigerar inlägg i INFORMELL_BLOGG utifrån ID.
+    //FILHANTERING FUNGERAR EJ!!!!!!!!!!!!!!!!
     private void btnUppdateraInformelltInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUppdateraInformelltInlaggActionPerformed
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
         Connection connection = obj_DB_Connection.get_connection();
         PreparedStatement ps = null;
 
-        String rubrik = txaRedigeraRubrik.getText();
-        String kategoriNamn = cbRedigeraKategori.getSelectedItem().toString();
-        int kategoriID = GetKategoriID(kategoriNamn);
-        //String fil = !!!!!!!!!!!!!!!!!!!!!
-        String text = txaRedigeraText.getText();
-        String inlaggsID = lblInlaggsID.getText();
-        try {
-            String query = "update INFORMELL_BLOGG set RUBRIK = '" + rubrik + "', TEXT = '" + text + "', "
-                    + "KATEGORI = " + kategoriID + " where INLAGGSID = " + inlaggsID; //FIL SKA LÄGGAS TILL!!!!!!!!!!!!!!1
+        if (Validering.textFaltHarVarde(txaRedigeraRubrik) && Validering.textAreaHarVarde(txaRedigeraText)) {
 
-            ps = connection.prepareStatement(query);
-            ps.executeUpdate();
+            String rubrik = txaRedigeraRubrik.getText();
+            String kategoriNamn = cbRedigeraKategori.getSelectedItem().toString();
+            int kategoriID = GetKategoriID(kategoriNamn);
+            //String fil = !!!!!!!!!!!!!!!!!!!!!
+            String text = txaRedigeraText.getText();
+            String inlaggsID = lblInlaggsID.getText();
+            try {
+                String query = "update INFORMELL_BLOGG set RUBRIK = '" + rubrik + "', TEXT = '" + text + "', "
+                        + "KATEGORI = " + kategoriID + " where INLAGGSID = " + inlaggsID; //FIL SKA LÄGGAS TILL!!!!!!!!!!!!!!1
 
-            JOptionPane.showMessageDialog(null, "Inlägg uppdaterat!");
-            cbVisaRubriker.removeAllItems();
-            fyllCbRubriker();
+                ps = connection.prepareStatement(query);
+                ps.executeUpdate();
 
-        } catch (Exception e) {
-            System.out.println(e);
+                JOptionPane.showMessageDialog(null, "Inlägg uppdaterat!");
+                cbVisaRubriker.removeAllItems();
+                fyllCbRubriker();
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
     }//GEN-LAST:event_btnUppdateraInformelltInlaggActionPerformed
 
@@ -283,25 +288,27 @@ public class RedigeraInformelltInlagg extends javax.swing.JFrame {
         PreparedStatement ps = null;
 
         String fraga = ("select KATEGORIID from KATEGORI_INFORMELL");
+        if (Validering.textFaltHarVarde(txtSkapaNyKategori)) {
 
-        String kategoriNamn = txtSkapaNyKategori.getText();
-        int id = GetAutoId(fraga);
-        try {
-            String query = "insert into KATEGORI_INFORMELL (KATEGORINAMN, KATEGORIID) values (?, ?)";
-            ps = connection.prepareStatement(query);
-            ps.setString(1, kategoriNamn);
-            ps.setInt(2, id);
-            ps.execute();
+            String kategoriNamn = txtSkapaNyKategori.getText();
+            int id = GetAutoId(fraga);
+            try {
+                String query = "insert into KATEGORI_INFORMELL (KATEGORINAMN, KATEGORIID) values (?, ?)";
+                ps = connection.prepareStatement(query);
+                ps.setString(1, kategoriNamn);
+                ps.setInt(2, id);
+                ps.execute();
 
-            cbRedigeraKategori.removeAllItems();
-            fyllCbKategorier();
-            cbRedigeraKategori.setSelectedItem(kategoriNamn);
-            txtSkapaNyKategori.setText("");
+                cbRedigeraKategori.removeAllItems();
+                fyllCbKategorier();
+                cbRedigeraKategori.setSelectedItem(kategoriNamn);
+                txtSkapaNyKategori.setText("");
 
-            JOptionPane.showMessageDialog(null, "Kategori tillagd!");
+                JOptionPane.showMessageDialog(null, "Kategori tillagd!");
 
-        } catch (Exception e) {
-            System.out.println(e);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
     }//GEN-LAST:event_btnSkapaNyKategoriActionPerformed
 
