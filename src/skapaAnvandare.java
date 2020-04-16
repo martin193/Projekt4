@@ -6,12 +6,19 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class skapaAnvandare extends javax.swing.JFrame {
+    
+    String epost;
 
     /**
      * Creates new form skapaAnvandare
      */
     public skapaAnvandare() {
         initComponents();
+    }
+    
+    public skapaAnvandare(String e) {
+        initComponents();
+        epost = e;   
     }
 
     /**
@@ -60,6 +67,11 @@ public class skapaAnvandare extends javax.swing.JFrame {
         });
 
         btnAvbryt.setText("Avbryt");
+        btnAvbryt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvbrytActionPerformed(evt);
+            }
+        });
 
         cboxAdministrator.setText("Administratör");
 
@@ -178,6 +190,11 @@ public class skapaAnvandare extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnLaggTillActionPerformed
+
+    private void btnAvbrytActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvbrytActionPerformed
+        this.dispose();
+        new AnvStartsida(epost).setVisible(true);
+    }//GEN-LAST:event_btnAvbrytActionPerformed
     
     private void skapaAnvandare(String Q){
         	DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();

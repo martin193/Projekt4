@@ -91,6 +91,7 @@ public class AnvStartsida extends javax.swing.JFrame {
         btnLoggaUt = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnAdmProfiler = new javax.swing.JButton();
+        btnAdmSkapaAnv = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -139,34 +140,47 @@ public class AnvStartsida extends javax.swing.JFrame {
             }
         });
 
+        btnAdmSkapaAnv.setText("Skapa användare");
+        btnAdmSkapaAnv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdmSkapaAnvActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnSeFormellBlogg)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSeProfil)
-                .addGap(47, 47, 47))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnLoggaUt)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnSeInformellBlogg))
+                        .addComponent(btnSeFormellBlogg)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSeProfil)
+                        .addGap(47, 47, 47))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnSeInlägg)
-                        .addGap(263, 263, 263)
-                        .addComponent(btnAdmProfiler))
+                        .addComponent(btnSeInformellBlogg)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLoggaUt))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(144, 144, 144)
-                        .addComponent(jLabel1)))
-                .addContainerGap(53, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnAdmSkapaAnv)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(btnSeInlägg)
+                                    .addGap(263, 263, 263)
+                                    .addComponent(btnAdmProfiler))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(144, 144, 144)
+                                    .addComponent(jLabel1))))
+                        .addGap(0, 47, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,12 +192,14 @@ public class AnvStartsida extends javax.swing.JFrame {
                     .addComponent(btnSeFormellBlogg)
                     .addComponent(btnSeProfil))
                 .addGap(18, 18, 18)
-                .addComponent(btnSeInformellBlogg)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSeInformellBlogg)
+                    .addComponent(btnAdmSkapaAnv))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSeInlägg)
                     .addComponent(btnAdmProfiler))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
                 .addComponent(btnLoggaUt)
                 .addContainerGap())
         );
@@ -192,7 +208,7 @@ public class AnvStartsida extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSeProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeProfilActionPerformed
-        this.dispose();
+            this.dispose();
         new ProfilSida(epost).setVisible(true);
     }//GEN-LAST:event_btnSeProfilActionPerformed
 
@@ -218,12 +234,18 @@ public class AnvStartsida extends javax.swing.JFrame {
 
     private void btnAdmProfilerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmProfilerActionPerformed
         this.dispose();
-        new hanteraAnvandare().setVisible(true);
+        new hanteraAnvandare(epost).setVisible(true);
     }//GEN-LAST:event_btnAdmProfilerActionPerformed
+
+    private void btnAdmSkapaAnvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmSkapaAnvActionPerformed
+        this.dispose();
+        new skapaAnvandare(epost).setVisible(true);
+    }//GEN-LAST:event_btnAdmSkapaAnvActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdmProfiler;
+    private javax.swing.JButton btnAdmSkapaAnv;
     private javax.swing.JButton btnLoggaUt;
     private javax.swing.JButton btnSeFormellBlogg;
     private javax.swing.JButton btnSeInformellBlogg;

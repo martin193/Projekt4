@@ -16,12 +16,20 @@ import javax.swing.JOptionPane;
  */
 public class hanteraAnvandare extends javax.swing.JFrame {
 
+    private String epost;
+
     /**
      * Creates new form hanteraAnvandare
      */
     public hanteraAnvandare() {
         initComponents();
         fillBox();
+    }
+
+    public hanteraAnvandare(String e) {
+        initComponents();
+        fillBox();
+        epost = e;
     }
 
     /**
@@ -83,8 +91,13 @@ public class hanteraAnvandare extends javax.swing.JFrame {
         });
 
         btnTaBort.setText("Ta bort");
+        btnTaBort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaBortActionPerformed(evt);
+            }
+        });
 
-        btnAvbryt.setText("Avbryt");
+        btnAvbryt.setText("Tillbaka");
         btnAvbryt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAvbrytActionPerformed(evt);
@@ -201,13 +214,20 @@ public class hanteraAnvandare extends javax.swing.JFrame {
         String email = txfMail.getText();
         String losenord = txfLosenord.getText();
         String telnr = txfTelnr.getText();
-        String Q = "UPDATE ANVANDARE SET FORNAMN = '"+fornamn+"',EFTERNAMN='"+efternamn+"', EPOST='"+email+"', LOSENORD='"+losenord+"', TELNR='"+telnr+"'WHERE EPOST='"+epost+"'";
-        fillBox();
+        boolean adminstatus = checkAdmin.isSelected();
+        String admin = "F";
+        if (adminstatus) {
+            admin = "T";
+        }
+        String Q = "UPDATE ANVANDARE SET FORNAMN = '" + fornamn + "',EFTERNAMN='" + efternamn + "', EPOST='" + email + "', LOSENORD='" + losenord + "',ADMIN='"+admin+"', TELNR='" + telnr + "'WHERE EPOST='" + epost + "'";
+
         try {
             updateAnvandare(Q);
             JOptionPane.showMessageDialog(null, "Ändringen lyckades!");
-        }catch(Exception e)
-        {System.out.println(e);
+            fillBox();
+        } catch (Exception e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "Något gick fel! Uppdatering misslyckades");
         }
     }//GEN-LAST:event_btnUppdateraActionPerformed
 
@@ -217,12 +237,17 @@ public class hanteraAnvandare extends javax.swing.JFrame {
 
     private void btnFyllListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFyllListaActionPerformed
         setText();
+        setCheckBox();
     }//GEN-LAST:event_btnFyllListaActionPerformed
 
     private void btnAvbrytActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvbrytActionPerformed
         this.dispose();
-        new AnvStartsida().setVisible(true);
+        new AnvStartsida(epost).setVisible(true);
     }//GEN-LAST:event_btnAvbrytActionPerformed
+
+    private void btnTaBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTaBortActionPerformed
 
     private void fillBox() {
         boxAnvandare.removeAllItems();
@@ -266,6 +291,15 @@ public class hanteraAnvandare extends javax.swing.JFrame {
         txfMail.setText(epost);
         txfLosenord.setText(getQuery("SELECT LOSENORD FROM ANVANDARE WHERE EPOST='" + epost + "'"));
         txfTelnr.setText(getQuery("SELECT TELNR FROM ANVANDARE WHERE EPOST='" + epost + "'"));
+
+    }
+
+    public void setCheckBox() {
+        String isAdmin = getQuery("SELECT ADMIN FROM ANVANDARE WHERE EPOST='" + epost + "'");
+
+        if (isAdmin.equals("T")) {
+            checkAdmin.setSelected(true);
+        }
 
     }
 
