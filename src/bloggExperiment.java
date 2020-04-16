@@ -248,7 +248,7 @@ public class bloggExperiment extends javax.swing.JFrame {
         
         JOptionPane.showMessageDialog(null, "kewl");
         
-        getSelectedRow();
+        //getSelectedRow();
 
         bloggRuta.setText("");
 

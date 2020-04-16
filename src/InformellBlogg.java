@@ -239,7 +239,7 @@ public class InformellBlogg extends javax.swing.JFrame {
                 
                 bloggRuta.append(resultat);
                 
-                skrivBloggPost();
+                //skrivBloggPost();
                 
 	    }
 	} catch (Exception e) {
@@ -249,6 +249,7 @@ public class InformellBlogg extends javax.swing.JFrame {
     }
 
     public void skrivBloggPost(){
+        //det här var ett test men gick inge bra
         
         JPanel contactlist = new JPanel();
         getContentPane().add(contactlist);
