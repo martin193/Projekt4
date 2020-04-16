@@ -45,10 +45,12 @@ public class AnvStartsida extends javax.swing.JFrame {
         if(svar.equals("T"))
         {
         btnAdmProfiler.setVisible(true);
+        btnAdmSkapaAnv.setVisible(true);
         }
         else
         {
         btnAdmProfiler.setVisible(false);
+        btnAdmSkapaAnv.setVisible(false);
         }
         
         }
