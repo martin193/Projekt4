@@ -223,9 +223,9 @@ public class hanteraAnvandare extends javax.swing.JFrame {
 
         try {
             updateAnvandare(Q);
-            JOptionPane.showMessageDialog(null, "Ändringen lyckades!");
             emptyBox();
             fillBox();
+            JOptionPane.showMessageDialog(null, "Ändringen lyckades!");
         } catch (Exception e) {
             System.out.println(e);
             JOptionPane.showMessageDialog(null, "Något gick fel! Uppdatering misslyckades");
