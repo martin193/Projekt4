@@ -169,7 +169,7 @@ public class InformellBlogg extends javax.swing.JFrame {
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         this.dispose();
-        new AnvStartsida().setVisible(true);
+        new AnvStartsida(epost).setVisible(true);
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     //Filtrerar informella blogginlägg utifrån den kategori som valts i combo boxen.

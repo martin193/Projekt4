@@ -226,7 +226,7 @@ public class AnvStartsida extends javax.swing.JFrame {
 
     private void btnSeInläggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeInläggActionPerformed
         this.dispose();
-        new MinaInlagg().setVisible(true);
+        new MinaInlagg(epost).setVisible(true);
     }//GEN-LAST:event_btnSeInläggActionPerformed
 
     private void btnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaUtActionPerformed
