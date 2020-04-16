@@ -77,6 +77,13 @@ public class bloggExperiment extends javax.swing.JFrame {
         String kategori = null;
         String fornamn = null;
         String efternamn = null;
+        
+        DefaultTableModel yaya = (DefaultTableModel)tblInlagg.getModel();
+        int rowCount = yaya.getRowCount();
+        for (int i = rowCount - 1; i >= 0; i--) {
+            yaya.removeRow(i);
+        }
+        
 	try {
 	    String query= s;
 	    ps=connection.prepareStatement(query);
@@ -245,17 +252,50 @@ public class bloggExperiment extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxKategorierActionPerformed
 
     private void tblInlaggMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblInlaggMouseClicked
+                
         
-        JOptionPane.showMessageDialog(null, "kewl");
+        DefaultTableModel yaya = (DefaultTableModel)tblInlagg.getModel();
+        int selectedRowIndex = tblInlagg.getSelectedRow();
         
-        //getSelectedRow();
-
-        bloggRuta.setText("");
+        String id = (yaya.getValueAt(selectedRowIndex, 0).toString());
+        
+        //id är rubrik nu dock
+        
+        String fraga= "SELECT * FROM INFORMELL_BLOGG WHERE RUBRIK = '" + id + "'";
+                
+                
+        String text = GetText(fraga);
 
         
         
     }//GEN-LAST:event_tblInlaggMouseClicked
 
+    public String GetText(String s)
+    {
+	DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
+	Connection connection=obj_DB_Connection.get_connection();
+	PreparedStatement ps=null;
+        String text = null;
+
+	try {
+	    String query= s;
+	    ps=connection.prepareStatement(query);
+	    ResultSet rs=ps.executeQuery();
+	    while(rs.next()){
+                
+                text = rs.getString(2);
+                            
+	    }
+            
+            bloggRuta.setText(text);
+            
+	} catch (Exception e) {
+	    System.out.println(e);
+	}         
+        
+        return text;
+    }
+    
     /**
      * @param args the command line arguments
      */
