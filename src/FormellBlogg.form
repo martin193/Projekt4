@@ -31,7 +31,7 @@
                       <EmptySpace min="51" pref="51" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="btNyFormell" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="btVisaMinaFormella" pref="139" max="32767" attributes="0"/>
+                          <Component id="btVisaMinaFormella" max="32767" attributes="0"/>
                           <Component id="btnVisaAllaFormella" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>

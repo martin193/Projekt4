@@ -433,6 +433,6 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
     private javax.swing.JTextField txtKategori;
     private javax.swing.JTextField txtNyRubrik;
     // End of variables declaration//GEN-END:variables
-byte[] photo = null;
 String filename = null;
+byte[] photo = null;
 }

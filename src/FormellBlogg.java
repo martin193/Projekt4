@@ -201,6 +201,7 @@ public class FormellBlogg extends javax.swing.JFrame {
         String text = null;
         String kategori = null;
         String anvandarID = null;
+        byte[] photo = null;
 
         try {
             String query = s;
@@ -212,6 +213,7 @@ public class FormellBlogg extends javax.swing.JFrame {
                 text = rs.getString(2);
                 kategori = rs.getString(8);
                 anvandarID = rs.getString(4);
+                photo = rs.getBytes(5);
 
                 String anvandare = GetForfattare(anvandarID);
 
