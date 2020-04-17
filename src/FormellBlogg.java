@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 public class FormellBlogg extends javax.swing.JFrame {
 
     private String epost;
+
     /**
      * Creates new form FormellBlogg
      */
@@ -197,7 +198,8 @@ public class FormellBlogg extends javax.swing.JFrame {
         txtFormell.setText("");
 
         try {
-            String fraga = "SELECT * FROM FORMELL_BLOGG JOIN KATEGORI_FORMELL ON KATEGORIID = KATEGORI";
+            String fraga = "SELECT * FROM FORMELL_BLOGG JOIN KATEGORI_FORMELL ON KATEGORIID = "
+                    + "KATEGORI JOIN ANVANDARE ON ANVANDARE.ANVANDARID = FORMELL_BLOGG.ANVANDARID ORDER BY TIDPUNKT DESC";
             String text = GetQuery(fraga);
 
         } catch (Exception ex) {
@@ -267,7 +269,7 @@ public class FormellBlogg extends javax.swing.JFrame {
 
     //Filtrerar formella blogginlägg utifrån den kategori som valts i combo boxen.
     private void btnFiltreraKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltreraKategoriActionPerformed
-        txtFormell.setText("");       
+        txtFormell.setText("");
         String kategori = cbxFormellKategori.getSelectedItem().toString();
         String fraga = "SELECT * FROM FORMELL_BLOGG JOIN KATEGORI_FORMELL ON KATEGORIID = KATEGORI WHERE KATEGORINAMN = '" + kategori + "'";
 
@@ -309,9 +311,9 @@ public class FormellBlogg extends javax.swing.JFrame {
     private void btVisaMinaFormellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisaMinaFormellaActionPerformed
         txtFormell.setText("");
 
-        try {         
+        try {
             String fraga = "select * from FORMELL_BLOGG JOIN KATEGORI_FORMELL ON KATEGORIID = "
-                  + "KATEGORI where ANVANDARID = (select ANVANDARID from ANVANDARE where EPOST = '" + epost + "')";           
+                    + "KATEGORI where ANVANDARID = (select ANVANDARID from ANVANDARE where EPOST = '" + epost + "')";
             String text = GetQuery(fraga);
 
         } catch (Exception ex) {
@@ -320,85 +322,78 @@ public class FormellBlogg extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btVisaMinaFormellaActionPerformed
 
-    
+
     private void btnRaderaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRaderaInlaggActionPerformed
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
         Connection connection = obj_DB_Connection.get_connection();
         PreparedStatement ps = null;
         String inlagg = cbxInlagg.getSelectedItem().toString();
-        
+
         int yes_no = JOptionPane.showConfirmDialog(this, "Är du säker på att du vill radera inlägget?", "Confirm", JOptionPane.YES_NO_OPTION);
-       
+
         //Ber användaren att bekräfta radering av valt inlägg.
-        if (yes_no == JOptionPane.YES_OPTION){
-            try{
-                String sql = "DELETE FROM FORMELL_BLOGG WHERE RUBRIK = '" + inlagg +"'";
+        if (yes_no == JOptionPane.YES_OPTION) {
+            try {
+                String sql = "DELETE FROM FORMELL_BLOGG WHERE RUBRIK = '" + inlagg + "'";
                 ps = connection.prepareStatement(sql);
                 ps.executeUpdate();
-                
+
                 JOptionPane.showMessageDialog(null, "Inlägget har raderats!");
-        }
-        
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Något gick fel!");
-          }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Något gick fel!");
+            }
         }
     }//GEN-LAST:event_btnRaderaInlaggActionPerformed
 
-    private void fyllcbxInlagg(){
-         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
-         Connection connection = obj_DB_Connection.get_connection();
-         PreparedStatement ps = null;
-         String inlagg = null;
-         
-         try{
-             String fraga = "SELECT RUBRIK FROM FORMELL_BLOGG";
-             ps = connection.prepareStatement(fraga);
-             ResultSet rs = ps.executeQuery();
-             
-             while(rs.next()){
-                 inlagg = rs.getString(1);
-                 cbxInlagg.addItem(inlagg);
-             }
-         }
-         
-         catch(Exception e){
-             System.out.println("Felmeddeland! " + e);
-         }
-    }
-    
-    //Kollar om användaren är admin, är svaret true visas comboBoc och knapp för att radera andras inlägg.
-    private void kollaAdmin(){
-         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
-         Connection connection = obj_DB_Connection.get_connection();
-         PreparedStatement ps = null;
-         String svar = null;
-         
-         try{
-              String fraga = "SELECT ADMIN FROM ANVANDARE WHERE EPOST = '" + epost + "'"; 
-              ps = connection.prepareStatement(fraga);
-              ResultSet rs = ps.executeQuery();
-              
-              while(rs.next()){
-                svar = rs.getString(1);
-	    }
-        
-             if(svar.equals("T")){
-                 cbxInlagg.setVisible(true);
-                 fyllcbxInlagg();
-                 btnRaderaInlagg.setVisible(true);
-             }
-             else{
-                 cbxInlagg.setVisible(false);
-                 btnRaderaInlagg.setVisible(false);
-             }
-         }
-        catch(Exception ex){
-        JOptionPane.showMessageDialog(null, "Något gick fel!");
+    private void fyllcbxInlagg() {
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        String inlagg = null;
+
+        try {
+            String fraga = "SELECT RUBRIK FROM FORMELL_BLOGG";
+            ps = connection.prepareStatement(fraga);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                inlagg = rs.getString(1);
+                cbxInlagg.addItem(inlagg);
+            }
+        } catch (Exception e) {
+            System.out.println("Felmeddeland! " + e);
         }
     }
-    
-    
+
+    //Kollar om användaren är admin, är svaret true visas comboBoc och knapp för att radera andras inlägg.
+    private void kollaAdmin() {
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        String svar = null;
+
+        try {
+            String fraga = "SELECT ADMIN FROM ANVANDARE WHERE EPOST = '" + epost + "'";
+            ps = connection.prepareStatement(fraga);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                svar = rs.getString(1);
+            }
+
+            if (svar.equals("T")) {
+                cbxInlagg.setVisible(true);
+                fyllcbxInlagg();
+                btnRaderaInlagg.setVisible(true);
+            } else {
+                cbxInlagg.setVisible(false);
+                btnRaderaInlagg.setVisible(false);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btNyFormell;
