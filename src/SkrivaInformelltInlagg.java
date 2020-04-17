@@ -274,8 +274,8 @@ public class SkrivaInformelltInlagg extends javax.swing.JFrame {
                 ps.setInt(4, forfattareID);              
                 ps.setString(5, tidpunkt);
                 ps.setInt(6, kategoriID);
-                ps.setString(7, null); //FINNS ET SOM TABELL I DATABAS                
-                //ps.setBytes(7, photo); //FINNS ET SOM TABELL I DATABAS
+                //ps.setString(7, null); //FINNS ET SOM TABELL I DATABAS                
+                ps.setBytes(7, photo); //FINNS ET SOM TABELL I DATABAS
                 ps.execute();
 
                 JOptionPane.showMessageDialog(null, "Inlägg publicerat!");

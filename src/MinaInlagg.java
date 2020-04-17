@@ -93,6 +93,12 @@ public class MinaInlagg extends javax.swing.JFrame {
         lblValjInformell.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
         lblValjInformell.setText("Sök rubriker (informella inlägg):");
 
+        cbxFormella.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxFormellaActionPerformed(evt);
+            }
+        });
+
         btnRedigeraFormella.setText("Redigera formellt inlägg");
         btnRedigeraFormella.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -269,16 +275,46 @@ public class MinaInlagg extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnRaderaInlaggActionPerformed
+
+    private void cbxFormellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFormellaActionPerformed
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        String inlagg = null;
+        txaHeltInlagg.setText("");
+
+        try {
+            String formellRubrik = cbxFormella.getSelectedItem().toString();
+
+            
+                String sql = "SELECT TEXT FROM FORMELL_BLOGG WHERE RUBRIK = '" + formellRubrik + "'";
+                ps = connection.prepareStatement(sql);
+                ResultSet rs3 = ps.executeQuery();
+
+                while (rs3.next()) {
+                    inlagg = rs3.getString(1);
+                    txaHeltInlagg.setText(inlagg);
+                }
+
+            } catch (Exception e) {
+            System.out.println("Något gick fel!" + e);
+        }
+    }//GEN-LAST:event_cbxFormellaActionPerformed
     private void fyllCbxFormella() {
 
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
         Connection connection = obj_DB_Connection.get_connection();
         PreparedStatement ps = null;
         String inlagg = null;
+        
+        //testar--->
+        //String rubrik;
+        //int id = 0;
+        //<---
         cbxFormella.addItem("");
 
         try {
-            String sql = "SELECT RUBRIK FROM FORMELL_BLOGG JOIN ANVANDARE ON FORMELL_BLOGG.ANVANDARID = "
+            String sql = "SELECT * FROM FORMELL_BLOGG JOIN ANVANDARE ON FORMELL_BLOGG.ANVANDARID = "
                     + "ANVANDARE.ANVANDARID WHERE ANVANDARE.EPOST = '" + epost + "'";
             ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -286,6 +322,9 @@ public class MinaInlagg extends javax.swing.JFrame {
             while (rs.next()) {
                 inlagg = rs.getString(1);
                 cbxFormella.addItem(inlagg);
+                //ubrik = rs.getString(1);
+                //id = rs.getInt(3);
+                //cbxFormella.addItem(new Item(id, rubrik));
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ett fel uppstod!");
