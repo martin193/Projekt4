@@ -25,6 +25,7 @@ public class InformellBlogg extends javax.swing.JFrame {
         txtInformell.setLineWrap(true);
         txtInformell.setEditable(false);
         epost = e;
+        kollaAdmin();
     }
 
     @SuppressWarnings("unchecked")
@@ -61,6 +62,8 @@ public class InformellBlogg extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtInformell = new javax.swing.JTextArea();
         btnVisaAllaInformella = new javax.swing.JButton();
+        cbxInlagg = new javax.swing.JComboBox<>();
+        btnRaderaInlagg = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,6 +111,13 @@ public class InformellBlogg extends javax.swing.JFrame {
             }
         });
 
+        btnRaderaInlagg.setText("Radera inlägg");
+        btnRaderaInlagg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRaderaInlaggActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -118,50 +128,61 @@ public class InformellBlogg extends javax.swing.JFrame {
                         .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(66, 66, 66)
+                                        .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(53, 53, 53)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnNyttInlagg)
+                                            .addComponent(btnVisaMinaInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnVisaAllaInformella, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(cbxKategorier, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnFiltreraKategori))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnFiltreraKategori)
+                                .addGap(40, 40, 40)
+                                .addComponent(cbxInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                                .addComponent(btnRaderaInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(223, 223, 223)
                         .addComponent(lblRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnNyttInlagg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnVisaAllaInformella, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnVisaMinaInlagg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(47, Short.MAX_VALUE))))
+                .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxKategorier, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnFiltreraKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(btnNyttInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(btnVisaMinaInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(btnVisaAllaInformella, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(67, 67, 67)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(cbxKategorier, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnFiltreraKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(65, 65, 65)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(cbxInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnRaderaInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(65, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(143, 143, 143)
+                        .addComponent(btnNyttInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(btnVisaMinaInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(btnVisaAllaInformella, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGap(27, 27, 27))))
         );
 
         pack();
@@ -232,6 +253,32 @@ public class InformellBlogg extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnVisaMinaInlaggActionPerformed
 
+    
+    private void btnRaderaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRaderaInlaggActionPerformed
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        String inlagg = cbxInlagg.getSelectedItem().toString();
+        
+        int yes_no = JOptionPane.showConfirmDialog(this, "Är du säker på att du vill radera inlägget?", "Confirm", JOptionPane.YES_NO_OPTION);
+       
+        //Ber användaren att bekräfta radering av valt inlägg.
+        if (yes_no == JOptionPane.YES_OPTION){
+            try{
+                String sql = "DELETE FROM INFORMELL_BLOGG WHERE RUBRIK = '" + inlagg +"'";
+                ps = connection.prepareStatement(sql);
+                ps.executeUpdate();
+                
+                JOptionPane.showMessageDialog(null, "Inlägget har raderats!");
+        }
+        
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+          }
+        }
+    }//GEN-LAST:event_btnRaderaInlaggActionPerformed
+
+    
     private void fyllBloggRuta() {
 
         txtInformell.setText("");
@@ -319,12 +366,71 @@ public class InformellBlogg extends javax.swing.JFrame {
         return namn;
     }
 
+    
+    
+        private void fyllcbxInlagg(){
+         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+         Connection connection = obj_DB_Connection.get_connection();
+         PreparedStatement ps = null;
+         String inlagg = null;
+         
+         try{
+             String fraga = "SELECT RUBRIK FROM FORMELL_BLOGG";
+             ps = connection.prepareStatement(fraga);
+             ResultSet rs = ps.executeQuery();
+             
+             while(rs.next()){
+                 inlagg = rs.getString(1);
+                 cbxInlagg.addItem(inlagg);
+             }
+         }
+         
+         catch(Exception e){
+             System.out.println("Felmeddeland! " + e);
+         }
+    }
+    
+    //Kollar om användaren är admin, är svaret true visas comboBoc och knapp för att radera andras inlägg.
+    private void kollaAdmin(){
+         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+         Connection connection = obj_DB_Connection.get_connection();
+         PreparedStatement ps = null;
+         String svar = null;
+         
+         try{
+              String fraga = "SELECT ADMIN FROM ANVANDARE WHERE EPOST = '" + epost + "'"; 
+              ps = connection.prepareStatement(fraga);
+              ResultSet rs = ps.executeQuery();
+              
+              while(rs.next()){
+                svar = rs.getString(1);
+	    }
+        
+             if(svar.equals("T")){
+                 cbxInlagg.setVisible(true);
+                 fyllcbxInlagg();
+                 btnRaderaInlagg.setVisible(true);
+             }
+             else{
+                 cbxInlagg.setVisible(false);
+                 btnRaderaInlagg.setVisible(false);
+             }
+         }
+        catch(Exception ex){
+        JOptionPane.showMessageDialog(null, "Något gick fel!");
+        }
+    }
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFiltreraKategori;
     private javax.swing.JButton btnNyttInlagg;
+    private javax.swing.JButton btnRaderaInlagg;
     private javax.swing.JButton btnTillbaka;
     private javax.swing.JButton btnVisaAllaInformella;
     private javax.swing.JButton btnVisaMinaInlagg;
+    private javax.swing.JComboBox<String> cbxInlagg;
     private javax.swing.JComboBox<String> cbxKategorier;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblRubrik;
