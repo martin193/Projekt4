@@ -18,6 +18,7 @@ public class RedigeraFormelltInlagg extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         fyllCbRubriker();
         txaRedigeraText.setLineWrap(true);
+        txaRedigeraText.setWrapStyleWord(true);
     }
 
     @SuppressWarnings("unchecked")

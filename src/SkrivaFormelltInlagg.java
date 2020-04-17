@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.concurrent.atomic.AtomicInteger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -32,6 +31,7 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         epost = e;
         txaNyttInlägg.setLineWrap(true);
+        txaNyttInlägg.setWrapStyleWord(true);
         fyllCbKategori();
     }
 

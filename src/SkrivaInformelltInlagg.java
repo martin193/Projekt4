@@ -28,6 +28,7 @@ public class SkrivaInformelltInlagg extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         epost = e;
         txaNyttInlägg.setLineWrap(true);
+        txaNyttInlägg.setWrapStyleWord(true);
         fyllCbKategori();
 
     }

@@ -23,6 +23,7 @@ public class RedigeraInformelltInlagg extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         fyllCbRubriker();
         txaRedigeraText.setLineWrap(true);
+        txaRedigeraText.setWrapStyleWord(true);
     }
 
     /**

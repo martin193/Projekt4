@@ -9,13 +9,12 @@ import javax.swing.JOptionPane;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author jenni
  */
 public class MinaInlagg extends javax.swing.JFrame {
-    
+
     String epost;
 
     /**
@@ -27,9 +26,11 @@ public class MinaInlagg extends javax.swing.JFrame {
         fyllCbxFormella();
         fyllCbxInformella();
         txaHeltInlagg.setEditable(false);
+        txaHeltInlagg.setLineWrap(true);
+        txaHeltInlagg.setWrapStyleWord(true);
     }
-    
-    public MinaInlagg(String e){
+
+    public MinaInlagg(String e) {
         epost = e;
         initComponents();
         this.setLocationRelativeTo(null);
@@ -51,13 +52,14 @@ public class MinaInlagg extends javax.swing.JFrame {
         lblValjFormell = new javax.swing.JLabel();
         btnVisaHeltInlagg = new javax.swing.JButton();
         btnRaderaInlagg = new javax.swing.JButton();
-        txaHeltInlagg = new java.awt.TextArea();
         btnTillbaka = new javax.swing.JButton();
         lblValjInformell = new javax.swing.JLabel();
         cbxInformella = new javax.swing.JComboBox<>();
         cbxFormella = new javax.swing.JComboBox<>();
         btnRedigeraFormella = new javax.swing.JButton();
         btnRedigeraInformella = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txaHeltInlagg = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,27 +107,32 @@ public class MinaInlagg extends javax.swing.JFrame {
             }
         });
 
+        txaHeltInlagg.setColumns(20);
+        txaHeltInlagg.setRows(5);
+        jScrollPane1.setViewportView(txaHeltInlagg);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(btnVisaHeltInlagg)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnRedigeraFormella)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnRedigeraInformella)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnRaderaInlagg)
-                        .addGap(0, 73, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(65, 65, 65)
+                        .addComponent(jScrollPane1)
+                        .addGap(18, 18, 18)
                         .addComponent(btnTillbaka))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(btnVisaHeltInlagg)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRedigeraFormella)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnRedigeraInformella)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnRaderaInlagg))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -138,12 +145,8 @@ public class MinaInlagg extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(172, 172, 172)
                                 .addComponent(lblRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 73, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(106, 106, 106)
-                .addComponent(txaHeltInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,71 +169,63 @@ public class MinaInlagg extends javax.swing.JFrame {
                     .addComponent(btnRaderaInlagg)
                     .addComponent(btnRedigeraFormella)
                     .addComponent(btnRedigeraInformella))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txaHeltInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
-                .addComponent(btnTillbaka)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnTillbaka)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         this.dispose();
         new AnvStartsida(epost).setVisible(true);
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
-    
+
     private void btnVisaHeltInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaHeltInlaggActionPerformed
-          DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
-	  Connection connection=obj_DB_Connection.get_connection();
-	  PreparedStatement ps=null;
-          String inlagg = null;
-          txaHeltInlagg.setText("");
-          
-          try {
-              String formellRubrik = cbxFormella.getSelectedItem().toString();
-              String informellRubrik = cbxInformella.getSelectedItem().toString();
- 
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        String inlagg = null;
+        txaHeltInlagg.setText("");
 
-              if(formellRubrik != null && informellRubrik.equals("")){
-                  String sql = "SELECT TEXT FROM FORMELL_BLOGG WHERE RUBRIK = '" + formellRubrik +"'";
-                  ps = connection.prepareStatement(sql);
-                  ResultSet rs3 = ps.executeQuery();
-                  
-                  while(rs3.next()) {
-                  inlagg = rs3.getString(1);
-                  txaHeltInlagg.setText(inlagg);
-                  }
+        try {
+            String formellRubrik = cbxFormella.getSelectedItem().toString();
+            String informellRubrik = cbxInformella.getSelectedItem().toString();
 
-              }
-              
-             else if(informellRubrik != null && formellRubrik.equals("")) {
-                  String sql2 = "SELECT TEXT FROM INFORMELL_BLOGG WHERE RUBRIK = '" + informellRubrik +"'";
-                  ps = connection.prepareStatement(sql2);
-                  ResultSet rs = ps.executeQuery();
-                  
-                  while(rs.next()) {
-                  inlagg = rs.getString(1);
-                  txaHeltInlagg.setText(inlagg);
-                  }
-              }
-              
-              else if(formellRubrik != null && informellRubrik != null) {
-                  JOptionPane.showMessageDialog(null, "Välj endast en rubrik!");
-              }
-              
-              else {
-                  JOptionPane.showMessageDialog(null, "Välj en rubrik!");
-              }
-          }
-          catch(Exception e){
-              System.out.println("Något gick fel!" + e);
-          }
-          
-          
+            if (formellRubrik != null && informellRubrik.equals("")) {
+                String sql = "SELECT TEXT FROM FORMELL_BLOGG WHERE RUBRIK = '" + formellRubrik + "'";
+                ps = connection.prepareStatement(sql);
+                ResultSet rs3 = ps.executeQuery();
+
+                while (rs3.next()) {
+                    inlagg = rs3.getString(1);
+                    txaHeltInlagg.setText(inlagg);
+                }
+
+            } else if (informellRubrik != null && formellRubrik.equals("")) {
+                String sql2 = "SELECT TEXT FROM INFORMELL_BLOGG WHERE RUBRIK = '" + informellRubrik + "'";
+                ps = connection.prepareStatement(sql2);
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    inlagg = rs.getString(1);
+                    txaHeltInlagg.setText(inlagg);
+                }
+            } else if (formellRubrik != null && informellRubrik != null) {
+                JOptionPane.showMessageDialog(null, "Välj endast en rubrik!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Välj en rubrik!");
+            }
+        } catch (Exception e) {
+            System.out.println("Något gick fel!" + e);
+        }
+
+
     }//GEN-LAST:event_btnVisaHeltInlaggActionPerformed
 
     private void btnRedigeraFormellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedigeraFormellaActionPerformed
@@ -244,100 +239,80 @@ public class MinaInlagg extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRedigeraInformellaActionPerformed
 
     private void btnRaderaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRaderaInlaggActionPerformed
-        DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
-	  Connection connection=obj_DB_Connection.get_connection();
-	  PreparedStatement ps=null;
-          
-          
-          try{
-              
-              String formellRubrik = cbxFormella.getSelectedItem().toString();
-              String informellRubrik = cbxInformella.getSelectedItem().toString();
-              
-              if(formellRubrik != null && informellRubrik.equals("")){
-                  
-                  String sql = "DELETE FROM FORMELL_BLOGG WHERE RUBRIK = '" + formellRubrik +"'";
-                  ps = connection.prepareStatement(sql);
-                  ps.executeUpdate();
-                
-                  JOptionPane.showMessageDialog(null, "Inlägget har raderats!");
-              }
-             
-              
-             else if(informellRubrik != null && formellRubrik.equals("")) {
-                  String sql2 = "DELETE FROM INFORMELL_BLOGG WHERE RUBRIK = '" + informellRubrik +"'";
-                  ps = connection.prepareStatement(sql2);
-                  ps.executeUpdate();
-                  
-                  JOptionPane.showMessageDialog(null, "Inlägget har raderats!");
-                 
-              }
-              
-              else if(formellRubrik != null && informellRubrik != null) {
-                  JOptionPane.showMessageDialog(null, "Välj endast en rubrik!");
-              }
-              
-          }
-              
-          
-          catch(Exception e) {
-              System.out.println("Något gick fel!" + e);
-          }
-          
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+
+        try {
+
+            String formellRubrik = cbxFormella.getSelectedItem().toString();
+            String informellRubrik = cbxInformella.getSelectedItem().toString();
+
+            if (formellRubrik != null && informellRubrik.equals("")) {
+
+                String sql = "DELETE FROM FORMELL_BLOGG WHERE RUBRIK = '" + formellRubrik + "'";
+                ps = connection.prepareStatement(sql);
+                ps.executeUpdate();
+
+                JOptionPane.showMessageDialog(null, "Inlägget har raderats!");
+            } else if (informellRubrik != null && formellRubrik.equals("")) {
+                String sql2 = "DELETE FROM INFORMELL_BLOGG WHERE RUBRIK = '" + informellRubrik + "'";
+                ps = connection.prepareStatement(sql2);
+                ps.executeUpdate();
+
+                JOptionPane.showMessageDialog(null, "Inlägget har raderats!");
+
+            } else if (formellRubrik != null && informellRubrik != null) {
+                JOptionPane.showMessageDialog(null, "Välj endast en rubrik!");
+            }
+
+        } catch (Exception e) {
+            System.out.println("Något gick fel!" + e);
+        }
+
     }//GEN-LAST:event_btnRaderaInlaggActionPerformed
- private void fyllCbxFormella() {
-     
-     DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
-	  Connection connection=obj_DB_Connection.get_connection();
-	  PreparedStatement ps=null;
-          String inlagg = null;
-          cbxFormella.addItem("");
-          
-         try{
-           String sql = "SELECT RUBRIK FROM FORMELL_BLOGG JOIN ANVANDARE ON FORMELL_BLOGG.ANVANDARID = ANVANDARE.ANVANDARID WHERE ANVANDARE.ANVANDARID = 1" ;
-           ps = connection.prepareStatement(sql);
-           ResultSet rs = ps.executeQuery();
-           
-           while(rs.next()){
-               inlagg = rs.getString(1);
-               cbxFormella.addItem(inlagg);
-           } 
+    private void fyllCbxFormella() {
+
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        String inlagg = null;
+        cbxFormella.addItem("");
+
+        try {
+            String sql = "SELECT RUBRIK FROM FORMELL_BLOGG JOIN ANVANDARE ON FORMELL_BLOGG.ANVANDARID = ANVANDARE.ANVANDARID WHERE ANVANDARE.ANVANDARID = 1";
+            ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                inlagg = rs.getString(1);
+                cbxFormella.addItem(inlagg);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod!");
         }
-         catch(Exception e){
-             JOptionPane.showMessageDialog(null, "Ett fel uppstod!");
-         }  
     }
- 
- private void fyllCbxInformella() {
-     DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
-	  Connection connection=obj_DB_Connection.get_connection();
-	  PreparedStatement ps=null;
-          String inlagg = null;
-          cbxInformella.addItem("");
-          
-         try{
-           String sql = "SELECT RUBRIK FROM INFORMELL_BLOGG JOIN ANVANDARE ON INFORMELL_BLOGG.ANVANDARID = ANVANDARE.ANVANDARID WHERE ANVANDARE.ANVANDARID = 1" ;
-           ps = connection.prepareStatement(sql);
-           ResultSet rs = ps.executeQuery();
-           
-           while(rs.next()){
-               inlagg = rs.getString(1);
-               cbxInformella.addItem(inlagg);
-           } 
+
+    private void fyllCbxInformella() {
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        String inlagg = null;
+        cbxInformella.addItem("");
+
+        try {
+            String sql = "SELECT RUBRIK FROM INFORMELL_BLOGG JOIN ANVANDARE ON INFORMELL_BLOGG.ANVANDARID = ANVANDARE.ANVANDARID WHERE ANVANDARE.ANVANDARID = 1";
+            ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                inlagg = rs.getString(1);
+                cbxInformella.addItem(inlagg);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod!");
         }
-         catch(Exception e){
-             JOptionPane.showMessageDialog(null, "Ett fel uppstod!");
-         }  
     }
- 
- 
-     
- 
-     
- 
-    
-    
-    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -348,10 +323,10 @@ public class MinaInlagg extends javax.swing.JFrame {
     private javax.swing.JButton btnVisaHeltInlagg;
     private javax.swing.JComboBox<String> cbxFormella;
     private javax.swing.JComboBox<String> cbxInformella;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblRubrik;
     private javax.swing.JLabel lblValjFormell;
     private javax.swing.JLabel lblValjInformell;
-    private java.awt.TextArea txaHeltInlagg;
+    private javax.swing.JTextArea txaHeltInlagg;
     // End of variables declaration//GEN-END:variables
 }
-
