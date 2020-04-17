@@ -50,7 +50,6 @@ public class MinaInlagg extends javax.swing.JFrame {
 
         lblRubrik = new javax.swing.JLabel();
         lblValjFormell = new javax.swing.JLabel();
-        btnVisaHeltInlagg = new javax.swing.JButton();
         btnRaderaInlagg = new javax.swing.JButton();
         btnTillbaka = new javax.swing.JButton();
         lblValjInformell = new javax.swing.JLabel();
@@ -69,13 +68,6 @@ public class MinaInlagg extends javax.swing.JFrame {
         lblValjFormell.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
         lblValjFormell.setText("Sök rubriker (formella inlägg) :");
 
-        btnVisaHeltInlagg.setText("Visa hela inlägget");
-        btnVisaHeltInlagg.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVisaHeltInlaggActionPerformed(evt);
-            }
-        });
-
         btnRaderaInlagg.setText("Radera inlägg");
         btnRaderaInlagg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,6 +84,12 @@ public class MinaInlagg extends javax.swing.JFrame {
 
         lblValjInformell.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
         lblValjInformell.setText("Sök rubriker (informella inlägg):");
+
+        cbxInformella.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxInformellaActionPerformed(evt);
+            }
+        });
 
         cbxFormella.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,10 +137,7 @@ public class MinaInlagg extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(130, 130, 130)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(btnRedigeraFormella, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnVisaHeltInlagg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnRedigeraFormella, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(btnRedigeraInformella, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -166,9 +161,7 @@ public class MinaInlagg extends javax.swing.JFrame {
                     .addComponent(lblValjInformell, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbxInformella, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRedigeraFormella, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVisaHeltInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnRedigeraFormella, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRedigeraInformella, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -189,48 +182,6 @@ public class MinaInlagg extends javax.swing.JFrame {
         new AnvStartsida(epost).setVisible(true);
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
-
-    private void btnVisaHeltInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaHeltInlaggActionPerformed
-        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
-        Connection connection = obj_DB_Connection.get_connection();
-        PreparedStatement ps = null;
-        String inlagg = null;
-        txaHeltInlagg.setText("");
-
-        try {
-            String formellRubrik = cbxFormella.getSelectedItem().toString();
-            String informellRubrik = cbxInformella.getSelectedItem().toString();
-
-            if (formellRubrik != null && informellRubrik.equals("")) {
-                String sql = "SELECT TEXT FROM FORMELL_BLOGG WHERE RUBRIK = '" + formellRubrik + "'";
-                ps = connection.prepareStatement(sql);
-                ResultSet rs3 = ps.executeQuery();
-
-                while (rs3.next()) {
-                    inlagg = rs3.getString(1);
-                    txaHeltInlagg.setText(inlagg);
-                }
-
-            } else if (informellRubrik != null && formellRubrik.equals("")) {
-                String sql2 = "SELECT TEXT FROM INFORMELL_BLOGG WHERE RUBRIK = '" + informellRubrik + "'";
-                ps = connection.prepareStatement(sql2);
-                ResultSet rs = ps.executeQuery();
-
-                while (rs.next()) {
-                    inlagg = rs.getString(1);
-                    txaHeltInlagg.setText(inlagg);
-                }
-            } else if (formellRubrik != null && informellRubrik != null) {
-                JOptionPane.showMessageDialog(null, "Välj endast en rubrik!");
-            } else {
-                JOptionPane.showMessageDialog(null, "Välj en rubrik!");
-            }
-        } catch (Exception e) {
-            System.out.println("Något gick fel!" + e);
-        }
-
-
-    }//GEN-LAST:event_btnVisaHeltInlaggActionPerformed
 
     private void btnRedigeraFormellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedigeraFormellaActionPerformed
         this.dispose();
@@ -300,6 +251,31 @@ public class MinaInlagg extends javax.swing.JFrame {
             System.out.println("Något gick fel!" + e);
         }
     }//GEN-LAST:event_cbxFormellaActionPerformed
+
+    private void cbxInformellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxInformellaActionPerformed
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        String inlagg = null;
+        txaHeltInlagg.setText("");
+
+        try {
+            String informellRubrik = cbxInformella.getSelectedItem().toString();
+
+            
+                String sql = "SELECT TEXT FROM INFORMELL_BLOGG WHERE RUBRIK = '" + informellRubrik + "'";
+                ps = connection.prepareStatement(sql);
+                ResultSet rs3 = ps.executeQuery();
+
+                while (rs3.next()) {
+                    inlagg = rs3.getString(1);
+                    txaHeltInlagg.setText(inlagg);
+                }
+
+            } catch (Exception e) {
+            System.out.println("Något gick fel!" + e);
+        }
+    }//GEN-LAST:event_cbxInformellaActionPerformed
     private void fyllCbxFormella() {
 
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
@@ -315,7 +291,7 @@ public class MinaInlagg extends javax.swing.JFrame {
 
         try {
             String sql = "SELECT * FROM FORMELL_BLOGG JOIN ANVANDARE ON FORMELL_BLOGG.ANVANDARID = "
-                    + "ANVANDARE.ANVANDARID WHERE ANVANDARE.EPOST = '" + epost + "'";
+                    + "ANVANDARE.ANVANDARID WHERE ANVANDARE.EPOST = '" + epost + "' ORDER BY TIDPUNKT DESC";
             ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
@@ -340,7 +316,7 @@ public class MinaInlagg extends javax.swing.JFrame {
 
         try {
             String sql = "SELECT RUBRIK FROM INFORMELL_BLOGG JOIN ANVANDARE ON INFORMELL_BLOGG.ANVANDARID = "
-                    + "ANVANDARE.ANVANDARID WHERE ANVANDARE.EPOST = '" + epost + "'";
+                    + "ANVANDARE.ANVANDARID WHERE ANVANDARE.EPOST = '" + epost + "' ORDER BY TIDPUNKT DESC";
             ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
@@ -359,7 +335,6 @@ public class MinaInlagg extends javax.swing.JFrame {
     private javax.swing.JButton btnRedigeraFormella;
     private javax.swing.JButton btnRedigeraInformella;
     private javax.swing.JButton btnTillbaka;
-    private javax.swing.JButton btnVisaHeltInlagg;
     private javax.swing.JComboBox<String> cbxFormella;
     private javax.swing.JComboBox<String> cbxInformella;
     private javax.swing.JScrollPane jScrollPane1;
