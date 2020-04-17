@@ -21,6 +21,7 @@ public class FormellBlogg extends javax.swing.JFrame {
         fyllCbKategorier();
         fyllBloggRuta();
         txtFormell.setLineWrap(true);
+        txtFormell.setWrapStyleWord(true);
         txtFormell.setEditable(false);
         epost = e;
         kollaAdmin();

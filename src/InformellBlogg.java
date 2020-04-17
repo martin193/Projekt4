@@ -23,6 +23,7 @@ public class InformellBlogg extends javax.swing.JFrame {
         fyllBloggRuta();
         fyllCbKategorier();
         txtInformell.setLineWrap(true);
+        txtInformell.setWrapStyleWord(true);
         txtInformell.setEditable(false);
         epost = e;
         kollaAdmin();
@@ -280,19 +281,16 @@ public class InformellBlogg extends javax.swing.JFrame {
 
     
     private void fyllBloggRuta() {
-
         txtInformell.setText("");
-
         try {
-
-            String fraga = "SELECT * FROM INFORMELL_BLOGG JOIN KATEGORI_INFORMELL ON KATEGORIID = KATEGORI JOIN ANVANDARE ON ANVANDARE.ANVANDARID = INFORMELL_BLOGG.ANVANDARID";
-
+            String fraga= "SELECT * FROM INFORMELL_BLOGG JOIN KATEGORI_INFORMELL ON KATEGORIID = "
+                     + "KATEGORI JOIN ANVANDARE ON ANVANDARE.ANVANDARID = INFORMELL_BLOGG.ANVANDARID ORDER BY TIDPUNKT DESC";
+            
             String rubrik = GetQuery(fraga);
 
         } catch (Exception bla) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
         }
-
     }
 
     public String GetQuery(String s) {
