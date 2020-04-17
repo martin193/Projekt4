@@ -36,10 +36,10 @@
                       </Group>
                       <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnAdmSkapaAnv" alignment="0" pref="174" max="32767" attributes="0"/>
+                          <Component id="btnAdmSkapaAnv" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnSeInlägg" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnSeProfil" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnAdmProfiler" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnAdmProfiler" alignment="0" pref="174" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
                   </Group>
@@ -141,7 +141,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnAdmProfiler">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Hantera profiler"/>
+        <Property name="text" type="java.lang.String" value="Hantera anv&#xe4;ndare"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdmProfilerActionPerformed"/>

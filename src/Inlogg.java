@@ -1,4 +1,5 @@
 
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,6 +42,12 @@ public class Inlogg extends javax.swing.JFrame {
         lblEpostInlogg.setText("E-post:");
 
         lblLosenord.setText("Lösenord:");
+
+        pwfLosenord.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                pwfLosenordKeyPressed(evt);
+            }
+        });
 
         btnLoggaIn.setText("Logga in");
         btnLoggaIn.addActionListener(new java.awt.event.ActionListener() {
@@ -140,6 +147,34 @@ public class Inlogg extends javax.swing.JFrame {
     private void btnAvslutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvslutaActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnAvslutaActionPerformed
+
+    private void pwfLosenordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pwfLosenordKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            lblFelMeddelande.setText("");
+            String epost = txfEpost.getText();
+            String losenord = new String(pwfLosenord.getPassword());
+
+            if (Validering.textFaltHarVarde(txfEpost) && Validering.textFaltHarVarde(pwfLosenord)) {
+                try {
+                    String fraga = "SELECT Losenord from ANVANDARE where Epost = '" + epost + "'";
+                    String fraga2 = "SELECT AnvandarID from ANVANDARE where Epost = '" + epost + "'";
+
+                    String losenord2 = GetQuery(fraga);
+                    String anvandarID = GetQuery(fraga2);
+
+                    if (losenord.equals(losenord2)) {
+                        dispose();
+                        new AnvStartsida(epost).setVisible(true);
+
+                    } else {
+                        lblFelMeddelande.setText("Felaktigt användarnamn eller lösenord");
+                    }
+                } catch (Exception ex) {
+                    lblFelMeddelande.setText("Något gick fel");
+                }
+            }
+        }
+    }//GEN-LAST:event_pwfLosenordKeyPressed
 
     public String GetQuery(String s) {
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
