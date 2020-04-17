@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.ImageIcon;
@@ -28,7 +29,7 @@ public class SkrivaInformelltInlagg extends javax.swing.JFrame {
         epost = e;
         txaNyttInlägg.setLineWrap(true);
         fyllCbKategori();
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -157,8 +158,7 @@ public class SkrivaInformelltInlagg extends javax.swing.JFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(txtValjFil, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(btnValjFil)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                                .addComponent(btnValjFil))))
                                     .addGroup(layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -220,7 +220,7 @@ public class SkrivaInformelltInlagg extends javax.swing.JFrame {
         PreparedStatement ps = null;
 
         if (Validering.textFaltHarVarde(txtKategori)) {
-            String fraga = ("select KATEGORIID from KATEGORI_INFORMELL");
+            String fraga = ("select KATEGORIID from KATEGORI_INFORMELL order by KATEGORIID ASC");
 
             String kategoriNamn = txtKategori.getText();
             int id = GetAutoId(fraga);
@@ -238,6 +238,8 @@ public class SkrivaInformelltInlagg extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(null, "Kategori tillagd!");
 
+            } catch (SQLIntegrityConstraintViolationException ex) {
+                JOptionPane.showMessageDialog(null, "Kategorin finns redan i listan");
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -252,7 +254,7 @@ public class SkrivaInformelltInlagg extends javax.swing.JFrame {
         PreparedStatement ps = null;
         if (Validering.textFaltHarVarde(txtNyRubrik) && Validering.textAreaHarVarde(txaNyttInlägg)) {
 
-            String fraga = ("select INLAGGSID from INFORMELL_BLOGG");
+            String fraga = ("select INLAGGSID from INFORMELL_BLOGG order by INLAGGSID ASC");
 
             String rubrik = txtNyRubrik.getText();
             int kategoriID = GetKategoriID();
@@ -283,32 +285,28 @@ public class SkrivaInformelltInlagg extends javax.swing.JFrame {
 
 
     private void btnValjFilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValjFilActionPerformed
-        if (Validering.textFaltHarVarde(txtValjFil)) {
-            {
-                JFileChooser chooser = new JFileChooser();
-                chooser.showOpenDialog(null);
-                File f = chooser.getSelectedFile();
-                String filename = f.getAbsolutePath();
-                txtValjFil.setText(filename);
-                jLabel10.setIcon(new ImageIcon(f.toString()));
-                try {
-                    File image = new File(filename);
-                    FileInputStream fis = new FileInputStream(image);
-                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                    byte[] buf = new byte[1024];
-                    for (int readNum; (readNum = fis.read(buf)) != -1;) {
-                        bos.write(buf, 0, readNum);
-                    }
-                    photo = bos.toByteArray();
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, e);
+        {
+            JFileChooser chooser = new JFileChooser();
+            chooser.showOpenDialog(null);
+            File f = chooser.getSelectedFile();
+            String filename = f.getAbsolutePath();
+            txtValjFil.setText(filename);
+            jLabel10.setIcon(new ImageIcon(f.toString()));
+            try {
+                File image = new File(filename);
+                FileInputStream fis = new FileInputStream(image);
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                byte[] buf = new byte[1024];
+                for (int readNum; (readNum = fis.read(buf)) != -1;) {
+                    bos.write(buf, 0, readNum);
                 }
+                photo = bos.toByteArray();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
             }
         }
     }//GEN-LAST:event_btnValjFilActionPerformed
 
-    
-    
 //Tar emot en SQL-fråga som parameter för att sedan returnera nästa lediga ID för den tabell som r specificerad i SQL-frågan.
     public int GetAutoId(String o) {
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
@@ -327,7 +325,7 @@ public class SkrivaInformelltInlagg extends javax.swing.JFrame {
         }
         idNy = idNy + 1;
         JOptionPane.showMessageDialog(null, " nästa id: " + idNy);
-        
+
         return idNy;
     }
 

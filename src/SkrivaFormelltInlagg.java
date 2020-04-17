@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -222,8 +223,7 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
         PreparedStatement ps = null;
         if (Validering.textFaltHarVarde(txtNyRubrik) && Validering.textAreaHarVarde(txaNyttInlägg)) {
 
-            //String fraga = ("select INLAGGSID from FORMELL_BLOGG");
-            String fraga = "select max(INLAGGSID) from FORMELL_BLOGG";
+            String fraga = ("select INLAGGSID from FORMELL_BLOGG order by INLAGGSID ASC");
 
             String rubrik = txtNyRubrik.getText();
             int kategoriID = GetKategoriID();
@@ -258,7 +258,7 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
         PreparedStatement ps = null;
 
         if (Validering.textFaltHarVarde(txtKategori)) {
-            String fraga = ("select KATEGORIID from KATEGORI_FORMELL");
+            String fraga = ("select KATEGORIID from KATEGORI_FORMELL order by KATEGORIID ASC");
 
             String kategoriNamn = txtKategori.getText();
             int id = GetAutoId(fraga);
@@ -276,6 +276,8 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(null, "Kategori tillagd!");
 
+            } catch (SQLIntegrityConstraintViolationException ex) {
+                JOptionPane.showMessageDialog(null, "Kategorin finns redan i listan");
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -283,26 +285,24 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLaggTillNyKategoriActionPerformed
 
     private void btnValjFilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValjFilActionPerformed
-        if (Validering.textFaltHarVarde(txtValjFil)) {
-            {
-                JFileChooser chooser = new JFileChooser();
-                chooser.showOpenDialog(null);
-                File f = chooser.getSelectedFile();
-                String filename = f.getAbsolutePath();
-                txtValjFil.setText(filename);
-                jLabel10.setIcon(new ImageIcon(f.toString()));
-                try {
-                    File image = new File(filename);
-                    FileInputStream fis = new FileInputStream(image);
-                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                    byte[] buf = new byte[1024];
-                    for (int readNum; (readNum = fis.read(buf)) != -1;) {
-                        bos.write(buf, 0, readNum);
-                    }
-                    photo = bos.toByteArray();
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, e);
+        {
+            JFileChooser chooser = new JFileChooser();
+            chooser.showOpenDialog(null);
+            File f = chooser.getSelectedFile();
+            String filename = f.getAbsolutePath();
+            txtValjFil.setText(filename);
+            jLabel10.setIcon(new ImageIcon(f.toString()));
+            try {
+                File image = new File(filename);
+                FileInputStream fis = new FileInputStream(image);
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                byte[] buf = new byte[1024];
+                for (int readNum; (readNum = fis.read(buf)) != -1;) {
+                    bos.write(buf, 0, readNum);
                 }
+                photo = bos.toByteArray();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
             }
         }
     }//GEN-LAST:event_btnValjFilActionPerformed
@@ -319,21 +319,18 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 idNy = rs.getInt(1);
-                //idNy = idNy + 1;
             }
-            
+
         } catch (Exception ex) {
             System.out.println("Internt felmeddelande: " + ex);
         }
-        
+
         idNy = idNy + 1;
-        
+
         System.out.print(idNy);
         return idNy;
-        
+
     }
-
-
 
     public int GetKategoriID() {
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
