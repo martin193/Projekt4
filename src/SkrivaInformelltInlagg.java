@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.ImageIcon;
@@ -219,7 +220,7 @@ public class SkrivaInformelltInlagg extends javax.swing.JFrame {
         PreparedStatement ps = null;
 
         if (Validering.textFaltHarVarde(txtKategori)) {
-            String fraga = ("select KATEGORIID from KATEGORI_INFORMELL");
+            String fraga = ("select KATEGORIID from KATEGORI_INFORMELL order by KATEGORIID ASC");
 
             String kategoriNamn = txtKategori.getText();
             int id = GetAutoId(fraga);
@@ -237,6 +238,8 @@ public class SkrivaInformelltInlagg extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(null, "Kategori tillagd!");
 
+            } catch (SQLIntegrityConstraintViolationException ex) {
+                JOptionPane.showMessageDialog(null, "Kategorin finns redan i listan");
             } catch (Exception e) {
                 System.out.println(e);
             }
