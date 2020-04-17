@@ -23,74 +23,59 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="83" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnLaddaUppNyFil" min="-2" pref="85" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="205" max="-2" attributes="0"/>
+                      <Component id="btnUppdateraFormelltInlagg" min="-2" pref="183" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
+                      <Component id="btnAvbryt" min="-2" pref="84" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel7" alignment="1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+                              <Component id="jLabel1" min="-2" pref="351" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txaRedigeraRubrik" min="-2" pref="313" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="cbRedigeraKategori" min="-2" pref="124" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                      <Component id="txtSkapaNyKategori" min="-2" pref="134" max="-2" attributes="0"/>
+                                  <Component id="cbRedigeraKategori" alignment="0" min="-2" pref="122" max="-2" attributes="0"/>
+                                  <Component id="btnLaddaUppNyFil" min="-2" pref="85" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane1" min="-2" pref="304" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="cbVisaRubriker" min="-2" pref="304" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblInlaggsID" min="-2" pref="64" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="txtSkapaNyKategori" min="-2" pref="134" max="-2" attributes="0"/>
+                                          <Component id="txaRedigeraRubrik" min="-2" pref="306" max="-2" attributes="0"/>
+                                      </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="btnSkapaNyKategori" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="lblInlaggsID" alignment="0" min="-2" pref="64" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jLabel1" min="-2" pref="351" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
-                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
               </Group>
-          </Group>
-          <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnUppdateraFormelltInlagg" min="-2" pref="183" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
-                      <Component id="btnAvbryt" min="-2" pref="76" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
-                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jScrollPane1" min="-2" pref="286" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="cbVisaRubriker" min="-2" pref="159" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnVisaInlagg" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -98,19 +83,23 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" pref="41" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cbVisaRubriker" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="btnVisaInlagg" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblInlaggsID" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jLabel1" min="-2" pref="41" max="-2" attributes="0"/>
+                      <EmptySpace pref="37" max="32767" attributes="0"/>
+                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="cbVisaRubriker" min="-2" pref="30" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace type="unrelated" max="32767" attributes="0"/>
+              <EmptySpace pref="14" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblInlaggsID" alignment="1" min="-2" pref="19" max="-2" attributes="0"/>
+                  <Component id="jLabel7" alignment="1" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txaRedigeraRubrik" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -122,7 +111,7 @@
                   <Component id="txtSkapaNyKategori" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnSkapaNyKategori" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnLaddaUppNyFil" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -132,7 +121,7 @@
                   <Component id="jScrollPane1" min="-2" pref="271" max="-2" attributes="0"/>
                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnUppdateraFormelltInlagg" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
                   <Component id="btnAvbryt" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
@@ -157,7 +146,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="V&#xe4;lj ny kategori"/>
+        <Property name="text" type="java.lang.String" value="V&#xe4;lj ny kategori:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbRedigeraKategori">
@@ -172,7 +161,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ladda upp ny fil"/>
+        <Property name="text" type="java.lang.String" value="Ladda upp ny fil:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnLaddaUppNyFil">
@@ -215,12 +204,12 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Redigera rubrik"/>
+        <Property name="text" type="java.lang.String" value="Redigera rubrik:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Redigera text"/>
+        <Property name="text" type="java.lang.String" value="Redigera text:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbVisaRubriker">
@@ -229,6 +218,9 @@
           <StringArray count="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbVisaRubrikerActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -237,14 +229,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="V&#xe4;lj inl&#xe4;gg att redigera:"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnVisaInlagg">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Visa inl&#xe4;gg"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVisaInlaggActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtSkapaNyKategori">
     </Component>

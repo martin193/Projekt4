@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  */
 public class MinaInlagg extends javax.swing.JFrame {
 
-    String epost;
+  private String epost;
 
     /**
      * Creates new form MinaInlagg
@@ -185,12 +185,12 @@ public class MinaInlagg extends javax.swing.JFrame {
 
     private void btnRedigeraFormellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedigeraFormellaActionPerformed
         this.dispose();
-        new RedigeraFormelltInlagg().setVisible(true);
+        new RedigeraFormelltInlagg(epost).setVisible(true);
     }//GEN-LAST:event_btnRedigeraFormellaActionPerformed
 
     private void btnRedigeraInformellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedigeraInformellaActionPerformed
         this.dispose();
-        new RedigeraInformelltInlagg().setVisible(true);
+        new RedigeraInformelltInlagg(epost).setVisible(true);
     }//GEN-LAST:event_btnRedigeraInformellaActionPerformed
 
     private void btnRaderaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRaderaInlaggActionPerformed
