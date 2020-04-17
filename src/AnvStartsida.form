@@ -24,71 +24,67 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="btnSeFormellBlogg" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnSeProfil" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="btnSeInformellBlogg" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-              </Group>
-          </Group>
-          <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnLoggaUt" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="btnAdmSkapaAnv" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnSeInlägg" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="263" max="-2" attributes="0"/>
-                                  <Component id="btnAdmProfiler" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
-                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                  <Component id="btnLoggaUt" alignment="1" min="-2" pref="93" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnUtbildningsProjekt" pref="178" max="32767" attributes="0"/>
+                          <Component id="btnForskningsProjekt" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnSeInformellBlogg" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnSeFormellBlogg" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="47" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnAdmSkapaAnv" alignment="0" pref="174" max="32767" attributes="0"/>
+                          <Component id="btnSeInlägg" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnSeProfil" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnAdmProfiler" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="205" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnSeFormellBlogg" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnSeProfil" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSeFormellBlogg" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="btnSeProfil" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnSeInformellBlogg" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnAdmSkapaAnv" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSeInformellBlogg" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="btnSeInlägg" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnSeInlägg" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnAdmProfiler" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnForskningsProjekt" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="btnAdmSkapaAnv" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="125" max="32767" attributes="0"/>
-              <Component id="btnLoggaUt" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="btnUtbildningsProjekt" min="-2" pref="39" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="btnAdmProfiler" min="-2" pref="39" max="-2" attributes="0"/>
+                      <EmptySpace pref="38" max="32767" attributes="0"/>
+                      <Component id="btnLoggaUt" min="-2" pref="37" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -113,7 +109,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnSeInl&#xe4;gg">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Se mina inl&#xe4;gg"/>
+        <Property name="text" type="java.lang.String" value="Mina inl&#xe4;gg"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSeInl&#xe4;ggActionPerformed"/>
@@ -121,7 +117,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnSeProfil">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Se min profilsida"/>
+        <Property name="text" type="java.lang.String" value="Min profilsida"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSeProfilActionPerformed"/>
@@ -138,7 +134,7 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Lucida Grande" size="24" style="1"/>
+          <Font name="Cambria" size="24" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="V&#xe4;lkommen till din sida!"/>
       </Properties>
@@ -158,6 +154,16 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdmSkapaAnvActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnForskningsProjekt">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Forskningsprojekt"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnUtbildningsProjekt">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Utbildningsprojekt"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

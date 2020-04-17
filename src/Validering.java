@@ -50,7 +50,7 @@ public class Validering {
         boolean resultat = true;
         if(kollaRuta.getText().isEmpty())
         {
-            JOptionPane.showMessageDialog(null, "Rutan är tom!");
+            JOptionPane.showMessageDialog(null, "Vänligen fyll i fält!");
             resultat=false;
             kollaRuta.requestFocus();
         }
@@ -67,7 +67,7 @@ public class Validering {
         boolean resultat = true;
         if(kollaRuta.getText().isEmpty())
         {
-            JOptionPane.showMessageDialog(null, "Rutan är tom!");
+            JOptionPane.showMessageDialog(null, "Vänligen fyll i fält!");
             resultat=false;
             kollaRuta.requestFocus();
         }
@@ -89,7 +89,7 @@ public class Validering {
         } 
         else 
         {
-            JOptionPane.showMessageDialog(null, "Ange endast bokstäver!");
+            JOptionPane.showMessageDialog(null, "Vänligen ange endast bokstäver!");
             kollaRuta.requestFocus();
             return false;
             //annars returneras false
