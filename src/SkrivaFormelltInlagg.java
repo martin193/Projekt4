@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -258,7 +259,7 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
         PreparedStatement ps = null;
 
         if (Validering.textFaltHarVarde(txtKategori)) {
-            String fraga = ("select KATEGORIID from KATEGORI_FORMELL");
+            String fraga = ("select KATEGORIID from KATEGORI_FORMELL order by KATEGORIID ASC");
 
             String kategoriNamn = txtKategori.getText();
             int id = GetAutoId(fraga);
@@ -276,6 +277,8 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(null, "Kategori tillagd!");
 
+            } catch (SQLIntegrityConstraintViolationException ex) {
+                JOptionPane.showMessageDialog(null, "Kategorin finns redan i listan");
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -317,7 +320,6 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 idNy = rs.getInt(1);
-                //idNy = idNy + 1;
             }
 
         } catch (Exception ex) {
