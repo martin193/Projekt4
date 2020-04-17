@@ -254,7 +254,7 @@ public class SkrivaInformelltInlagg extends javax.swing.JFrame {
         PreparedStatement ps = null;
         if (Validering.textFaltHarVarde(txtNyRubrik) && Validering.textAreaHarVarde(txaNyttInlägg)) {
 
-            String fraga = ("select INLAGGSID from INFORMELL_BLOGG");
+            String fraga = ("select INLAGGSID from INFORMELL_BLOGG order by INLAGGSID ASC");
 
             String rubrik = txtNyRubrik.getText();
             int kategoriID = GetKategoriID();
