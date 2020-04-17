@@ -10,13 +10,12 @@ import javax.swing.JOptionPane;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author martinnoe
  */
 public class ProfilSida extends javax.swing.JFrame {
-    
+
     private String epost;
 
     /**
@@ -49,6 +48,8 @@ public class ProfilSida extends javax.swing.JFrame {
         txtTelefonnr = new javax.swing.JTextField();
         btnTillbaka = new javax.swing.JButton();
         btnChange = new javax.swing.JButton();
+        txtBekraftaLosen = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,16 +57,16 @@ public class ProfilSida extends javax.swing.JFrame {
         jLabel1.setText(" Min profil");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel2.setText("Namn");
+        jLabel2.setText("Namn:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel3.setText("Mailadress");
+        jLabel3.setText("Mailadress:");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel4.setText("Nytt lösenord");
+        jLabel4.setText("Nytt lösenord:");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel6.setText("Telefonnummer");
+        jLabel6.setText("Telefonnummer:");
 
         txtNamn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,39 +88,48 @@ public class ProfilSida extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel5.setText("Bekräfta lösenord:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(221, 221, 221)
-                        .addComponent(btnChange, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnChange, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(75, 75, 75)
+                        .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(107, 107, 107)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2))
-                                .addGap(31, 31, 31))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(82, 82, 82)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel2))
+                                        .addGap(31, 31, 31))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(82, 82, 82)
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                                    .addComponent(txtNyttLosen)
+                                    .addComponent(txtMailAdress)
+                                    .addComponent(txtNamn)
+                                    .addComponent(txtBekraftaLosen)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(82, 82, 82)
                                 .addComponent(jLabel6)
-                                .addGap(18, 18, 18)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-                            .addComponent(txtTelefonnr)
-                            .addComponent(txtNyttLosen)
-                            .addComponent(txtMailAdress)
-                            .addComponent(txtNamn))))
-                .addGap(0, 175, Short.MAX_VALUE))
+                                .addGap(18, 18, Short.MAX_VALUE)
+                                .addComponent(txtTelefonnr, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 153, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,12 +150,20 @@ public class ProfilSida extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtBekraftaLosen, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTelefonnr, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addGap(26, 26, 26)
-                .addComponent(btnChange, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnChange, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 8, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(btnTillbaka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -165,53 +183,59 @@ public class ProfilSida extends javax.swing.JFrame {
         String fornamn = txtNamn.getText();
         String email = txtMailAdress.getText();
         String losenord = txtNyttLosen.getText();
+        String losenord2 = txtBekraftaLosen.getText();
         String telnr = txtTelefonnr.getText();
-        String Q = "UPDATE ANVANDARE SET FORNAMN = '"+fornamn +"', EPOST='"+email+"', LOSENORD='"+losenord+"', TELNR='"+telnr+"'WHERE EPOST='"+epost+"'";
+        String Q = "UPDATE ANVANDARE SET FORNAMN = '" + fornamn + "', EPOST='" + email + "', "
+                + "LOSENORD='" + losenord + "', TELNR='" + telnr + "'WHERE EPOST='" + epost + "'";
         epost = email;
-        try {
-            updateAnvandare(Q);
-            JOptionPane.showMessageDialog(null, "Ändringen lyckades!");
-        }catch(Exception e)
-        {System.out.println(e);
+        if (losenord.equals(losenord2)) {
+            try {
+                updateAnvandare(Q);
+                JOptionPane.showMessageDialog(null, "Ändringen lyckades!");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Lösenorden stämmer inte överens");
         }
     }//GEN-LAST:event_btnChangeActionPerformed
 
-    public void setText(){
-        txtNamn.setText(getQuery("SELECT FORNAMN FROM ANVANDARE WHERE EPOST='"+epost+"'"));
+    public void setText() {
+        txtNamn.setText(getQuery("SELECT FORNAMN FROM ANVANDARE WHERE EPOST='" + epost + "'"));
         txtMailAdress.setText(epost);
-        txtNyttLosen.setText(getQuery("SELECT LOSENORD FROM ANVANDARE WHERE EPOST='"+epost+"'"));
-        txtTelefonnr.setText(getQuery("SELECT TELNR FROM ANVANDARE WHERE EPOST='"+epost+"'"));
+        txtNyttLosen.setText(getQuery("SELECT LOSENORD FROM ANVANDARE WHERE EPOST='" + epost + "'"));
+        txtTelefonnr.setText(getQuery("SELECT TELNR FROM ANVANDARE WHERE EPOST='" + epost + "'"));
     }
-    
-    public String getQuery(String q){
+
+    public String getQuery(String q) {
         String svar = null;
-        DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
-	Connection connection=obj_DB_Connection.get_connection();
-	PreparedStatement ps=null;
-	try {
-	    String query= q;
-	    ps=connection.prepareStatement(query);
-	    ResultSet rs=ps.executeQuery();
-	    while(rs.next()){
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        try {
+            String query = q;
+            ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
                 svar = rs.getString(1);
-	    }
-	} catch (Exception e) {
-	    System.out.println(e);
-	} 
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         return svar;
     }
-    
+
     public void updateAnvandare(String Q) {
-        DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
-	Connection connection=obj_DB_Connection.get_connection();
-	PreparedStatement ps=null;
-	try {
-	    String query= Q;
-	    ps=connection.prepareStatement(query);
-	    ps.executeUpdate();
-	} catch (SQLException e) {
-	    System.out.println(e);
-	}
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        try {
+            String query = Q;
+            ps = connection.prepareStatement(query);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChange;
@@ -220,7 +244,9 @@ public class ProfilSida extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JTextField txtBekraftaLosen;
     private javax.swing.JTextField txtMailAdress;
     private javax.swing.JTextField txtNamn;
     private javax.swing.JTextField txtNyttLosen;
