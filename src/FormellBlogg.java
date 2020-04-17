@@ -171,7 +171,7 @@ public class FormellBlogg extends javax.swing.JFrame {
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         this.dispose();
-        new AnvStartsida().setVisible(true);
+        new AnvStartsida(epost).setVisible(true);
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     //Fyller BloggRuta med inlägg från FORMELL_BLOGG

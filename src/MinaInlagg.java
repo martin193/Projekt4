@@ -15,11 +15,22 @@ import javax.swing.JOptionPane;
  * @author jenni
  */
 public class MinaInlagg extends javax.swing.JFrame {
+    
+    String epost;
 
     /**
      * Creates new form MinaInlagg
      */
     public MinaInlagg() {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        fyllCbxFormella();
+        fyllCbxInformella();
+        txaHeltInlagg.setEditable(false);
+    }
+    
+    public MinaInlagg(String e){
+        epost = e;
         initComponents();
         this.setLocationRelativeTo(null);
         fyllCbxFormella();
@@ -168,7 +179,7 @@ public class MinaInlagg extends javax.swing.JFrame {
     
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         this.dispose();
-        new AnvStartsida().setVisible(true);
+        new AnvStartsida(epost).setVisible(true);
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     

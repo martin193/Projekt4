@@ -45,10 +45,12 @@ public class AnvStartsida extends javax.swing.JFrame {
         if(svar.equals("T"))
         {
         btnAdmProfiler.setVisible(true);
+        btnAdmSkapaAnv.setVisible(true);
         }
         else
         {
         btnAdmProfiler.setVisible(false);
+        btnAdmSkapaAnv.setVisible(false);
         }
         
         }
@@ -224,7 +226,7 @@ public class AnvStartsida extends javax.swing.JFrame {
 
     private void btnSeInläggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeInläggActionPerformed
         this.dispose();
-        new MinaInlagg().setVisible(true);
+        new MinaInlagg(epost).setVisible(true);
     }//GEN-LAST:event_btnSeInläggActionPerformed
 
     private void btnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaUtActionPerformed

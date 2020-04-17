@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class hanteraAnvandare extends javax.swing.JFrame {
 
-    private String epost;
+    private String email;
 
     /**
      * Creates new form hanteraAnvandare
@@ -29,7 +29,7 @@ public class hanteraAnvandare extends javax.swing.JFrame {
     public hanteraAnvandare(String e) {
         initComponents();
         fillBox();
-        epost = e;
+        email = e;
     }
 
     /**
@@ -223,8 +223,9 @@ public class hanteraAnvandare extends javax.swing.JFrame {
 
         try {
             updateAnvandare(Q);
-            JOptionPane.showMessageDialog(null, "Ändringen lyckades!");
+            emptyBox();
             fillBox();
+            JOptionPane.showMessageDialog(null, "Ändringen lyckades!");
         } catch (Exception e) {
             System.out.println(e);
             JOptionPane.showMessageDialog(null, "Något gick fel! Uppdatering misslyckades");
@@ -242,11 +243,18 @@ public class hanteraAnvandare extends javax.swing.JFrame {
 
     private void btnAvbrytActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvbrytActionPerformed
         this.dispose();
-        new AnvStartsida(epost).setVisible(true);
+        new AnvStartsida(email).setVisible(true);
     }//GEN-LAST:event_btnAvbrytActionPerformed
 
     private void btnTaBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortActionPerformed
-        // TODO add your handling code here:
+        String epost = boxAnvandare.getSelectedItem().toString();
+        String query = "DELETE FROM ANVANDARE WHERE EPOST='"+epost+"'";
+        try {
+            updateAnvandare(query);
+            emptyBox();
+            fillBox();
+            JOptionPane.showMessageDialog(null, "Borttagningen lyckades!");
+        } catch(Exception e){JOptionPane.showMessageDialog(null, e);}
     }//GEN-LAST:event_btnTaBortActionPerformed
 
     private void fillBox() {
@@ -295,11 +303,12 @@ public class hanteraAnvandare extends javax.swing.JFrame {
     }
 
     public void setCheckBox() {
-        String isAdmin = getQuery("SELECT ADMIN FROM ANVANDARE WHERE EPOST='" + epost + "'");
+        String email = boxAnvandare.getSelectedItem().toString();
+        String isAdmin = getQuery("SELECT ADMIN FROM ANVANDARE WHERE EPOST='" + email + "'");
 
         if (isAdmin.equals("T")) {
             checkAdmin.setSelected(true);
-        }
+        }else {checkAdmin.setSelected(false);}
 
     }
 
@@ -314,6 +323,15 @@ public class hanteraAnvandare extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e);
         }
+    }
+    
+    public void emptyBox(){
+        txfFornamn.setText(null);
+        txfEfternamn.setText(null);
+        txfMail.setText(null);
+        txfLosenord.setText(null);
+        txfTelnr.setText(null);
+        checkAdmin.setSelected(false);
     }
 
 
