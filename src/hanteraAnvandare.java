@@ -61,7 +61,6 @@ public class hanteraAnvandare extends javax.swing.JFrame {
         btnUppdatera = new javax.swing.JButton();
         btnTaBort = new javax.swing.JButton();
         btnAvbryt = new javax.swing.JButton();
-        btnFyllLista = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
 
         jLabel8.setFont(new java.awt.Font("Cambria", 1, 24)); // NOI18N
@@ -117,13 +116,6 @@ public class hanteraAnvandare extends javax.swing.JFrame {
             }
         });
 
-        btnFyllLista.setText("Sök");
-        btnFyllLista.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFyllListaActionPerformed(evt);
-            }
-        });
-
         jLabel9.setFont(new java.awt.Font("Cambria", 1, 24)); // NOI18N
         jLabel9.setText("Hantera användare");
 
@@ -131,59 +123,58 @@ public class hanteraAnvandare extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(71, 71, 71)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txfFornamn, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-                            .addComponent(boxAnvandare, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addGap(47, 47, 47)
-                            .addComponent(txfEfternamn))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(54, 54, 54)
-                                .addComponent(txfLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addGap(37, 37, 37)
-                                    .addComponent(checkAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addGap(47, 47, 47)
-                                    .addComponent(txfMail, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txfTelnr, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(18, 18, 18)
-                .addComponent(btnFyllLista)
-                .addGap(88, 88, 88))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnUppdatera)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnTaBort, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(81, 81, 81))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnAvbryt, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())))
+                        .addComponent(btnTaBort, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(81, 81, 81))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel9)
-                        .addGap(117, 117, 117))))
+                        .addGap(117, 117, 117))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnAvbryt, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(47, 47, 47)
+                                        .addComponent(txfEfternamn))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel1))
+                                        .addGap(23, 23, 23)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(boxAnvandare, 0, 133, Short.MAX_VALUE)
+                                            .addComponent(txfFornamn))))
+                                .addGap(117, 117, 117))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addGap(37, 37, 37)
+                                    .addComponent(checkAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel6)
+                                            .addGap(54, 54, 54)
+                                            .addComponent(txfLosenord))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(jLabel5)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(txfTelnr))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel4)
+                                            .addGap(47, 47, 47)
+                                            .addComponent(txfMail)))
+                                    .addContainerGap()))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,9 +183,7 @@ public class hanteraAnvandare extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(boxAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnFyllLista))
+                    .addComponent(boxAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(25, 25, 25)
@@ -242,30 +231,37 @@ public class hanteraAnvandare extends javax.swing.JFrame {
         String telnr = txfTelnr.getText();
         boolean adminstatus = checkAdmin.isSelected();
         String admin = "F";
-        if (adminstatus) {
-            admin = "T";
-        }
-        String Q = "UPDATE ANVANDARE SET FORNAMN = '" + fornamn + "',EFTERNAMN='" + efternamn + "', EPOST='" + email + "', LOSENORD='" + losenord + "',ADMIN='"+admin+"', TELNR='" + telnr + "'WHERE EPOST='" + epost + "'";
 
-        try {
-            updateAnvandare(Q);
-            emptyBox();
-            fillBox();
-            JOptionPane.showMessageDialog(null, "Ändringen lyckades!");
-        } catch (Exception e) {
-            System.out.println(e);
-            JOptionPane.showMessageDialog(null, "Något gick fel! Uppdatering misslyckades");
+        if (Validering.baraBokstaver(txfFornamn) && Validering.textFaltHarVarde(txfFornamn)) {
+            if (Validering.baraBokstaver(txfEfternamn) && Validering.textFaltHarVarde(txfEfternamn)) {
+                if (Validering.korrektEmail(email)) {
+                    if (Validering.korrektTelnr(txfTelnr)) {
+                        if (Validering.korrektLosenord(txfLosenord)) {
+                            if (adminstatus) {
+                                admin = "T";
+                            }
+                            String Q = "UPDATE ANVANDARE SET FORNAMN = '" + fornamn + "',EFTERNAMN='" + efternamn + "', EPOST='" + email + "', LOSENORD='" + losenord + "',ADMIN='" + admin + "', TELNR='" + telnr + "'WHERE EPOST='" + epost + "'";
+
+                            try {
+                                updateAnvandare(Q);
+                                emptyBox();
+                                fillBox();
+                                JOptionPane.showMessageDialog(null, "Ändringen lyckades!");
+                            } catch (Exception e) {
+                                System.out.println(e);
+                                JOptionPane.showMessageDialog(null, "Något gick fel! Uppdatering misslyckades");
+                            }
+                        }
+                    }
+                }
+            }
         }
     }//GEN-LAST:event_btnUppdateraActionPerformed
 
     private void boxAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxAnvandareActionPerformed
-
-    }//GEN-LAST:event_boxAnvandareActionPerformed
-
-    private void btnFyllListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFyllListaActionPerformed
         setText();
         setCheckBox();
-    }//GEN-LAST:event_btnFyllListaActionPerformed
+    }//GEN-LAST:event_boxAnvandareActionPerformed
 
     private void btnAvbrytActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvbrytActionPerformed
         this.dispose();
@@ -274,13 +270,15 @@ public class hanteraAnvandare extends javax.swing.JFrame {
 
     private void btnTaBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortActionPerformed
         String epost = boxAnvandare.getSelectedItem().toString();
-        String query = "DELETE FROM ANVANDARE WHERE EPOST='"+epost+"'";
+        String query = "DELETE FROM ANVANDARE WHERE EPOST='" + epost + "'";
         try {
             updateAnvandare(query);
             emptyBox();
             fillBox();
             JOptionPane.showMessageDialog(null, "Borttagningen lyckades!");
-        } catch(Exception e){JOptionPane.showMessageDialog(null, e);}
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }//GEN-LAST:event_btnTaBortActionPerformed
 
     private void fillBox() {
@@ -334,7 +332,9 @@ public class hanteraAnvandare extends javax.swing.JFrame {
 
         if (isAdmin.equals("T")) {
             checkAdmin.setSelected(true);
-        }else {checkAdmin.setSelected(false);}
+        } else {
+            checkAdmin.setSelected(false);
+        }
 
     }
 
@@ -350,8 +350,8 @@ public class hanteraAnvandare extends javax.swing.JFrame {
             System.out.println(e);
         }
     }
-    
-    public void emptyBox(){
+
+    public void emptyBox() {
         txfFornamn.setText(null);
         txfEfternamn.setText(null);
         txfMail.setText(null);
@@ -364,7 +364,6 @@ public class hanteraAnvandare extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> boxAnvandare;
     private javax.swing.JButton btnAvbryt;
-    private javax.swing.JButton btnFyllLista;
     private javax.swing.JButton btnTaBort;
     private javax.swing.JButton btnUppdatera;
     private javax.swing.JCheckBox checkAdmin;
