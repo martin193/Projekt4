@@ -283,25 +283,25 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLaggTillNyKategoriActionPerformed
 
     private void btnValjFilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValjFilActionPerformed
-        if (Validering.textFaltHarVarde(txtValjFil)) {
-                JFileChooser chooser = new JFileChooser();
-                chooser.showOpenDialog(null);
-                File f = chooser.getSelectedFile();
-                String filename = f.getAbsolutePath();
-                txtValjFil.setText(filename);
-                jLabel10.setIcon(new ImageIcon(f.toString()));
-                try {
-                    File image = new File(filename);
-                    FileInputStream fis = new FileInputStream(image);
-                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                    byte[] buf = new byte[1024];
-                    for (int readNum; (readNum = fis.read(buf)) != -1;) {
-                        bos.write(buf, 0, readNum);
-                    }
-                    photo = bos.toByteArray();
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, e);
+        {
+            JFileChooser chooser = new JFileChooser();
+            chooser.showOpenDialog(null);
+            File f = chooser.getSelectedFile();
+            String filename = f.getAbsolutePath();
+            txtValjFil.setText(filename);
+            jLabel10.setIcon(new ImageIcon(f.toString()));
+            try {
+                File image = new File(filename);
+                FileInputStream fis = new FileInputStream(image);
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                byte[] buf = new byte[1024];
+                for (int readNum; (readNum = fis.read(buf)) != -1;) {
+                    bos.write(buf, 0, readNum);
                 }
+                photo = bos.toByteArray();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
         }
     }//GEN-LAST:event_btnValjFilActionPerformed
 
@@ -319,19 +319,17 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
                 idNy = rs.getInt(1);
                 //idNy = idNy + 1;
             }
-            
+
         } catch (Exception ex) {
             System.out.println("Internt felmeddelande: " + ex);
         }
-        
+
         idNy = idNy + 1;
-        
+
         System.out.print(idNy);
         return idNy;
-        
+
     }
-
-
 
     public int GetKategoriID() {
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
