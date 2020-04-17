@@ -284,7 +284,6 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
 
     private void btnValjFilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValjFilActionPerformed
         if (Validering.textFaltHarVarde(txtValjFil)) {
-            {
                 JFileChooser chooser = new JFileChooser();
                 chooser.showOpenDialog(null);
                 File f = chooser.getSelectedFile();
@@ -303,7 +302,6 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, e);
                 }
-            }
         }
     }//GEN-LAST:event_btnValjFilActionPerformed
 
