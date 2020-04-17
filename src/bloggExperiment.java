@@ -136,6 +136,7 @@ public class bloggExperiment extends javax.swing.JFrame {
         lblRubrik = new javax.swing.JLabel();
         lblForfattare = new javax.swing.JLabel();
         lblTidpunkt = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -179,6 +180,13 @@ public class bloggExperiment extends javax.swing.JFrame {
 
         lblRubrik.setPreferredSize(new java.awt.Dimension(100, 20));
 
+        jButton1.setText("Ta bort inlägg");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -219,6 +227,10 @@ public class bloggExperiment extends javax.swing.JFrame {
                         .addComponent(lblBild, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(39, 39, 39))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(333, 333, 333)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,7 +258,9 @@ public class bloggExperiment extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(lblTidpunkt, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
                     .addComponent(lblForfattare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(56, 56, 56))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         pack();
@@ -296,6 +310,10 @@ public class bloggExperiment extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_tblInlaggMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // denna ska bara ses av admin
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public String GetText(String s)
     {
@@ -376,6 +394,7 @@ public class bloggExperiment extends javax.swing.JFrame {
     private javax.swing.JTextArea bloggRuta;
     private javax.swing.JButton btnFiltreraKategori;
     private javax.swing.JComboBox<String> cbxKategorier;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

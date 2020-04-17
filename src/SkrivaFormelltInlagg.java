@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -230,7 +232,7 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
             String text = txaNyttInlägg.getText();
             int forfattareID = GetForfattare();
             int inlaggsID = GetAutoId(fraga);
-            String tidpunkt = "2020-04-15"; //String tidpunkt = automatiskt datum
+            String tidpunkt = hemtaTidpunkt();
             try {
                 String query = "insert into FORMELL_BLOGG (RUBRIK, TEXT, INLAGGSID, ANVANDARID, PHOTO, TIDPUNKT, KATEGORI) values"
                         + " (?, ?, ?, ?, ?, ?, ?)";
@@ -389,6 +391,16 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+    public String hemtaTidpunkt() {
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+
+        System.out.println(now);
+
+        return dtf.format(now);
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

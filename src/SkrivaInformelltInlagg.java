@@ -262,18 +262,20 @@ public class SkrivaInformelltInlagg extends javax.swing.JFrame {
             String text = txaNyttInlägg.getText();
             int forfattareID = GetForfattare();
             int inlaggsID = GetAutoId(fraga);
-            String tidpunkt = "2020-04-15"; //String tidpunkt = automatiskt datum
+            String tidpunkt = hemtaTidpunkt();
+            
             try {
-                String query = "insert into INFORMELL_BLOGG (RUBRIK, TEXT, INLAGGSID, ANVANDARID, TIDPUNKT, KATEGORI) values"
+                String query = "insert into INFORMELL_BLOGG (RUBRIK, TEXT, INLAGGSID, ANVANDARID, TIDPUNKT, KATEGORI, BILD) values"
                         + " (?, ?, ?, ?, ?, ?, ?)";
                 ps = connection.prepareStatement(query);
                 ps.setString(1, rubrik);
                 ps.setString(2, text);
                 ps.setInt(3, inlaggsID);
-                ps.setInt(4, forfattareID);
-                //ps.setBytes(5, photo); //FINNS ET SOM TABELL I DATABAS
-                ps.setString(6, tidpunkt);
-                ps.setInt(7, kategoriID);
+                ps.setInt(4, forfattareID);              
+                ps.setString(5, tidpunkt);
+                ps.setInt(6, kategoriID);
+                ps.setString(7, null); //FINNS ET SOM TABELL I DATABAS                
+                //ps.setBytes(7, photo); //FINNS ET SOM TABELL I DATABAS
                 ps.execute();
 
                 JOptionPane.showMessageDialog(null, "Inlägg publicerat!");
@@ -325,7 +327,7 @@ public class SkrivaInformelltInlagg extends javax.swing.JFrame {
             System.out.println("Internt felmeddelande: " + ex);
         }
         idNy = idNy + 1;
-        JOptionPane.showMessageDialog(null, " nästa id: " + idNy);
+        //JOptionPane.showMessageDialog(null, " nästa id: " + idNy);
 
         return idNy;
     }
@@ -389,7 +391,7 @@ public class SkrivaInformelltInlagg extends javax.swing.JFrame {
         return anvandarID;
     }
 
-    public String hemtaDatum() {
+    public String hemtaTidpunkt() {
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
