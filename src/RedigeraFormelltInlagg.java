@@ -10,10 +10,13 @@ import javax.swing.JOptionPane;
  */
 public class RedigeraFormelltInlagg extends javax.swing.JFrame {
 
+    private String epost;
+    
     /**
      * Creates new form RedigeraFormelltInlägg
      */
-    public RedigeraFormelltInlagg() {
+    public RedigeraFormelltInlagg(String e) {
+        epost = e;
         initComponents();
         this.setLocationRelativeTo(null);
         fyllCbRubriker();
@@ -39,7 +42,6 @@ public class RedigeraFormelltInlagg extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         cbVisaRubriker = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        btnVisaInlagg = new javax.swing.JButton();
         txtSkapaNyKategori = new javax.swing.JTextField();
         btnSkapaNyKategori = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
@@ -52,9 +54,9 @@ public class RedigeraFormelltInlagg extends javax.swing.JFrame {
         jLabel1.setText("  Redigera formellt blogginlägg");
         jLabel1.setOpaque(true);
 
-        jLabel2.setText("Välj ny kategori");
+        jLabel2.setText("Välj ny kategori:");
 
-        jLabel3.setText("Ladda upp ny fil");
+        jLabel3.setText("Ladda upp ny fil:");
 
         btnLaddaUppNyFil.setText("Välj");
 
@@ -76,18 +78,17 @@ public class RedigeraFormelltInlagg extends javax.swing.JFrame {
         txaRedigeraText.setRows(5);
         jScrollPane1.setViewportView(txaRedigeraText);
 
-        jLabel4.setText("Redigera rubrik");
+        jLabel4.setText("Redigera rubrik:");
 
-        jLabel5.setText("Redigera text");
+        jLabel5.setText("Redigera text:");
 
-        jLabel6.setText("Välj inlägg att redigera:");
-
-        btnVisaInlagg.setText("Visa inlägg");
-        btnVisaInlagg.addActionListener(new java.awt.event.ActionListener() {
+        cbVisaRubriker.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVisaInlaggActionPerformed(evt);
+                cbVisaRubrikerActionPerformed(evt);
             }
         });
+
+        jLabel6.setText("Välj inlägg att redigera:");
 
         btnSkapaNyKategori.setText("Skapa ny kategori");
         btnSkapaNyKategori.addActionListener(new java.awt.event.ActionListener() {
@@ -102,74 +103,64 @@ public class RedigeraFormelltInlagg extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 83, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLaddaUppNyFil, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(64, 64, 64))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txaRedigeraRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(cbRedigeraKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(28, 28, 28)
-                                        .addComponent(txtSkapaNyKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnSkapaNyKategori))
-                                    .addComponent(lblInlaggsID, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(94, 94, 94)))
-                        .addGap(37, 37, 37))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnUppdateraFormelltInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(113, 113, 113)
-                        .addComponent(btnAvbryt, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(205, 205, 205)
+                        .addComponent(btnUppdateraFormelltInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(108, 108, 108)
+                        .addComponent(btnAvbryt, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(94, 94, 94)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(90, 90, 90)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel5)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(46, 46, 46)
+                                .addComponent(jLabel3)
+                                .addGap(41, 41, 41)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbRedigeraKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnLaddaUppNyFil, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbVisaRubriker, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnVisaInlagg)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbVisaRubriker, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel7))
+                                .addGap(42, 42, 42)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblInlaggsID, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(txtSkapaNyKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txaRedigeraRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnSkapaNyKategori)))))))
+                .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbVisaRubriker, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVisaInlagg)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(lblInlaggsID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                        .addComponent(jLabel6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(cbVisaRubriker, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblInlaggsID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txaRedigeraRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
@@ -179,7 +170,7 @@ public class RedigeraFormelltInlagg extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtSkapaNyKategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSkapaNyKategori))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(btnLaddaUppNyFil))
@@ -187,7 +178,7 @@ public class RedigeraFormelltInlagg extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUppdateraFormelltInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAvbryt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -198,10 +189,9 @@ public class RedigeraFormelltInlagg extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     //Lägger till RUBRIKER den inloggade användaren skapat från FORMELL_BLOGG i combo box.
-    // HÅRDKODAD EPOST JUST NU, BÖR ÄNDRAS TILL DEN INLOGGADE ANVÄNDARENS EPOST!!!!!!!!!!!!!!!!!!!!!!!!1
     private void fyllCbRubriker() {
         String fraga = "SELECT RUBRIK from FORMELL_BLOGG where ANVANDARID = "
-                + "(select ANVANDARID from ANVANDARE where EPOST = 'roby@katt.se')"; //Ändra till epost för den inloggade användaren!!
+                + "(select ANVANDARID from ANVANDARE where EPOST = '" + epost + "')";
 
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
         Connection connection = obj_DB_Connection.get_connection();
@@ -243,46 +233,8 @@ public class RedigeraFormelltInlagg extends javax.swing.JFrame {
 
     private void btnAvbrytActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvbrytActionPerformed
         this.dispose();
-        new MinaInlagg().setVisible(true);
+        new MinaInlagg(epost).setVisible(true);
     }//GEN-LAST:event_btnAvbrytActionPerformed
-
-    //Visar det inlägg vars rubrik står i combo boxen (cbVisaRubriker). 
-    //FILHANTERINGEN BEHÖVER FIXAS!!!!!!!!!!!!!!!!!!!!111
-    private void btnVisaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaInlaggActionPerformed
-        fyllCbKategorier();
-        String rubrik = cbVisaRubriker.getSelectedItem().toString();
-        String fraga = "select * from FORMELL_BLOGG where RUBRIK = '" + rubrik + "'";
-
-        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
-        Connection connection = obj_DB_Connection.get_connection();
-        PreparedStatement ps = null;
-        String rubrik2 = null;
-        int kategori = 0;
-        //String fil = null; !!!!!!!!!!!!!!!!!!!!!!!!!!!
-        String text = null;
-        String inlaggsID = null;
-        try {
-            String query = fraga;
-            ps = connection.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                rubrik2 = rs.getString(1);
-                kategori = rs.getInt(5);
-                //fil = rs.getString(7); !!!!!!!!!!!!!!!!!!!!!1
-                text = rs.getString(2);
-                inlaggsID = rs.getString(3);
-
-                String kategoriNamn = GetKategoriNamn(kategori);
-
-                txaRedigeraRubrik.setText(rubrik2);
-                cbRedigeraKategori.setSelectedItem(kategoriNamn);
-                txaRedigeraText.setText(text);
-                lblInlaggsID.setText(inlaggsID);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }//GEN-LAST:event_btnVisaInlaggActionPerformed
 
     //Lägger till ny kategori i databas KATEGORI_FORMELL
     private void btnSkapaNyKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaNyKategoriActionPerformed
@@ -348,6 +300,44 @@ public class RedigeraFormelltInlagg extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnUppdateraFormelltInlaggActionPerformed
 
+    //Visar det inlägg vars rubrik står i combo boxen (cbVisaRubriker). 
+    //FILHANTERINGEN BEHÖVER FIXAS!!!!!!!!!!!!!!!!!!!!111
+    private void cbVisaRubrikerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbVisaRubrikerActionPerformed
+        fyllCbKategorier();
+        String rubrik = cbVisaRubriker.getSelectedItem().toString();
+        String fraga = "select * from FORMELL_BLOGG where RUBRIK = '" + rubrik + "'";
+
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        String rubrik2 = null;
+        int kategori = 0;
+        //String fil = null; !!!!!!!!!!!!!!!!!!!!!!!!!!!
+        String text = null;
+        String inlaggsID = null;
+        try {
+            String query = fraga;
+            ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                rubrik2 = rs.getString(1);
+                kategori = rs.getInt(5);
+                //fil = rs.getString(7); !!!!!!!!!!!!!!!!!!!!!1
+                text = rs.getString(2);
+                inlaggsID = rs.getString(3);
+
+                String kategoriNamn = GetKategoriNamn(kategori);
+
+                txaRedigeraRubrik.setText(rubrik2);
+                cbRedigeraKategori.setSelectedItem(kategoriNamn);
+                txaRedigeraText.setText(text);
+                lblInlaggsID.setText(inlaggsID);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_cbVisaRubrikerActionPerformed
+
     //Returnerar ID för den kategori vars namn skickas in som parameter.
     public int GetKategoriID(String kategori) {
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
@@ -410,7 +400,6 @@ public class RedigeraFormelltInlagg extends javax.swing.JFrame {
     private javax.swing.JButton btnLaddaUppNyFil;
     private javax.swing.JButton btnSkapaNyKategori;
     private javax.swing.JButton btnUppdateraFormelltInlagg;
-    private javax.swing.JButton btnVisaInlagg;
     private javax.swing.JComboBox<String> cbRedigeraKategori;
     private javax.swing.JComboBox<String> cbVisaRubriker;
     private javax.swing.JLabel jLabel1;
