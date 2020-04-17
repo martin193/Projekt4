@@ -320,11 +320,14 @@ public class SkrivaInformelltInlagg extends javax.swing.JFrame {
             ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                idNy = idNy + 1;
+                idNy = rs.getInt(1);
             }
         } catch (Exception ex) {
             System.out.println("Internt felmeddelande: " + ex);
         }
+        idNy = idNy + 1;
+        JOptionPane.showMessageDialog(null, " nästa id: " + idNy);
+        
         return idNy;
     }
 

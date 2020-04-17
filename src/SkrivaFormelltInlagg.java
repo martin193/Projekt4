@@ -318,12 +318,16 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
             ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                idNy = rs.getInt(query);
+                idNy = rs.getInt(1);
                 //idNy = idNy + 1;
             }
+            
         } catch (Exception ex) {
             System.out.println("Internt felmeddelande: " + ex);
         }
+        
+        idNy = idNy + 1;
+        
         System.out.print(idNy);
         return idNy;
         

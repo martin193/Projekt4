@@ -154,14 +154,14 @@ public class bloggExperiment extends javax.swing.JFrame {
             }
         });
 
-        btnFiltreraKategori.setText("kategori");
+        btnFiltreraKategori.setText("välj kategori");
         btnFiltreraKategori.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFiltreraKategoriActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("jaa");
+        jLabel1.setText("blogg osv");
 
         lblBild.setPreferredSize(new java.awt.Dimension(208, 212));
 
@@ -188,9 +188,9 @@ public class bloggExperiment extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btnFiltreraKategori, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(cbxKategorier, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                                 .addComponent(jLabel2)
-                                .addGap(0, 25, Short.MAX_VALUE)))
+                                .addGap(0, 13, Short.MAX_VALUE)))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(60, 60, 60)
