@@ -42,7 +42,7 @@ public class ProfilSida extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtNamn = new javax.swing.JTextField();
+        txtFornamn = new javax.swing.JTextField();
         txtMailAdress = new javax.swing.JTextField();
         txtNyttLosen = new javax.swing.JTextField();
         txtTelefonnr = new javax.swing.JTextField();
@@ -50,6 +50,8 @@ public class ProfilSida extends javax.swing.JFrame {
         btnChange = new javax.swing.JButton();
         txtBekraftaLosen = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        txtEfternamn = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,7 +59,7 @@ public class ProfilSida extends javax.swing.JFrame {
         jLabel1.setText(" Min profil");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel2.setText("Namn:");
+        jLabel2.setText("Förnamn:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Mailadress:");
@@ -68,9 +70,9 @@ public class ProfilSida extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Telefonnummer:");
 
-        txtNamn.addActionListener(new java.awt.event.ActionListener() {
+        txtFornamn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNamnActionPerformed(evt);
+                txtFornamnActionPerformed(evt);
             }
         });
 
@@ -91,6 +93,9 @@ public class ProfilSida extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Bekräfta lösenord:");
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel7.setText("Efternamn:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -103,28 +108,25 @@ public class ProfilSida extends javax.swing.JFrame {
                         .addGap(75, 75, 75)
                         .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(82, 82, 82)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel2))
-                                        .addGap(31, 31, 31))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGap(82, 82, 82)
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel7)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
                                     .addComponent(txtNyttLosen)
                                     .addComponent(txtMailAdress)
-                                    .addComponent(txtNamn)
-                                    .addComponent(txtBekraftaLosen)))
+                                    .addComponent(txtFornamn)
+                                    .addComponent(txtBekraftaLosen)
+                                    .addComponent(txtEfternamn)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(82, 82, 82)
                                 .addComponent(jLabel6)
                                 .addGap(18, 18, Short.MAX_VALUE)
                                 .addComponent(txtTelefonnr, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -136,11 +138,15 @@ public class ProfilSida extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(44, 44, 44)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(18, 18, 18)
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtEfternamn, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 17, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMailAdress, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
@@ -160,7 +166,7 @@ public class ProfilSida extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnChange, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 8, Short.MAX_VALUE))
+                        .addGap(0, 2, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addComponent(btnTillbaka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -170,9 +176,9 @@ public class ProfilSida extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamnActionPerformed
+    private void txtFornamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFornamnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNamnActionPerformed
+    }//GEN-LAST:event_txtFornamnActionPerformed
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         this.dispose();
@@ -180,28 +186,40 @@ public class ProfilSida extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     private void btnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionPerformed
-        String fornamn = txtNamn.getText();
+        String fornamn = txtFornamn.getText();
+        String efternamn = txtEfternamn.getText();
         String email = txtMailAdress.getText();
         String losenord = txtNyttLosen.getText();
         String losenord2 = txtBekraftaLosen.getText();
         String telnr = txtTelefonnr.getText();
-        String Q = "UPDATE ANVANDARE SET FORNAMN = '" + fornamn + "', EPOST='" + email + "', "
-                + "LOSENORD='" + losenord + "', TELNR='" + telnr + "'WHERE EPOST='" + epost + "'";
+        String Q = "UPDATE ANVANDARE SET FORNAMN = '" + fornamn + "', EFTERNAMN = '" + efternamn + "', EPOST='" + email + "', "
+                + "LOSENORD='" + losenord + "', TELNR='" + telnr + "'WHERE EPOST ='" + epost + "'";
         epost = email;
-        if (losenord.equals(losenord2)) {
-            try {
-                updateAnvandare(Q);
-                JOptionPane.showMessageDialog(null, "Ändringen lyckades!");
-            } catch (Exception e) {
-                System.out.println(e);
+        if (Validering.baraBokstaver(txtFornamn) && Validering.textFaltHarVarde(txtFornamn)) {
+            if (Validering.baraBokstaver(txtEfternamn) && Validering.textFaltHarVarde(txtEfternamn)) {
+                if (Validering.korrektEmail(email)) {
+                    if (Validering.korrektTelnr(txtTelefonnr)) {
+                        if (Validering.korrektLosenord(txtNyttLosen)) {
+                            if (losenord.equals(losenord2)) {
+                                try {
+                                    updateAnvandare(Q);
+                                    JOptionPane.showMessageDialog(null, "Ändringen lyckades!");
+                                } catch (Exception e) {
+                                    System.out.println(e);
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Lösenorden stämmer inte överens");
+                            }
+                        }
+                    }
+                }
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Lösenorden stämmer inte överens");
         }
     }//GEN-LAST:event_btnChangeActionPerformed
 
     public void setText() {
-        txtNamn.setText(getQuery("SELECT FORNAMN FROM ANVANDARE WHERE EPOST='" + epost + "'"));
+        txtFornamn.setText(getQuery("SELECT FORNAMN FROM ANVANDARE WHERE EPOST='" + epost + "'"));
+        txtEfternamn.setText(getQuery("SELECT EFTERNAMN FROM ANVANDARE WHERE EPOST='" + epost + "'"));
         txtMailAdress.setText(epost);
         txtNyttLosen.setText(getQuery("SELECT LOSENORD FROM ANVANDARE WHERE EPOST='" + epost + "'"));
         txtTelefonnr.setText(getQuery("SELECT TELNR FROM ANVANDARE WHERE EPOST='" + epost + "'"));
@@ -246,9 +264,11 @@ public class ProfilSida extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField txtBekraftaLosen;
+    private javax.swing.JTextField txtEfternamn;
+    private javax.swing.JTextField txtFornamn;
     private javax.swing.JTextField txtMailAdress;
-    private javax.swing.JTextField txtNamn;
     private javax.swing.JTextField txtNyttLosen;
     private javax.swing.JTextField txtTelefonnr;
     // End of variables declaration//GEN-END:variables
