@@ -3,10 +3,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import java.util.Random;
 
 public class skapaAnvandare extends javax.swing.JFrame {
     
     String epost;
+    private String char_list = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
     /**
      * Creates new form skapaAnvandare
@@ -45,6 +47,7 @@ public class skapaAnvandare extends javax.swing.JFrame {
         btnLaggTill = new javax.swing.JButton();
         btnTillbaka = new javax.swing.JButton();
         cboxAdministrator = new javax.swing.JCheckBox();
+        btnSlumpa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,6 +85,13 @@ public class skapaAnvandare extends javax.swing.JFrame {
 
         cboxAdministrator.setText("Administratör");
 
+        btnSlumpa.setText("Generera");
+        btnSlumpa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSlumpaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,22 +107,22 @@ public class skapaAnvandare extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(cboxAdministrator, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(150, 150, 150))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(btnLaggTill)
+                        .addGap(75, 75, 75)
+                        .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cboxAdministrator, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txfLosenord)
                             .addComponent(txfTelnr)
                             .addComponent(txfMail)
                             .addComponent(txfEfternamn)
                             .addComponent(txfFornamn))
-                        .addGap(150, 150, 150))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(btnLaggTill)
-                        .addGap(75, 75, 75)
-                        .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSlumpa)
+                        .addGap(35, 35, 35))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(127, 127, 127)
                 .addComponent(jLabel6)
@@ -145,7 +155,9 @@ public class skapaAnvandare extends javax.swing.JFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txfLosenord, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txfLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnSlumpa))
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
                         .addComponent(cboxAdministrator)
@@ -208,6 +220,11 @@ public class skapaAnvandare extends javax.swing.JFrame {
         this.dispose();
         new AnvStartsida(epost).setVisible(true);
     }//GEN-LAST:event_btnTillbakaActionPerformed
+
+    private void btnSlumpaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSlumpaActionPerformed
+        String losen = slumpaLosen();
+        txfLosenord.setText(losen);
+    }//GEN-LAST:event_btnSlumpaActionPerformed
     
     private void skapaAnvandare(String Q){
         	DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
@@ -230,10 +247,30 @@ public class skapaAnvandare extends javax.swing.JFrame {
         txfLosenord.setText(null);
         cboxAdministrator.setSelected(false);
     }
+    
+    private int getRandomNum(){
+        int randomInt = 0; 
+        Random randomGenerator = new Random();
+        randomInt = randomGenerator.nextInt(char_list.length());
+        if(randomInt -1 == -1){return randomInt;}
+        else {return randomInt-1;}
+    }
+    
+    private String slumpaLosen(){
+        StringBuilder str = new StringBuilder();
+        for (int i=0;i<7;i++){
+            int num = getRandomNum();
+            char ch = char_list.charAt(num);
+            str.append(ch);
+        }
+        String slumpatLosen = str.toString();
+        return slumpatLosen;
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLaggTill;
+    private javax.swing.JButton btnSlumpa;
     private javax.swing.JButton btnTillbaka;
     private javax.swing.JCheckBox cboxAdministrator;
     private javax.swing.JLabel jLabel1;
