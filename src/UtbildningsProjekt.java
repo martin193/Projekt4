@@ -23,8 +23,8 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
     public UtbildningsProjekt(String e) {
         initComponents();
         epost = e;
-        fillBox();
         id = getId();
+        fillBox();
     }
 
     /**
@@ -242,7 +242,7 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
 
     private void btnMinaProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinaProjektActionPerformed
         this.dispose();
-        new MinaProjekt(epost,id).setVisible(true);
+        new MinaProjekt(epost,id,true).setVisible(true);
     }//GEN-LAST:event_btnMinaProjektActionPerformed
 
     private void btnSkapaProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaProjektActionPerformed

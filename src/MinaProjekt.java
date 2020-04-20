@@ -16,13 +16,15 @@ import javax.swing.JOptionPane;
  */
 public class MinaProjekt extends javax.swing.JFrame {
 
+    private boolean uProjekt;
     private String epost;
     private String id;
     /**
      * Creates new form MinaProjekt
      */
-    public MinaProjekt(String e, String i) {
+    public MinaProjekt(String e, String i,boolean u) {
         initComponents();
+        uProjekt = u;
         epost = e;
         id = i;
         fyllcbxUtbildning();
@@ -162,7 +164,12 @@ public class MinaProjekt extends javax.swing.JFrame {
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         this.dispose();
+        if (uProjekt){
         new UtbildningsProjekt(epost).setVisible(true);
+        }
+        else {
+        new ForskningsProjekt(epost).setVisible(true);
+        }
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     private void btnRaderaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRaderaActionPerformed

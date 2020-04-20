@@ -1,3 +1,8 @@
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,13 +16,15 @@
 public class ForskningsProjekt extends javax.swing.JFrame {
     
     private String epost;
+    private String id; 
 
     /**
-     * Creates new form ForskningsProjekt
+     * Creates new sform ForskningsProjekt
      */
     public ForskningsProjekt(String e) {
         initComponents();
         epost = e;
+        id = getId();
     }
 
     /**
@@ -214,7 +221,7 @@ public class ForskningsProjekt extends javax.swing.JFrame {
 
     private void btnMinaProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinaProjektActionPerformed
         this.dispose();
-        new MinaProjekt(epost).setVisible(true);
+        new MinaProjekt(epost,id,false).setVisible(true);
     }//GEN-LAST:event_btnMinaProjektActionPerformed
 
     private void btnSkapaNyttProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaNyttProjektActionPerformed
@@ -223,6 +230,23 @@ public class ForskningsProjekt extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnSkapaNyttProjektActionPerformed
 
+        private String getId(){
+        String id = null;
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        try {
+            String query = "SELECT ANVANDARID FROM ANVANDARE WHERE EPOST='"+epost+"'";
+            ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                id = rs.getString(1);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return id;
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
