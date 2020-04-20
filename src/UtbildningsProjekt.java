@@ -23,8 +23,8 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
     public UtbildningsProjekt(String e) {
         initComponents();
         epost = e;
-        fillBox();
         id = getId();
+        fillBox();
     }
 
     /**
@@ -78,6 +78,11 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
         lblProjekt.setText("Projekt jag har åtkomst till:");
 
         btnTillbaka.setText("Tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaActionPerformed(evt);
+            }
+        });
 
         btnMinaProjekt.setText("Mina projekt");
         btnMinaProjekt.addActionListener(new java.awt.event.ActionListener() {
@@ -242,7 +247,7 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
 
     private void btnMinaProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinaProjektActionPerformed
         this.dispose();
-        new MinaProjekt(epost,id).setVisible(true);
+        new MinaProjekt(epost,id,true).setVisible(true);
     }//GEN-LAST:event_btnMinaProjektActionPerformed
 
     private void btnSkapaProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaProjektActionPerformed
@@ -257,6 +262,11 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
     private void btnVisaProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaProjektActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVisaProjektActionPerformed
+
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+        this.dispose();
+        new AnvStartsida(epost).setVisible(true);
+    }//GEN-LAST:event_btnTillbakaActionPerformed
 
     private String getId(){
         String id = null;

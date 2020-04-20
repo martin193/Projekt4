@@ -256,7 +256,8 @@ public class AnvStartsida extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdmSkapaAnvActionPerformed
 
     private void btnForskningsProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnForskningsProjektActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new ForskningsProjekt(epost).setVisible(true);
     }//GEN-LAST:event_btnForskningsProjektActionPerformed
 
     private void btnUtbildningsProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUtbildningsProjektActionPerformed
