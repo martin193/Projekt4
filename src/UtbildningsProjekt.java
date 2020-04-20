@@ -1,3 +1,8 @@
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,6 +22,7 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
     public UtbildningsProjekt(String e) {
         initComponents();
         epost = e;
+        fillBox();
     }
 
     /**
@@ -231,7 +237,40 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
         new SkapaNyttUtbildningsProjekt(epost).setVisible(true);
     }//GEN-LAST:event_btnSkapaProjektActionPerformed
 
-
+    private String getId(){
+        String id = null;
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        try {
+            String query = "SELECT ANVANDARID FROM ANVANDARE WHERE EPOST='"+epost+"'";
+            ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                id = rs.getString(1);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return id;
+    }
+    
+    private void fillBox(){
+        cbxProjekt.removeAllItems();
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        try {
+            String query = "SELECT TITEL FROM ANVANDARE_UTBILDNINGSPROJEKT JOIN UTBILDNINGSPROJEKT ON ANVANDARE_UTBILDNINGSPROJEKT.UPID=UTBILDNINGSPROJEKT.UPID WHERE ANVANDARE_UTBILDNINGSPROJEKT.ANVANDARID="+getId();
+            ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                cbxProjekt.addItem(rs.getString("TITEL"));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMinaProjekt;
