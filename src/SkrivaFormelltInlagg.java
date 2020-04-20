@@ -1,4 +1,5 @@
 
+import java.awt.Desktop;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,7 +23,7 @@ import javax.swing.JOptionPane;
  * @author Sarah
  */
 public class SkrivaFormelltInlagg extends javax.swing.JFrame {
-
+String filepath;
     private String epost;
 
     /**
@@ -58,7 +59,7 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
         txtKategori = new javax.swing.JTextField();
         btnLaggTillNyKategori = new javax.swing.JButton();
         txtValjFil = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -113,7 +114,12 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setText("Bild/fil");
+        jButton1.setText("Open");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,35 +140,37 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(16, 16, 16)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(jLabel3)
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                            .addGap(2, 2, 2)
-                                                            .addComponent(jLabel5)))
-                                                    .addGap(18, 18, 18)
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(txtKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGroup(layout.createSequentialGroup()
-                                                            .addComponent(txtValjFil, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                            .addComponent(btnValjFil))))
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(cbKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(10, 10, 10)))
-                                            .addComponent(btnLaggTillNyKategori)))
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jLabel3)
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                        .addGap(2, 2, 2)
+                                                        .addComponent(jLabel5)))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(txtKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(txtValjFil, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                        .addComponent(btnValjFil))))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(cbKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(10, 10, 10)))
+                                        .addComponent(btnLaggTillNyKategori)))
                                 .addGap(0, 20, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())))))
+                                .addContainerGap())
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(160, 160, 160)
+                                .addComponent(jButton1)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -197,9 +205,12 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
                                 .addComponent(jLabel5)
                                 .addComponent(txtValjFil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(btnValjFil)))
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                        .addGap(49, 49, 49)
+                        .addComponent(jButton1)
+                        .addGap(98, 98, 98))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -233,8 +244,9 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
             int forfattareID = GetForfattare();
             int inlaggsID = GetAutoId(fraga);
             String tidpunkt = hemtaTidpunkt();
+            String sokväg = txtValjFil.getText();
             try {
-                String query = "insert into FORMELL_BLOGG (RUBRIK, TEXT, INLAGGSID, ANVANDARID, KATEGORI, TIDPUNKT, PHOTO) values"
+                String query = "insert into FORMELL_BLOGG (RUBRIK, TEXT, INLAGGSID, ANVANDARID, KATEGORI, TIDPUNKT, FIL) values"
                         + " (?, ?, ?, ?, ?, ?, ?)";
                 ps = connection.prepareStatement(query);
                 ps.setString(1, rubrik);
@@ -243,7 +255,7 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
                 ps.setInt(4, forfattareID);                                
                 ps.setInt(5, kategoriID);
                 ps.setString(6, tidpunkt);
-                ps.setBytes(7, photo);
+                ps.setString(7, sokväg);
                 ps.execute();
 
                 JOptionPane.showMessageDialog(null, "Inlägg publicerat!");
@@ -287,27 +299,51 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLaggTillNyKategoriActionPerformed
 
     private void btnValjFilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValjFilActionPerformed
-        {
-            JFileChooser chooser = new JFileChooser();
-            chooser.showOpenDialog(null);
-            File f = chooser.getSelectedFile();
-            String filename = f.getAbsolutePath();
-            txtValjFil.setText(filename);
-            jLabel10.setIcon(new ImageIcon(f.toString()));
-            try {
-                File image = new File(filename);
-                FileInputStream fis = new FileInputStream(image);
-                ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                byte[] buf = new byte[1024];
-                for (int readNum; (readNum = fis.read(buf)) != -1;) {
-                    bos.write(buf, 0, readNum);
+        
+        // TODO add your handling code here:
+      JFileChooser jfc = new JFileChooser();
+      jfc.showOpenDialog(this);
+      
+      try {
+                  File f = jfc.getSelectedFile();
+                  filepath = f.getAbsolutePath();
+                  filepath = filepath.replace('\\', '/');
+                  txtValjFil.setText(filepath);
+      }
+      catch (Exception e)
+      {
+          JOptionPane.showMessageDialog(rootPane, e);
+      }
+        
+                   
+    }//GEN-LAST:event_btnValjFilActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:{                                         
+        // TODO add your handling code here:
+        filepath = txtValjFil.getText();
+        try {
+            File pdfFile = new File(filepath);
+            if (pdfFile.exists())
+            {
+                if (Desktop.isDesktopSupported())
+                {
+                    Desktop.getDesktop().open(pdfFile);
                 }
-                photo = bos.toByteArray();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e);
+                else
+                {
+                    JOptionPane.showMessageDialog(rootPane, "desktop is not supported");
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(rootPane, "File doesnt exist");
             }
         }
-    }//GEN-LAST:event_btnValjFilActionPerformed
+        catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     //Tar emot en SQL-fråga som parameter för att sedan returnera nästa lediga ID för den tabell som r specificerad i SQL-frågan.
     public int GetAutoId(String o) {
@@ -409,8 +445,8 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
     private javax.swing.JButton btnTillbaka;
     private javax.swing.JButton btnValjFil;
     private javax.swing.JComboBox<String> cbKategori;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -423,6 +459,4 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
     private javax.swing.JTextField txtNyRubrik;
     private javax.swing.JTextField txtValjFil;
     // End of variables declaration//GEN-END:variables
-String filename = null;
-    byte[] photo = null;
 }
