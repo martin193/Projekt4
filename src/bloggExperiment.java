@@ -29,9 +29,11 @@ public class bloggExperiment extends javax.swing.JFrame {
         bloggRuta.setLineWrap(true);
         bloggRuta.setWrapStyleWord(true);
         
+        
         fyllCbKategorier();
         fyllBloggTabell();
         epost = e;
+        kollaAdmin();
     }
     private void fyllCbKategorier() {
         String fraga = "SELECT KATEGORINAMN FROM KATEGORI_INFORMELL";
@@ -81,6 +83,45 @@ public class bloggExperiment extends javax.swing.JFrame {
         
     }
     
+    public void kollaAdmin()
+    {
+        try
+        {
+            String fraga = "SELECT ADMIN FROM ANVANDARE WHERE EPOST = '" + epost + "'"; 
+            String svar = GetAdmin(fraga);
+
+            if(svar.equals("T"))
+            {
+            btnTaBort.setVisible(true);
+            }
+            else
+            {
+            btnTaBort.setVisible(false);
+            }
+        
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, "Hmmm");
+        }
+    }
+    public String GetAdmin(String q){
+        String svar = null;
+        DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
+	Connection connection=obj_DB_Connection.get_connection();
+	PreparedStatement ps=null;
+	try {
+	    String query= q;
+	    ps=connection.prepareStatement(query);
+	    ResultSet rs=ps.executeQuery();
+	    while(rs.next()){
+                svar = rs.getString(1);
+	    }
+	} catch (Exception e) {
+	    System.out.println(e);
+	} 
+        return svar;
+    }
     public String GetQuery(String s)
     {
 	DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
@@ -146,7 +187,7 @@ public class bloggExperiment extends javax.swing.JFrame {
         lblRubrik = new javax.swing.JLabel();
         lblForfattare = new javax.swing.JLabel();
         lblTidpunkt = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnTaBort = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         btnNyttInlagg = new javax.swing.JButton();
 
@@ -185,10 +226,10 @@ public class bloggExperiment extends javax.swing.JFrame {
 
         lblRubrik.setPreferredSize(new java.awt.Dimension(100, 20));
 
-        jButton1.setText("Ta bort inlägg");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnTaBort.setText("Ta bort inlägg");
+        btnTaBort.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnTaBortActionPerformed(evt);
             }
         });
 
@@ -240,7 +281,7 @@ public class bloggExperiment extends javax.swing.JFrame {
                                 .addGap(54, 54, 54))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(136, 136, 136)
-                        .addComponent(jButton1)))
+                        .addComponent(btnTaBort)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
@@ -280,7 +321,7 @@ public class bloggExperiment extends javax.swing.JFrame {
                             .addComponent(lblTidpunkt, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
                             .addComponent(lblForfattare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1))
+                        .addComponent(btnTaBort))
                     .addComponent(btnNyttInlagg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -361,13 +402,27 @@ public class bloggExperiment extends javax.swing.JFrame {
         
         
 
-        
+    
         
     }//GEN-LAST:event_tblInlaggMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // denna ska bara ses av admin
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnTaBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortActionPerformed
+        
+        DefaultTableModel yaya = (DefaultTableModel)tblInlagg.getModel();
+
+        int selectedRowIndex = tblInlagg.getSelectedRow();
+        
+        String id = (yaya.getValueAt(selectedRowIndex, 0).toString());
+        
+        JOptionPane.showMessageDialog(null, "Rubrik: " + id);
+        
+        //id är rubrik nu dock
+        
+        //String fraga= "SELECT * FROM INFORMELL_BLOGG JOIN ANVANDARE ON ANVANDARE.ANVANDARID = INFORMELL_BLOGG.ANVANDARID WHERE RUBRIK = '" + id + "'";
+                
+                
+        //String text = GetText(fraga);
+    }//GEN-LAST:event_btnTaBortActionPerformed
 
     private void btnNyttInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNyttInlaggActionPerformed
         this.dispose();
@@ -384,7 +439,7 @@ public class bloggExperiment extends javax.swing.JFrame {
         String fornamn = null;
         String efternamn = null;
         String tidpunkt = null;
-        
+        String epostForfattare = null;
         
 
 	try {
@@ -396,6 +451,7 @@ public class bloggExperiment extends javax.swing.JFrame {
                 text = rs.getString(2);
                 fornamn = rs.getString(9);
                 efternamn = rs.getString(10);
+                epostForfattare = rs.getString(11);
                 tidpunkt = rs.getString(5);
                 if (rs.getBytes(7) == null){
                     lblBild.setIcon(null);
@@ -417,6 +473,15 @@ public class bloggExperiment extends javax.swing.JFrame {
             bloggRuta.setText(text);
             lblForfattare.setText(namn);
             lblTidpunkt.setText(tid);
+            
+            if (epost.equals(epostForfattare))
+            {
+                btnTaBort.setVisible(true);
+            }
+            else
+            {
+                btnTaBort.setVisible(false);
+            }
             
 	} catch (Exception e) {
 	    System.out.println(e);
@@ -463,8 +528,8 @@ public class bloggExperiment extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea bloggRuta;
     private javax.swing.JButton btnNyttInlagg;
+    private javax.swing.JButton btnTaBort;
     private javax.swing.JComboBox<String> cbxKategorier;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
