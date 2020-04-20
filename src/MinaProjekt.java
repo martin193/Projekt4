@@ -177,7 +177,6 @@ public class MinaProjekt extends javax.swing.JFrame {
         Connection connection = obj_DB_Connection.get_connection();
         PreparedStatement ps = null;
 
-        try {
 
             String utbildningsTitel = cbxUtbildning.getSelectedItem().toString();
             String forskningsTitel = cbxForskning.getSelectedItem().toString();
@@ -185,15 +184,13 @@ public class MinaProjekt extends javax.swing.JFrame {
             if (utbildningsTitel != null && forskningsTitel.equals("")) {
 
                 String sql = "DELETE FROM UTBILDNINGSPROJEKT WHERE TITEL = '" + utbildningsTitel + "'";
-                ps = connection.prepareStatement(sql);
-                ps.executeUpdate();
+                updateSql(sql);
 
                 JOptionPane.showMessageDialog(null, "Projektet har raderats!");
                 
             } else if (forskningsTitel != null && utbildningsTitel.equals("")) {
                 String sql2 = "DELETE FROM FORSKNINGSPROJEKT WHERE TITEL = '" + forskningsTitel + "'";
-                ps = connection.prepareStatement(sql2);
-                ps.executeUpdate();
+                updateSql(sql2);
 
                 JOptionPane.showMessageDialog(null, "Projektet har raderats!");
 
@@ -201,10 +198,21 @@ public class MinaProjekt extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Välj endast ett projekt!");
             }
 
-        } catch (Exception e) {
-            System.out.println("Något gick fel!" + e);
-        }
+
     }//GEN-LAST:event_btnRaderaActionPerformed
+
+    private void updateSql(String statement)
+    {
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        try{
+       PreparedStatement ps = connection.prepareStatement(statement);
+       ps.executeUpdate();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }}
 
   
 
