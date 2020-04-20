@@ -1,3 +1,9 @@
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,6 +23,51 @@ public class MinaProjekt extends javax.swing.JFrame {
     public MinaProjekt(String e) {
         initComponents();
         epost = e;
+        fyllcbxUtbildning();
+        fyllcbxForskning();
+    }
+    
+    private void fyllcbxUtbildning() {
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        String inlagg = null;
+        cbxUtbildning.addItem("");
+
+        try {
+            String fraga = "SELECT TITEL FROM UTBILDNINGSPROJEKT JOIN ANVANDARE ON UTBILDNINGSPROJEKT.ANVANDARID = ANVANDARE.ANVANDARID WHERE ANVANDARE.EPOST = '" + epost + "'";
+            ps = connection.prepareStatement(fraga);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                inlagg = rs.getString(1);
+                cbxUtbildning.addItem(inlagg);
+            }
+        } catch (Exception e) {
+            System.out.println("Felmeddelande! " + e);
+        }
+    }
+    
+    private void fyllcbxForskning() {
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        String inlagg = null;
+        cbxForskning.addItem("");
+
+        try {
+            String fraga = "SELECT TITEL FROM FORSKNINGSPROJEKT JOIN ANVANDARE ON FORSKNINGSPROJEKT.ANVANDARID = ANVANDARE.ANVANDARID WHERE ANVANDARE.EPOST = '" + epost + "'";
+            ps = connection.prepareStatement(fraga);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                inlagg = rs.getString(1);
+                cbxForskning.addItem(inlagg);
+            }
+        } catch (Exception e) {
+            System.out.println("Felmeddelande! " + e);
+        }
+        
     }
 
     /**
@@ -46,8 +97,18 @@ public class MinaProjekt extends javax.swing.JFrame {
         lblForskning.setText("Mina forskningsprojekt:");
 
         btnTillbaka.setText("Tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaActionPerformed(evt);
+            }
+        });
 
         btnRadera.setText("Radera projekt");
+        btnRadera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRaderaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -96,6 +157,45 @@ public class MinaProjekt extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+        this.dispose();
+        new AnvStartsida(epost).setVisible(true);
+    }//GEN-LAST:event_btnTillbakaActionPerformed
+
+    private void btnRaderaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRaderaActionPerformed
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+
+        try {
+
+            String utbildningsTitel = cbxUtbildning.getSelectedItem().toString();
+            String forskningsTitel = cbxForskning.getSelectedItem().toString();
+
+            if (utbildningsTitel != null && forskningsTitel.equals("")) {
+
+                String sql = "DELETE FROM UTBILDNINGSPROJEKT WHERE TITEL = '" + utbildningsTitel + "'";
+                ps = connection.prepareStatement(sql);
+                ps.executeUpdate();
+
+                JOptionPane.showMessageDialog(null, "Projektet har raderats!");
+                
+            } else if (forskningsTitel != null && utbildningsTitel.equals("")) {
+                String sql2 = "DELETE FROM FORSKNINGSPROJEKT WHERE TITEL = '" + forskningsTitel + "'";
+                ps = connection.prepareStatement(sql2);
+                ps.executeUpdate();
+
+                JOptionPane.showMessageDialog(null, "Projektet har raderats!");
+
+            } else if (utbildningsTitel != null && forskningsTitel != null) {
+                JOptionPane.showMessageDialog(null, "Välj endast ett projekt!");
+            }
+
+        } catch (Exception e) {
+            System.out.println("Något gick fel!" + e);
+        }
+    }//GEN-LAST:event_btnRaderaActionPerformed
 
   
 
