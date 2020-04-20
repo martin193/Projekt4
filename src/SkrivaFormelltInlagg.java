@@ -234,16 +234,16 @@ public class SkrivaFormelltInlagg extends javax.swing.JFrame {
             int inlaggsID = GetAutoId(fraga);
             String tidpunkt = hemtaTidpunkt();
             try {
-                String query = "insert into FORMELL_BLOGG (RUBRIK, TEXT, INLAGGSID, ANVANDARID, PHOTO, TIDPUNKT, KATEGORI) values"
+                String query = "insert into FORMELL_BLOGG (RUBRIK, TEXT, INLAGGSID, ANVANDARID, KATEGORI, TIDPUNKT, PHOTO) values"
                         + " (?, ?, ?, ?, ?, ?, ?)";
                 ps = connection.prepareStatement(query);
                 ps.setString(1, rubrik);
                 ps.setString(2, text);
                 ps.setInt(3, inlaggsID);
-                ps.setInt(4, forfattareID);
-                ps.setBytes(5, photo);
+                ps.setInt(4, forfattareID);                                
+                ps.setInt(5, kategoriID);
                 ps.setString(6, tidpunkt);
-                ps.setInt(7, kategoriID);
+                ps.setBytes(7, photo);
                 ps.execute();
 
                 JOptionPane.showMessageDialog(null, "Inlägg publicerat!");

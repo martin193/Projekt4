@@ -1,7 +1,9 @@
 
+import java.awt.Image;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -306,6 +308,8 @@ public class bloggExperiment extends javax.swing.JFrame {
                 
                 
         String text = GetText(fraga);
+        
+        
 
         
         
@@ -326,6 +330,7 @@ public class bloggExperiment extends javax.swing.JFrame {
         String efternamn = null;
         String tidpunkt = null;
         
+        
 
 	try {
 	    String query= s;
@@ -337,7 +342,13 @@ public class bloggExperiment extends javax.swing.JFrame {
                 fornamn = rs.getString(9);
                 efternamn = rs.getString(10);
                 tidpunkt = rs.getString(5);
-                            
+                //bilden = rs.getBlob(8);
+                byte[] img = rs.getBytes(7);
+                ImageIcon bilden = new ImageIcon(img);
+                Image bild = bilden.getImage();
+                Image myImg = bild.getScaledInstance(lblBild.getWidth(), lblBild.getHeight(), Image.SCALE_SMOOTH);
+                ImageIcon nyBild = new ImageIcon(myImg);
+                lblBild.setIcon(nyBild);
 	    }
             
             String namn = "Av: " + fornamn + " " + efternamn;
