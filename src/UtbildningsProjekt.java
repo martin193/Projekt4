@@ -16,6 +16,7 @@ import java.sql.ResultSet;
 public class UtbildningsProjekt extends javax.swing.JFrame {
 
     private String epost;
+    private String id;
     /**
      * Creates new form UtbildningsProjekt
      */
@@ -23,6 +24,7 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
         initComponents();
         epost = e;
         fillBox();
+        id = getId();
     }
 
     /**
@@ -67,6 +69,12 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
             }
         });
 
+        cbxProjekt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxProjektActionPerformed(evt);
+            }
+        });
+
         lblProjekt.setText("Projekt jag har åtkomst till:");
 
         btnTillbaka.setText("Tillbaka");
@@ -79,6 +87,11 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
         });
 
         btnVisaProjekt.setText("Visa");
+        btnVisaProjekt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisaProjektActionPerformed(evt);
+            }
+        });
 
         txaVisaProjekt.setColumns(20);
         txaVisaProjekt.setRows(5);
@@ -179,8 +192,8 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lblProjekt)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(cbxProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(26, 26, 26)
                                         .addComponent(btnVisaProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -229,13 +242,21 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
 
     private void btnMinaProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinaProjektActionPerformed
         this.dispose();
-        new MinaProjekt(epost).setVisible(true);
+        new MinaProjekt(epost,id).setVisible(true);
     }//GEN-LAST:event_btnMinaProjektActionPerformed
 
     private void btnSkapaProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaProjektActionPerformed
         this.dispose();
         new SkapaNyttUtbildningsProjekt(epost).setVisible(true);
     }//GEN-LAST:event_btnSkapaProjektActionPerformed
+
+    private void cbxProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxProjektActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxProjektActionPerformed
+
+    private void btnVisaProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaProjektActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVisaProjektActionPerformed
 
     private String getId(){
         String id = null;
@@ -261,11 +282,11 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
         Connection connection = obj_DB_Connection.get_connection();
         PreparedStatement ps = null;
         try {
-            String query = "SELECT TITEL FROM ANVANDARE_UTBILDNINGSPROJEKT JOIN UTBILDNINGSPROJEKT ON ANVANDARE_UTBILDNINGSPROJEKT.UPID=UTBILDNINGSPROJEKT.UPID WHERE ANVANDARE_UTBILDNINGSPROJEKT.ANVANDARID="+getId();
+            String query = "SELECT TITEL FROM ANVANDARE_UTBILDNINGSPROJEKT JOIN UTBILDNINGSPROJEKT ON ANVANDARE_UTBILDNINGSPROJEKT.UPID=UTBILDNINGSPROJEKT.UPID WHERE ANVANDARE_UTBILDNINGSPROJEKT.ANVANDARID="+id;
             ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                cbxProjekt.addItem(rs.getString("TITEL"));
+                cbxProjekt.addItem(rs.getString(1));
             }
         } catch (Exception e) {
             System.out.println(e);

@@ -17,12 +17,14 @@ import javax.swing.JOptionPane;
 public class MinaProjekt extends javax.swing.JFrame {
 
     private String epost;
+    private String id;
     /**
      * Creates new form MinaProjekt
      */
-    public MinaProjekt(String e) {
+    public MinaProjekt(String e, String i) {
         initComponents();
         epost = e;
+        id = i;
         fyllcbxUtbildning();
         fyllcbxForskning();
     }
@@ -35,7 +37,7 @@ public class MinaProjekt extends javax.swing.JFrame {
         cbxUtbildning.addItem("");
 
         try {
-            String fraga = "SELECT TITEL FROM UTBILDNINGSPROJEKT JOIN ANVANDARE ON UTBILDNINGSPROJEKT.ANVANDARID = ANVANDARE.ANVANDARID WHERE ANVANDARE.EPOST = '" + epost + "'";
+            String fraga = "SELECT TITEL FROM UTBILDNINGSPROJEKT WHERE ANVANDARID="+id;
             ps = connection.prepareStatement(fraga);
             ResultSet rs = ps.executeQuery();
 
@@ -56,7 +58,7 @@ public class MinaProjekt extends javax.swing.JFrame {
         cbxForskning.addItem("");
 
         try {
-            String fraga = "SELECT TITEL FROM FORSKNINGSPROJEKT JOIN ANVANDARE ON FORSKNINGSPROJEKT.ANVANDARID = ANVANDARE.ANVANDARID WHERE ANVANDARE.EPOST = '" + epost + "'";
+            String fraga = "SELECT TITEL FROM FORSKNINGSPROJEKT WHERE ANVANDARID="+id;
             ps = connection.prepareStatement(fraga);
             ResultSet rs = ps.executeQuery();
 
@@ -160,7 +162,7 @@ public class MinaProjekt extends javax.swing.JFrame {
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         this.dispose();
-        new AnvStartsida(epost).setVisible(true);
+        new UtbildningsProjekt(epost).setVisible(true);
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     private void btnRaderaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRaderaActionPerformed
