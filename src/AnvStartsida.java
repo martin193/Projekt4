@@ -259,7 +259,7 @@ public class AnvStartsida extends javax.swing.JFrame {
 
     private void btnUtbildningsProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUtbildningsProjektActionPerformed
         this.dispose();
-        new SkapaNyttUtbildningsProjekt(epost).setVisible(true);
+        new UtbildningsProjekt(epost).setVisible(true);
     }//GEN-LAST:event_btnUtbildningsProjektActionPerformed
 
 
