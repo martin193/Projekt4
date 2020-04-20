@@ -146,8 +146,18 @@ public class AnvStartsida extends javax.swing.JFrame {
         });
 
         btnForskningsProjekt.setText("Forskningsprojekt");
+        btnForskningsProjekt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnForskningsProjektActionPerformed(evt);
+            }
+        });
 
         btnUtbildningsProjekt.setText("Utbildningsprojekt");
+        btnUtbildningsProjekt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUtbildningsProjektActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -242,6 +252,15 @@ public class AnvStartsida extends javax.swing.JFrame {
         this.dispose();
         new skapaAnvandare(epost).setVisible(true);
     }//GEN-LAST:event_btnAdmSkapaAnvActionPerformed
+
+    private void btnForskningsProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnForskningsProjektActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnForskningsProjektActionPerformed
+
+    private void btnUtbildningsProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUtbildningsProjektActionPerformed
+        this.dispose();
+        new SkapaNyttUtbildningsProjekt(epost).setVisible(true);
+    }//GEN-LAST:event_btnUtbildningsProjektActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

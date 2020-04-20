@@ -159,11 +159,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Forskningsprojekt"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnForskningsProjektActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnUtbildningsProjekt">
       <Properties>
         <Property name="text" type="java.lang.String" value="Utbildningsprojekt"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUtbildningsProjektActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

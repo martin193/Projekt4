@@ -57,6 +57,11 @@ public class SkapaNyttUtbildningsProjekt extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txaBeskrivning);
 
         btnTillbaka.setText("Tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaActionPerformed(evt);
+            }
+        });
 
         lblBjudIn.setText("Bjud in användare:");
 
@@ -125,6 +130,11 @@ public class SkapaNyttUtbildningsProjekt extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+        this.dispose();
+        new AnvStartsida(epost).setVisible(true);
+    }//GEN-LAST:event_btnTillbakaActionPerformed
 
 
 
