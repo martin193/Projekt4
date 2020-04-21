@@ -24,26 +24,23 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnLoggaUt" alignment="1" min="-2" pref="93" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnUtbildningsProjekt" pref="178" max="32767" attributes="0"/>
-                          <Component id="btnForskningsProjekt" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnSeInformellBlogg" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnSeFormellBlogg" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnAdmSkapaAnv" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnSeInlägg" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnSeProfil" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnAdmProfiler" alignment="0" pref="174" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="btnAllaProjekt" max="32767" attributes="0"/>
+                  <Component id="btnUtbildningsProjekt" pref="178" max="32767" attributes="0"/>
+                  <Component id="btnForskningsProjekt" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnSeInformellBlogg" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnSeFormellBlogg" alignment="0" max="32767" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnAdmSkapaAnv" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnSeInlägg" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnSeProfil" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnAdmProfiler" alignment="0" pref="174" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+              <Component id="btnLoggaUt" min="-2" pref="93" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
@@ -77,11 +74,13 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="btnUtbildningsProjekt" min="-2" pref="39" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnAllaProjekt" min="-2" pref="38" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="btnAdmProfiler" min="-2" pref="39" max="-2" attributes="0"/>
-                      <EmptySpace pref="38" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" pref="38" max="32767" attributes="0"/>
                       <Component id="btnLoggaUt" min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -169,6 +168,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUtbildningsProjektActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnAllaProjekt">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Se alla projekt"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAllaProjektActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
