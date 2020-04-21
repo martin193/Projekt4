@@ -32,6 +32,7 @@ public class MinaProjekt extends javax.swing.JFrame {
     }
     
     private void fyllcbxUtbildning() {
+        cbxUtbildning.removeAllItems();
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
         Connection connection = obj_DB_Connection.get_connection();
         PreparedStatement ps = null;
@@ -53,6 +54,7 @@ public class MinaProjekt extends javax.swing.JFrame {
     }
     
     private void fyllcbxForskning() {
+       cbxForskning.removeAllItems();
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
         Connection connection = obj_DB_Connection.get_connection();
         PreparedStatement ps = null;
@@ -180,20 +182,33 @@ public class MinaProjekt extends javax.swing.JFrame {
 
             String utbildningsTitel = cbxUtbildning.getSelectedItem().toString();
             String forskningsTitel = cbxForskning.getSelectedItem().toString();
-
-            if (utbildningsTitel != null && forskningsTitel.equals("")) {
-
-                String sql = "DELETE FROM UTBILDNINGSPROJEKT WHERE TITEL = '" + utbildningsTitel + "'";
-                updateSql(sql);
+            if (utbildningsTitel.equals("") && forskningsTitel.equals("")){
+                JOptionPane.showMessageDialog(null, "Välj ett projekt!");
+            }
+            else if (utbildningsTitel != null && forskningsTitel.equals("")) {
+                String uPid = getUFpid("SELECT UPID FROM UTBILDNINGSPROJEKT WHERE TITEL = '"+utbildningsTitel+"'");
+                String sql1 = "DELETE FROM UTBILDNINGSPROJEKT WHERE UPID ="+uPid;
+                String sql2 = "DELETE FROM UTBILDNINGSINLAGG WHERE UPID ="+uPid;
+                String sql3 = "DELETE FROM ANVANDARE_UTBILDNINGSPROJEKT WHERE UPID ="+uPid;
+                updateSql(sql3);
+                updateSql(sql2);
+                updateSql(sql1);
 
                 JOptionPane.showMessageDialog(null, "Projektet har raderats!");
                 
+                fyllcbxUtbildning();
             } else if (forskningsTitel != null && utbildningsTitel.equals("")) {
-                String sql2 = "DELETE FROM FORSKNINGSPROJEKT WHERE TITEL = '" + forskningsTitel + "'";
+                String fPid = getUFpid("SELECT FPID FROM FORSKNINGSPROJEKT WHERE TITEL = '"+forskningsTitel+"'");
+                String sql1 = "DELETE FROM FORSKNINGSPROJEKT WHERE FPID ="+fPid;
+                String sql2 = "DELETE FROM FORSKNINGSINLAGG WHERE FPID ="+fPid;
+                String sql3 = "DELETE FROM ANVANDARE_FORSKNINGSPROJEKT WHERE FPID ="+fPid;
+                updateSql(sql3);
                 updateSql(sql2);
+                updateSql(sql1);
 
                 JOptionPane.showMessageDialog(null, "Projektet har raderats!");
-
+                
+                fyllcbxForskning();
             } else if (utbildningsTitel != null && forskningsTitel != null) {
                 JOptionPane.showMessageDialog(null, "Välj endast ett projekt!");
             }
@@ -213,6 +228,22 @@ public class MinaProjekt extends javax.swing.JFrame {
         {
             System.out.println(e);
         }}
+    
+    private String getUFpid(String q){
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        String svar = null;
+        try {
+            PreparedStatement ps = connection.prepareStatement(q);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+             svar = rs.getString(1);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return svar;
+    }
 
   
 
