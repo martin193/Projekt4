@@ -1,15 +1,25 @@
+
+import java.awt.Image;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Sarah
  */
 public class SkapaNyttForskningsProjekt extends javax.swing.JFrame {
-    
+
     private String epost;
 
     /**
@@ -18,6 +28,10 @@ public class SkapaNyttForskningsProjekt extends javax.swing.JFrame {
     public SkapaNyttForskningsProjekt(String e) {
         initComponents();
         epost = e;
+        this.setLocationRelativeTo(null);
+        txaBeskrivning.setLineWrap(true);
+        txaBeskrivning.setWrapStyleWord(true);
+        fyllBloggTabell();
     }
 
     /**
@@ -33,13 +47,16 @@ public class SkapaNyttForskningsProjekt extends javax.swing.JFrame {
         lblNamn = new javax.swing.JLabel();
         txfNamn = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txaBeskrivning = new javax.swing.JTextArea();
-        lblBjudIn = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        listBjudIn = new javax.swing.JList<>();
         btnSkapaProjekt = new javax.swing.JButton();
         btnTillbaka = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblInbjudna = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblBjudIn = new javax.swing.JTable();
+        btnBjudIn = new javax.swing.JButton();
+        btnTaBortInbjuden = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txaBeskrivning = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,15 +67,12 @@ public class SkapaNyttForskningsProjekt extends javax.swing.JFrame {
 
         jLabel1.setText("Beskrivning:");
 
-        txaBeskrivning.setColumns(20);
-        txaBeskrivning.setRows(5);
-        jScrollPane1.setViewportView(txaBeskrivning);
-
-        lblBjudIn.setText("Bjud in användare:");
-
-        jScrollPane2.setViewportView(listBjudIn);
-
         btnSkapaProjekt.setText("Skapa projekt");
+        btnSkapaProjekt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSkapaProjektActionPerformed(evt);
+            }
+        });
 
         btnTillbaka.setText("Tillbaka");
         btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
@@ -67,81 +81,316 @@ public class SkapaNyttForskningsProjekt extends javax.swing.JFrame {
             }
         });
 
+        tblInbjudna.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Inbjudna användare"
+            }
+        ));
+        jScrollPane3.setViewportView(tblInbjudna);
+
+        tblBjudIn.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Användare"
+            }
+        ));
+        jScrollPane4.setViewportView(tblBjudIn);
+
+        btnBjudIn.setText("Bjud in");
+        btnBjudIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBjudInActionPerformed(evt);
+            }
+        });
+
+        btnTaBortInbjuden.setText("Ta bort");
+        btnTaBortInbjuden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaBortInbjudenActionPerformed(evt);
+            }
+        });
+
+        txaBeskrivning.setColumns(20);
+        txaBeskrivning.setRows(5);
+        jScrollPane2.setViewportView(txaBeskrivning);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnBjudIn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnTaBortInbjuden, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(43, 43, 43)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(53, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSkapaProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(163, 163, 163)
+                        .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(113, 113, 113)
-                        .addComponent(lblSkapaProjekt))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblBjudIn)
-                            .addComponent(lblNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txfNamn, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
-                .addContainerGap(137, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSkapaProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(192, 192, 192)
+                                .addComponent(lblSkapaProjekt))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(157, 157, 157)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txfNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(lblSkapaProjekt)
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txfNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel1)))
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblBjudIn)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblSkapaProjekt)
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txfNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(74, 74, 74)
+                                .addComponent(btnBjudIn)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnTaBortInbjuden)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSkapaProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28))
+                    .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSkapaProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         this.dispose();
         new ForskningsProjekt(epost).setVisible(true);
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
-   
+    private void fyllBloggTabell() {
+
+        try {
+
+            String fraga = "SELECT * FROM ANVANDARE";
+
+            String anvandare = GetQuery(fraga);
+
+        } catch (Exception bla) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+        }
+
+    }
+
+    public String GetQuery(String s) {
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        String epost2 = null;
+
+        DefaultTableModel yaya = (DefaultTableModel) tblBjudIn.getModel();
+        int rowCount = yaya.getRowCount();
+        for (int i = rowCount - 1; i >= 0; i--) {
+            yaya.removeRow(i);
+        }
+
+        try {
+            String query = s;
+            ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                epost2 = rs.getString(4);
+
+                String resultat = "";
+                if (epost.equals(epost2)) {
+
+                } else {
+                    //resultat+=rubrik + "\n" + "Författare: " + fornamn + ' ' + efternamn + "\n" + "Kategori: " + kategori + "\n" + text +  "\n" + "\n";
+                    DefaultTableModel taaInlagg = (DefaultTableModel) tblBjudIn.getModel();
+                    taaInlagg.addRow(new Object[]{epost2});
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return epost;
+    }
+
+    private void btnBjudInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBjudInActionPerformed
+        DefaultTableModel yaya = (DefaultTableModel) tblBjudIn.getModel();
+        int selectedRowIndex = tblBjudIn.getSelectedRow();
+
+        if (selectedRowIndex == -1) {
+            JOptionPane.showMessageDialog(null, "Vänligen markera en användare");
+        } else {
+            String epost = (yaya.getValueAt(selectedRowIndex, 0).toString());
+
+            DefaultTableModel taaInlagg = (DefaultTableModel) tblInbjudna.getModel();
+            taaInlagg.addRow(new Object[]{epost});
+
+            yaya.removeRow(selectedRowIndex);
+        }
+    }//GEN-LAST:event_btnBjudInActionPerformed
+
+    private void btnTaBortInbjudenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortInbjudenActionPerformed
+        DefaultTableModel yaya = (DefaultTableModel) tblInbjudna.getModel();
+        int selectedRowIndex = tblInbjudna.getSelectedRow();
+
+        if (selectedRowIndex == -1) {
+            JOptionPane.showMessageDialog(null, "Vänligen markera en användare");
+        } else {
+            String epost = (yaya.getValueAt(selectedRowIndex, 0).toString());
+
+            DefaultTableModel taaInlagg = (DefaultTableModel) tblBjudIn.getModel();
+            taaInlagg.addRow(new Object[]{epost});
+
+            yaya.removeRow(selectedRowIndex);
+        }
+    }//GEN-LAST:event_btnTaBortInbjudenActionPerformed
+
+    private void btnSkapaProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaProjektActionPerformed
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+
+        DefaultTableModel yaya = (DefaultTableModel) tblInbjudna.getModel();
+        int rowCount = yaya.getRowCount();
+
+        String titel = txfNamn.getText();
+        String beskrivning = txaBeskrivning.getText();
+        try {
+            if (Validering.baraBokstaver(txfNamn) && Validering.textFaltHarVarde(txfNamn)) {
+                if (Validering.baraBokstaverTextArea(txaBeskrivning) && Validering.textAreaHarVarde(txaBeskrivning)) {
+                    int projektId = GetAutoId("SELECT MAX(FPID) FROM FORSKNINGSPROJEKT");
+                    String fraga = "select * from ANVANDARE where EPOST = '" + epost + "'";
+
+                    int projektSkapare = getAnvandarID(fraga);
+
+                    String fraga4 = "insert into FORSKNINGSPROJEKT values ('" + projektId + "', '" + titel + "', '" + beskrivning + "', '" + projektSkapare + "')";
+                    GetQuery2(fraga4);
+
+                    String fraga5 = "insert into ANVANDARE_FORSKNINGSPROJEKT values ('" + projektSkapare + "', '" + projektId + "')";
+                    GetQuery2(fraga4);
+
+                    for (int i = 0; i < rowCount; i++) {
+
+                        String anvandare = (yaya.getValueAt(i, 0).toString());
+
+                        System.out.println(anvandare);
+
+                        String fraga2 = "select ANVANDARID from ANVANDARE where EPOST = '" + anvandare + "'";
+                        int anvandareIDInbjuden = getAnvandarID(fraga2);
+
+                        String fraga3 = "insert into ANVANDARE_FORSKNINGSPROJEKT values ('" + anvandareIDInbjuden + "', '" + projektId + "')";
+                        GetQuery2(fraga3);
+
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+    }//GEN-LAST:event_btnSkapaProjektActionPerformed
+
+    public void GetQuery2(String s) {
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        try {
+            String query = s;
+            ps = connection.prepareStatement(query);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    private int getAnvandarID(String Q) {
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        int id = 0;
+        try {
+            String query = Q;
+            ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                id = rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return id;
+    }
+
+    public int GetAutoId(String o) {
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        int idNy = 1;
+        try {
+            String query = o;
+            ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                idNy = rs.getInt(1);
+            }
+        } catch (Exception ex) {
+            System.out.println("Internt felmeddelande: " + ex);
+        }
+        idNy = idNy + 1;
+        return idNy;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBjudIn;
     private javax.swing.JButton btnSkapaProjekt;
+    private javax.swing.JButton btnTaBortInbjuden;
     private javax.swing.JButton btnTillbaka;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lblBjudIn;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lblNamn;
     private javax.swing.JLabel lblSkapaProjekt;
-    private javax.swing.JList<String> listBjudIn;
+    private javax.swing.JTable tblBjudIn;
+    private javax.swing.JTable tblInbjudna;
     private javax.swing.JTextArea txaBeskrivning;
     private javax.swing.JTextField txfNamn;
     // End of variables declaration//GEN-END:variables
