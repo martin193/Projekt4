@@ -95,6 +95,24 @@ public class Validering {
             //annars returneras false
         }
     }
+    
+        public static boolean baraBokstaverTextArea(JTextArea kollaRuta)
+    {
+          
+        if (kollaRuta.getText().matches("^[\\p{L} .'-]+$"))         
+        {
+            return true;
+            //såhär kollar man ifall inmatat värde endast innehåller bokstäver, då returneras true
+        } 
+        else 
+        {
+            JOptionPane.showMessageDialog(null, "Vänligen ange endast bokstäver!");
+            kollaRuta.requestFocus();
+            return false;
+            //annars returneras false
+        }
+    }
+    
     public static boolean korrektTelnr(JTextField kollaRuta)
     {
         int nummer = (kollaRuta.getText().length());
