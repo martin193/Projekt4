@@ -134,6 +134,11 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
         });
 
         btnValjFil.setText("Välj");
+        btnValjFil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnValjFilActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelBakgrundLayout = new javax.swing.GroupLayout(jPanelBakgrund);
         jPanelBakgrund.setLayout(jPanelBakgrundLayout);
@@ -304,6 +309,10 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
     private void txfRubrikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfRubrikActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txfRubrikActionPerformed
+
+    private void btnValjFilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValjFilActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnValjFilActionPerformed
 
     private String getId(){
         String id1 = null;

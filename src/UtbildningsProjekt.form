@@ -315,6 +315,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="V&#xe4;lj"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnValjFilActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
