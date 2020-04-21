@@ -2,6 +2,9 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -111,6 +114,12 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
 
         lblSkrivText.setText("Text:");
 
+        txfRubrik.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfRubrikActionPerformed(evt);
+            }
+        });
+
         txaText.setColumns(20);
         txaText.setRows(5);
         jScrollPane1.setViewportView(txaText);
@@ -118,6 +127,11 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
         lblSkrivFil.setText("Ladda upp fil:");
 
         btnPosta.setText("Posta");
+        btnPosta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPostaActionPerformed(evt);
+            }
+        });
 
         btnValjFil.setText("Välj");
 
@@ -268,32 +282,53 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
         new AnvStartsida(epost).setVisible(true);
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
+    private void btnPostaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostaActionPerformed
+        if (Validering.textFaltHarVarde(txfRubrik) && Validering.textAreaHarVarde(txaText)){
+            String rubrik = txfRubrik.getText();
+            String text = txaText.getText();
+            String uiid = GetAutoId("SELECT MAX(UIID) FROM UTBILDNINGSINLAGG");
+            String tidpunkt = hemtaTidpunkt();
+            String personId = getId();
+            String upid = getUpid();
+            String query = "INSERT INTO UTBILDNINGSINLAGG VALUES ("+uiid+",'"+rubrik+"','"+text+"',null,'"+tidpunkt+"',"+personId+","+upid+")";
+            updateSql(query);
+            JOptionPane.showMessageDialog(null, "Inlägget har publicerats!");
+            txfRubrik.setText(null);
+            txaText.setText(null);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Vänligen fyll i rubrik och textfält!");
+        }
+    }//GEN-LAST:event_btnPostaActionPerformed
+
+    private void txfRubrikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfRubrikActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfRubrikActionPerformed
+
     private String getId(){
-        String id = null;
+        String id1 = null;
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
         Connection connection = obj_DB_Connection.get_connection();
-        PreparedStatement ps = null;
         try {
             String query = "SELECT ANVANDARID FROM ANVANDARE WHERE EPOST='"+epost+"'";
-            ps = connection.prepareStatement(query);
+            PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                id = rs.getString(1);
+                id1 = rs.getString(1);
             }
         } catch (Exception e) {
             System.out.println(e);
         }
-        return id;
+        return id1;
     }
     
     private void fillBox(){
         cbxProjekt.removeAllItems();
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
         Connection connection = obj_DB_Connection.get_connection();
-        PreparedStatement ps = null;
         try {
             String query = "SELECT TITEL FROM ANVANDARE_UTBILDNINGSPROJEKT JOIN UTBILDNINGSPROJEKT ON ANVANDARE_UTBILDNINGSPROJEKT.UPID=UTBILDNINGSPROJEKT.UPID WHERE ANVANDARE_UTBILDNINGSPROJEKT.ANVANDARID="+id;
-            ps = connection.prepareStatement(query);
+            PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 cbxProjekt.addItem(rs.getString(1));
@@ -302,6 +337,71 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
             System.out.println(e);
         }
     }
+    
+    public String GetAutoId(String o) {
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        int idNy = 1;
+        try {
+            String query = o;
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                idNy = rs.getInt(1);
+            }
+
+        } catch (Exception ex) {
+            System.out.println("Internt felmeddelande: " + ex);
+        }
+
+        idNy = idNy + 1;
+
+        return Integer.toString(idNy);
+
+    }
+    
+    public String hemtaTidpunkt() {
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+
+        return dtf.format(now);
+
+    }
+    
+    public String getUpid(){
+        int uPid = 0;
+        String titel = cbxProjekt.getSelectedItem().toString();
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT UPID FROM UTBILDNINGSPROJEKT WHERE TITEL ='"+titel+"'");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                uPid = rs.getInt(1);
+
+            }
+
+        } catch (Exception ex) {
+            System.out.println("Internt felmeddelande: " + ex);
+        }
+        
+        return Integer.toString(uPid);
+        
+    }
+    
+        private void updateSql(String statement)
+    {
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        try{
+       PreparedStatement ps = connection.prepareStatement(statement);
+       ps.executeUpdate();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMinaProjekt;
