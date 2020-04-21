@@ -411,20 +411,33 @@ public class NyaFormellaSidan extends javax.swing.JFrame {
     private void btnTaBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortActionPerformed
         // TODO add your handling code here:
                 
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        
         DefaultTableModel yaya = (DefaultTableModel)jTable2.getModel();
 
         int selectedRowIndex = jTable2.getSelectedRow();
         
         String id = (yaya.getValueAt(selectedRowIndex, 0).toString());
+        //id är rubrik nu dock        
         
-        JOptionPane.showMessageDialog(null, "Rubrik: " + id);
+        try {
+            String sql = "DELETE FROM FORMELL_BLOGG WHERE RUBRIK = '" + id + "'";
+                ps = connection.prepareStatement(sql);
+                ps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Inlägget " + id + " har tagits bort");
+        }
+        catch (Exception bla) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");            
+        }
         
-        //id är rubrik nu dock
-        
-        //String fraga= "SELECT * FROM INFORMELL_BLOGG JOIN ANVANDARE ON ANVANDARE.ANVANDARID = INFORMELL_BLOGG.ANVANDARID WHERE RUBRIK = '" + id + "'";
-                
-                
-        //String text = GetText(fraga);
+        fyllCbKategorier();
+        fyllBloggTabell();
+        lblRubrik.setText("");
+        BloggRuta.setText("");
+        lblFörfattare.setText("");
+        lbltid.setText("");
         
     }//GEN-LAST:event_btnTaBortActionPerformed
 
@@ -505,7 +518,6 @@ public class NyaFormellaSidan extends javax.swing.JFrame {
                 tidpunkt = rs.getString(6);
                 fil = rs.getString(7);
 	    }
-                        System.out.println(tidpunkt);
             String namn = "Av: " + fornamn + " " + efternamn;
             String tid = tidpunkt.substring(0, 16);
             lblRubrik.setText(rubrik);
