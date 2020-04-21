@@ -2,6 +2,9 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -25,6 +28,7 @@ public class ForskningsProjekt extends javax.swing.JFrame {
         initComponents();
         epost = e;
         id = getId();
+        fillBox();
     }
 
     /**
@@ -88,6 +92,11 @@ public class ForskningsProjekt extends javax.swing.JFrame {
         btnValjFil.setText("Välj");
 
         btnPosta.setText("Posta");
+        btnPosta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPostaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -230,6 +239,25 @@ public class ForskningsProjekt extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnSkapaNyttProjektActionPerformed
 
+    private void btnPostaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostaActionPerformed
+        if (Validering.textFaltHarVarde(txfRubrik) && Validering.textAreaHarVarde(txaText)){
+            String rubrik = txfRubrik.getText();
+            String text = txaText.getText();
+            String fiid = GetAutoId("SELECT MAX(FIID) FROM FORSKNINGSINLAGG");
+            String tidpunkt = hemtaTidpunkt();
+            String personId = getId();
+            String fpid = getFpid();
+            String query = "INSERT INTO FORSKNINGSINLAGG VALUES ("+fiid+",'"+rubrik+"','"+text+"',null,'"+tidpunkt+"',"+personId+","+fpid+")";
+            updateSql(query);
+            JOptionPane.showMessageDialog(null, "Inlägget har publicerats!");
+            txfRubrik.setText(null);
+            txaText.setText(null);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Vänligen fyll i rubrik och textfält!");
+        }
+    }//GEN-LAST:event_btnPostaActionPerformed
+
         private String getId(){
         String id = null;
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
@@ -247,6 +275,87 @@ public class ForskningsProjekt extends javax.swing.JFrame {
         }
         return id;
     }
+        
+     private void fillBox(){
+        cbxProjekt.removeAllItems();
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        try {
+            String query = "SELECT TITEL FROM ANVANDARE_FORSKNINGSPROJEKT JOIN FORSKNINGSPROJEKT ON ANVANDARE_FORSKNINGSPROJEKT.FPID=FORSKNINGSPROJEKT.FPID WHERE ANVANDARE_FORSKNINGSPROJEKT.ANVANDARID="+id;
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                cbxProjekt.addItem(rs.getString(1));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public String GetAutoId(String o) {
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        int idNy = 1;
+        try {
+            String query = o;
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                idNy = rs.getInt(1);
+            }
+
+        } catch (Exception ex) {
+            System.out.println("Internt felmeddelande: " + ex);
+        }
+
+        idNy = idNy + 1;
+
+        return Integer.toString(idNy);
+
+    }
+    
+    public String hemtaTidpunkt() {
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+
+        return dtf.format(now);
+
+    }
+    
+    public String getFpid(){
+        int uPid = 0;
+        String titel = cbxProjekt.getSelectedItem().toString();
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT FPID FROM FORSKNINGSPROJEKT WHERE TITEL ='"+titel+"'");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                uPid = rs.getInt(1);
+
+            }
+
+        } catch (Exception ex) {
+            System.out.println("Internt felmeddelande: " + ex);
+        }
+        
+        return Integer.toString(uPid);
+        
+    }
+    
+        private void updateSql(String statement)
+    {
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        try{
+       PreparedStatement ps = connection.prepareStatement(statement);
+       ps.executeUpdate();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }}
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
