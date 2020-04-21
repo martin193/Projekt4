@@ -3,6 +3,10 @@ import java.awt.Desktop;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -225,17 +229,23 @@ String filepath;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
-        this.dispose();
+                        this.dispose();
+        new NyaFormellaSidan(epost).setVisible(true);
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     //Lägger till nytt blogginlägg i databas FORMELL_BLOGG
     //INLÄGGSID, TIDPUNKT och FIL EJ KLART!!!!!!   
     private void btnPubliceraFormelltInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPubliceraFormelltInlaggActionPerformed
+       
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
         Connection connection = obj_DB_Connection.get_connection();
         PreparedStatement ps = null;
         if (Validering.textFaltHarVarde(txtNyRubrik) && Validering.textAreaHarVarde(txaNyttInlägg)) {
-
+                try {
+                  String sokväg = txtValjFil.getText();
+            Path path = Paths.get(sokväg);
+                  byte[] fileBytes = Files.readAllBytes(path);
+                  
             String fraga = ("select INLAGGSID from FORMELL_BLOGG order by INLAGGSID ASC");
 
             String rubrik = txtNyRubrik.getText();
@@ -244,10 +254,11 @@ String filepath;
             int forfattareID = GetForfattare();
             int inlaggsID = GetAutoId(fraga);
             String tidpunkt = hemtaTidpunkt();
-            String sokväg = txtValjFil.getText();
-            try {
-                String query = "insert into FORMELL_BLOGG (RUBRIK, TEXT, INLAGGSID, ANVANDARID, KATEGORI, TIDPUNKT, FIL) values"
-                        + " (?, ?, ?, ?, ?, ?, ?)";
+            sokväg = path.getFileName().toString();
+            
+            
+                String query = "insert into FORMELL_BLOGG (RUBRIK, TEXT, INLAGGSID, ANVANDARID, KATEGORI, TIDPUNKT, FIL, NYFIL) values"
+                        + " (?, ?, ?, ?, ?, ?, ?, ?)";
                 ps = connection.prepareStatement(query);
                 ps.setString(1, rubrik);
                 ps.setString(2, text);
@@ -256,6 +267,7 @@ String filepath;
                 ps.setInt(5, kategoriID);
                 ps.setString(6, tidpunkt);
                 ps.setString(7, sokväg);
+                ps.setBytes(8, fileBytes);
                 ps.execute();
 
                 JOptionPane.showMessageDialog(null, "Inlägg publicerat!");
@@ -309,6 +321,8 @@ String filepath;
                   filepath = f.getAbsolutePath();
                   filepath = filepath.replace('\\', '/');
                   txtValjFil.setText(filepath);
+//                  Path path = Paths.get(filepath);
+//                  byte[] fileBytes = Files.readAllBytes(path);
       }
       catch (Exception e)
       {
