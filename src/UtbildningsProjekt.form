@@ -277,6 +277,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfRubrik">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfRubrikActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
@@ -302,6 +305,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Posta"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPostaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txfFil">
         </Component>
@@ -309,6 +315,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="V&#xe4;lj"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnValjFilActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
