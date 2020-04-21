@@ -284,34 +284,32 @@ public class SkapaNyttForskningsProjekt extends javax.swing.JFrame {
         String titel = txfNamn.getText();
         String beskrivning = txaBeskrivning.getText();
         try {
-            if (Validering.baraBokstaver(txfNamn) && Validering.textFaltHarVarde(txfNamn)) {
-                if (Validering.baraBokstaverTextArea(txaBeskrivning) && Validering.textAreaHarVarde(txaBeskrivning)) {
-                    int projektId = GetAutoId("SELECT MAX(FPID) FROM FORSKNINGSPROJEKT");
-                    String fraga = "select * from ANVANDARE where EPOST = '" + epost + "'";
+            if (Validering.textFaltHarVarde(txfNamn) && Validering.textAreaHarVarde(txaBeskrivning)) {
 
-                    int projektSkapare = getAnvandarID(fraga);
+                int projektId = GetAutoId("SELECT MAX(FPID) FROM FORSKNINGSPROJEKT");
+                String fraga = "select * from ANVANDARE where EPOST = '" + epost + "'";
 
-                    String fraga4 = "insert into FORSKNINGSPROJEKT values ('" + projektId + "', '" + titel + "', '" + beskrivning + "', '" + projektSkapare + "')";
-                    GetQuery2(fraga4);
+                int projektSkapare = getAnvandarID(fraga);
 
-                    String fraga5 = "insert into ANVANDARE_FORSKNINGSPROJEKT values ('" + projektSkapare + "', '" + projektId + "')";
-                    GetQuery2(fraga4);
+                String fraga4 = "insert into FORSKNINGSPROJEKT values ('" + projektId + "', '" + titel + "', '" + beskrivning + "', '" + projektSkapare + "')";
+                GetQuery2(fraga4);
 
-                    for (int i = 0; i < rowCount; i++) {
+                String fraga5 = "insert into ANVANDARE_FORSKNINGSPROJEKT values ('" + projektSkapare + "', '" + projektId + "')";
+                GetQuery2(fraga5);
 
-                        String anvandare = (yaya.getValueAt(i, 0).toString());
+                for (int i = 0; i < rowCount; i++) {
 
-                        System.out.println(anvandare);
+                    String anvandare = (yaya.getValueAt(i, 0).toString());
 
-                        String fraga2 = "select ANVANDARID from ANVANDARE where EPOST = '" + anvandare + "'";
-                        int anvandareIDInbjuden = getAnvandarID(fraga2);
+                    String fraga2 = "select ANVANDARID from ANVANDARE where EPOST = '" + anvandare + "'";
+                    int anvandareIDInbjuden = getAnvandarID(fraga2);
 
-                        String fraga3 = "insert into ANVANDARE_FORSKNINGSPROJEKT values ('" + anvandareIDInbjuden + "', '" + projektId + "')";
-                        GetQuery2(fraga3);
+                    String fraga3 = "insert into ANVANDARE_FORSKNINGSPROJEKT values ('" + anvandareIDInbjuden + "', '" + projektId + "')";
+                    GetQuery2(fraga3);
 
-                    }
                 }
             }
+
         } catch (Exception ex) {
             System.out.println(ex);
         }
