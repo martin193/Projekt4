@@ -1,14 +1,12 @@
 
 import java.awt.Desktop;
 import java.awt.HeadlessException;
-import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -246,6 +244,11 @@ public class NyaFormellaSidan extends javax.swing.JFrame {
                 "Rubrik", "Författare", "Kategori"
             }
         ));
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTable2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -451,6 +454,24 @@ public class NyaFormellaSidan extends javax.swing.JFrame {
                 this.dispose();
         new SkrivaFormelltInlagg(epost).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        // TODO add your handling code here:
+        
+        
+                DefaultTableModel yaya = (DefaultTableModel)jTable2.getModel();
+        int selectedRowIndex = jTable2.getSelectedRow();
+        
+        String id = (yaya.getValueAt(selectedRowIndex, 0).toString());
+        
+        //id är rubrik nu dock
+        
+        String fraga= "SELECT * FROM FORMELL_BLOGG JOIN ANVANDARE ON ANVANDARE.ANVANDARID = FORMELL_BLOGG.ANVANDARID WHERE RUBRIK = '" + id + "'";
+                
+                
+        String text = GetText(fraga);
+        
+    }//GEN-LAST:event_jTable2MouseClicked
     public String GetText(String s)
     {
 	DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
