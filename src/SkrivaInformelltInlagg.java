@@ -212,6 +212,7 @@ public class SkrivaInformelltInlagg extends javax.swing.JFrame {
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         this.dispose();
+        new NyInformellBlogg(epost).setVisible(true);
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     //Lägger till ny kategori i databas KATEGORI_INFORMELL
