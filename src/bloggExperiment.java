@@ -335,7 +335,7 @@ public class bloggExperiment extends javax.swing.JFrame {
         if (kategori == "Alla inlägg")
         {
             try
-        {
+            {
             
             String fraga= "SELECT * FROM INFORMELL_BLOGG JOIN KATEGORI_INFORMELL ON KATEGORIID = KATEGORI JOIN ANVANDARE ON ANVANDARE.ANVANDARID = INFORMELL_BLOGG.ANVANDARID ORDER BY TIDPUNKT DESC";
                 
@@ -343,11 +343,11 @@ public class bloggExperiment extends javax.swing.JFrame {
             String rubrik = GetQuery(fraga);
                 
                 
-        }
-        catch (Exception bla)
-        {
+            }
+            catch (Exception bla)
+            {
              JOptionPane.showMessageDialog(null, "Något gick fel!");
-        }
+            }
         }
         else if (kategori == "Mina inlägg")
         {
@@ -408,20 +408,36 @@ public class bloggExperiment extends javax.swing.JFrame {
 
     private void btnTaBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortActionPerformed
         
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
+        
         DefaultTableModel yaya = (DefaultTableModel)tblInlagg.getModel();
 
         int selectedRowIndex = tblInlagg.getSelectedRow();
         
         String id = (yaya.getValueAt(selectedRowIndex, 0).toString());
+        //id är rubrik nu dock        
         
-        JOptionPane.showMessageDialog(null, "Rubrik: " + id);
+        try {
+            String sql = "DELETE FROM INFORMELL_BLOGG WHERE RUBRIK = '" + id + "'";
+                ps = connection.prepareStatement(sql);
+                ps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Inlägget " + id + " har tagits bort");
+        }
+        catch (Exception bla) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");            
+        }
         
-        //id är rubrik nu dock
+        fyllCbKategorier();
+        fyllBloggTabell();
+        lblRubrik.setText("");
+        bloggRuta.setText("");
+        lblForfattare.setText("");
+        lblTidpunkt.setText("");
         
-        //String fraga= "SELECT * FROM INFORMELL_BLOGG JOIN ANVANDARE ON ANVANDARE.ANVANDARID = INFORMELL_BLOGG.ANVANDARID WHERE RUBRIK = '" + id + "'";
-                
-                
-        //String text = GetText(fraga);
+
+        
     }//GEN-LAST:event_btnTaBortActionPerformed
 
     private void btnNyttInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNyttInlaggActionPerformed
