@@ -9,13 +9,12 @@ import javax.swing.JOptionPane;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Sarah
  */
 public class AdmAllaProjekt extends javax.swing.JFrame {
-    
+
     private String epost;
 
     /**
@@ -27,13 +26,14 @@ public class AdmAllaProjekt extends javax.swing.JFrame {
         fyllcbxUtbildningsprojekt();
         fyllcbxForskningsprojekt();
     }
-    
+
     private void fyllcbxUtbildningsprojekt() {
+        cbxUtbildning.removeAllItems();
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
         Connection connection = obj_DB_Connection.get_connection();
         PreparedStatement ps = null;
         String inlagg = null;
-        cbxUtbildningsprojekt.addItem("");
+        cbxUtbildning.addItem("");
 
         try {
             String fraga = "SELECT TITEL FROM UTBILDNINGSPROJEKT";
@@ -42,19 +42,20 @@ public class AdmAllaProjekt extends javax.swing.JFrame {
 
             while (rs.next()) {
                 inlagg = rs.getString(1);
-                cbxUtbildningsprojekt.addItem(inlagg);
+                cbxUtbildning.addItem(inlagg);
             }
         } catch (Exception e) {
             System.out.println("Felmeddelande! " + e);
         }
     }
-    
+
     private void fyllcbxForskningsprojekt() {
-         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        cbxForskning.removeAllItems();
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
         Connection connection = obj_DB_Connection.get_connection();
         PreparedStatement ps = null;
         String inlagg = null;
-        cbxForskningsprojekt.addItem("");
+        cbxForskning.addItem("");
 
         try {
             String fraga = "SELECT TITEL FROM FORSKNINGSPROJEKT";
@@ -63,25 +64,23 @@ public class AdmAllaProjekt extends javax.swing.JFrame {
 
             while (rs.next()) {
                 inlagg = rs.getString(1);
-                cbxForskningsprojekt.addItem(inlagg);
+                cbxForskning.addItem(inlagg);
             }
         } catch (Exception e) {
             System.out.println("Felmeddelande! " + e);
         }
     }
-    
-    private void updateSql(String statement)
-    {
+
+    private void updateSql(String statement) {
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
         Connection connection = obj_DB_Connection.get_connection();
-        try{
-       PreparedStatement ps = connection.prepareStatement(statement);
-       ps.executeUpdate();
-        }
-        catch(Exception e)
-        {
+        try {
+            PreparedStatement ps = connection.prepareStatement(statement);
+            ps.executeUpdate();
+        } catch (Exception e) {
             System.out.println(e);
-        }}
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -97,8 +96,8 @@ public class AdmAllaProjekt extends javax.swing.JFrame {
         btnRadera = new javax.swing.JButton();
         btnAvbryt = new javax.swing.JButton();
         lblForskningsprojekt = new javax.swing.JLabel();
-        cbxUtbildningsprojekt = new javax.swing.JComboBox<>();
-        cbxForskningsprojekt = new javax.swing.JComboBox<>();
+        cbxUtbildning = new javax.swing.JComboBox<>();
+        cbxForskning = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,7 +113,7 @@ public class AdmAllaProjekt extends javax.swing.JFrame {
             }
         });
 
-        btnAvbryt.setText("Avbryt");
+        btnAvbryt.setText("Tillbaka");
         btnAvbryt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAvbrytActionPerformed(evt);
@@ -136,8 +135,8 @@ public class AdmAllaProjekt extends javax.swing.JFrame {
                             .addComponent(lblForskningsprojekt))
                         .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cbxUtbildningsprojekt, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbxForskningsprojekt, 0, 147, Short.MAX_VALUE)))
+                            .addComponent(cbxUtbildning, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbxForskning, 0, 147, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(193, 193, 193)
                         .addComponent(lblAllaProjekt)))
@@ -160,11 +159,11 @@ public class AdmAllaProjekt extends javax.swing.JFrame {
                 .addGap(75, 75, 75)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUtbprojekt)
-                    .addComponent(cbxUtbildningsprojekt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxUtbildning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblForskningsprojekt)
-                    .addComponent(cbxForskningsprojekt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxForskning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(btnRadera, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
@@ -181,43 +180,69 @@ public class AdmAllaProjekt extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAvbrytActionPerformed
 
     private void btnRaderaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRaderaActionPerformed
-       DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
         Connection connection = obj_DB_Connection.get_connection();
         PreparedStatement ps = null;
 
+        String utbildningsTitel = cbxUtbildning.getSelectedItem().toString();
+        String forskningsTitel = cbxForskning.getSelectedItem().toString();
+        if (utbildningsTitel.equals("") && forskningsTitel.equals("")) {
+            JOptionPane.showMessageDialog(null, "Välj ett projekt!");
+        } else if (utbildningsTitel != null && forskningsTitel.equals("")) {
+            String uPid = getUFpid("SELECT UPID FROM UTBILDNINGSPROJEKT WHERE TITEL = '" + utbildningsTitel + "'");
+            String sql1 = "DELETE FROM UTBILDNINGSPROJEKT WHERE UPID =" + uPid;
+            String sql2 = "DELETE FROM UTBILDNINGSINLAGG WHERE UPID =" + uPid;
+            String sql3 = "DELETE FROM ANVANDARE_UTBILDNINGSPROJEKT WHERE UPID =" + uPid;
+            updateSql(sql3);
+            updateSql(sql2);
+            updateSql(sql1);
 
-            String utbildningsTitel = cbxUtbildningsprojekt.getSelectedItem().toString();
-            String forskningsTitel = cbxForskningsprojekt.getSelectedItem().toString();
+            JOptionPane.showMessageDialog(null, "Projektet har raderats!");
 
-            if (utbildningsTitel != null && forskningsTitel.equals("")) {
+            fyllcbxUtbildningsprojekt();
+        } else if (forskningsTitel != null && utbildningsTitel.equals("")) {
+            String fPid = getUFpid("SELECT FPID FROM FORSKNINGSPROJEKT WHERE TITEL = '" + forskningsTitel + "'");
+            String sql1 = "DELETE FROM FORSKNINGSPROJEKT WHERE FPID =" + fPid;
+            String sql2 = "DELETE FROM FORSKNINGSINLAGG WHERE FPID =" + fPid;
+            String sql3 = "DELETE FROM ANVANDARE_FORSKNINGSPROJEKT WHERE FPID =" + fPid;
+            updateSql(sql3);
+            updateSql(sql2);
+            updateSql(sql1);
 
-                String sql = "DELETE FROM UTBILDNINGSPROJEKT WHERE TITEL = '" + utbildningsTitel + "'";
-                updateSql(sql);
+            JOptionPane.showMessageDialog(null, "Projektet har raderats!");
 
-                JOptionPane.showMessageDialog(null, "Projektet har raderats!");
-                
-            } else if (forskningsTitel != null && utbildningsTitel.equals("")) {
-                String sql2 = "DELETE FROM FORSKNINGSPROJEKT WHERE TITEL = '" + forskningsTitel + "'";
-                updateSql(sql2);
+            fyllcbxForskningsprojekt();
+        } else if (utbildningsTitel != null && forskningsTitel != null) {
+            JOptionPane.showMessageDialog(null, "Välj endast ett projekt!");
+        }
 
-                JOptionPane.showMessageDialog(null, "Projektet har raderats!");
-
-            } else if (utbildningsTitel != null && forskningsTitel != null) {
-                JOptionPane.showMessageDialog(null, "Välj endast ett projekt!");
-            }
-            
     }//GEN-LAST:event_btnRaderaActionPerformed
 
+    private String getUFpid(String q) {
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        String svar = null;
+        try {
+            PreparedStatement ps = connection.prepareStatement(q);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                svar = rs.getString(1);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return svar;
+    }
     /**
      * @param args the command line arguments
      */
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAvbryt;
     private javax.swing.JButton btnRadera;
-    private javax.swing.JComboBox<String> cbxForskningsprojekt;
-    private javax.swing.JComboBox<String> cbxUtbildningsprojekt;
+    private javax.swing.JComboBox<String> cbxForskning;
+    private javax.swing.JComboBox<String> cbxUtbildning;
     private javax.swing.JLabel lblAllaProjekt;
     private javax.swing.JLabel lblForskningsprojekt;
     private javax.swing.JLabel lblUtbprojekt;
