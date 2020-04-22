@@ -30,8 +30,6 @@ public class ForskningsProjekt extends javax.swing.JFrame {
     private String epost;
     private String id; 
     String filepath;
-    private byte[] filebytes;
-
     /**
      * Creates new sform ForskningsProjekt
      */
@@ -275,12 +273,18 @@ public class ForskningsProjekt extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSkapaNyttProjektActionPerformed
 
     private void btnPostaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostaActionPerformed
+        DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
+        Connection connection = obj_DB_Connection.get_connection();
+        PreparedStatement ps = null;
         if (Validering.textFaltHarVarde(txfRubrik) && Validering.textAreaHarVarde(txaText))
+        {
             try
             {
+
             String sokväg = txfLaddaUppFil.getText();
             Path path = Paths.get(sokväg);
-                  byte[] fileBytes = Files.readAllBytes(path);{
+            byte[] fileBytes = Files.readAllBytes(path);
+            
             String rubrik = txfRubrik.getText();
             String text = txaText.getText();
             String fiid = GetAutoId("SELECT MAX(FIID) FROM FORSKNINGSINLAGG");
@@ -288,24 +292,37 @@ public class ForskningsProjekt extends javax.swing.JFrame {
             String personId = getId();
             String fpid = getFpid();
             
-            sokväg = path.getFileName().toString();
+           sokväg = path.getFileName().toString();
             
-            String query = "INSERT INTO FORSKNINGSINLAGG VALUES ("+fiid+",'"+rubrik+"','"+text+"',fileBytes,'"+tidpunkt+"',"+personId+","+fpid+")";
+//            String query = "INSERT INTO FORSKNINGSINLAGG VALUES ("+fiid+",'"+rubrik+"','"+text+"','"sokväg"','"+tidpunkt+"',"+personId+","+fpid+","fileBytes")";
+            String query = "insert into FORSKNINGSINLAGG (FIID, RUBRIK, TEXT, TIDPUNKT, ANVANDARID, FPID, NYFIL, FIL) values"
+                        + " (?, ?, ?, ?, ?, ?, ?, ?)";
+                ps = connection.prepareStatement(query);
+                ps.setString(1, fiid);
+                ps.setString(2, rubrik);
+                ps.setString(3, text);                         
+                ps.setString(4, tidpunkt);
+                ps.setString(5, personId);
+                ps.setString(6, fpid);
+                ps.setBytes(7, fileBytes);
+                ps.setString(8, sokväg); 
+                ps.execute();
             updateSql(query);
             JOptionPane.showMessageDialog(null, "Inlägget har publicerats!");
             txfRubrik.setText(null);
             txaText.setText(null);
             
         }
-            }
+            
        catch (Exception e) {
                 System.out.println(e);
             }
+        }
     }//GEN-LAST:event_btnPostaActionPerformed
 
     private void btnValjFilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValjFilActionPerformed
         // TODO add your handling code here:
-              JFileChooser jfc = new JFileChooser();
+      JFileChooser jfc = new JFileChooser();
       jfc.showOpenDialog(this);
       
       try {
@@ -320,7 +337,6 @@ public class ForskningsProjekt extends javax.swing.JFrame {
       {
           JOptionPane.showMessageDialog(rootPane, e);
       }
-      
     }//GEN-LAST:event_btnValjFilActionPerformed
 
     private void testActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testActionPerformed

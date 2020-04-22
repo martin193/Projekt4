@@ -247,6 +247,7 @@ String filepath;
                   byte[] fileBytes = Files.readAllBytes(path);
                   
             String fraga = ("select INLAGGSID from FORMELL_BLOGG order by INLAGGSID ASC");
+            System.out.println(sokväg);
 
             String rubrik = txtNyRubrik.getText();
             int kategoriID = GetKategoriID();
@@ -255,8 +256,10 @@ String filepath;
             int inlaggsID = GetAutoId(fraga);
             String tidpunkt = hemtaTidpunkt();
             sokväg = path.getFileName().toString();
-            
-            
+            System.out.println(path.getFileName().toString());  
+            System.out.println(path);
+            System.out.println(sokväg);
+
                 String query = "insert into FORMELL_BLOGG (RUBRIK, TEXT, INLAGGSID, ANVANDARID, KATEGORI, TIDPUNKT, FIL, NYFIL) values"
                         + " (?, ?, ?, ?, ?, ?, ?, ?)";
                 ps = connection.prepareStatement(query);
