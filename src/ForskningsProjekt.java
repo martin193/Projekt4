@@ -1,9 +1,18 @@
 
+import java.awt.Desktop;
+import java.awt.HeadlessException;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /*
@@ -20,6 +29,8 @@ public class ForskningsProjekt extends javax.swing.JFrame {
     
     private String epost;
     private String id; 
+    String filepath;
+    private byte[] filebytes;
 
     /**
      * Creates new sform ForskningsProjekt
@@ -57,6 +68,7 @@ public class ForskningsProjekt extends javax.swing.JFrame {
         txfLaddaUppFil = new javax.swing.JTextField();
         btnValjFil = new javax.swing.JButton();
         btnPosta = new javax.swing.JButton();
+        test = new java.awt.Button();
         btnMinaProjekt = new javax.swing.JButton();
         btnSkapaNyttProjekt = new javax.swing.JButton();
         btnTillbaka = new javax.swing.JButton();
@@ -90,11 +102,24 @@ public class ForskningsProjekt extends javax.swing.JFrame {
         lblFil.setText("Ladda upp fil:");
 
         btnValjFil.setText("Välj");
+        btnValjFil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnValjFilActionPerformed(evt);
+            }
+        });
 
         btnPosta.setText("Posta");
         btnPosta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPostaActionPerformed(evt);
+            }
+        });
+
+        test.setActionCommand("test");
+        test.setLabel("button1");
+        test.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                testActionPerformed(evt);
             }
         });
 
@@ -125,7 +150,10 @@ public class ForskningsProjekt extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txfRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(158, 158, 158)
+                        .addComponent(test, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -146,7 +174,9 @@ public class ForskningsProjekt extends javax.swing.JFrame {
                     .addComponent(lblFil)
                     .addComponent(txfLaddaUppFil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnValjFil))
-                .addGap(37, 37, 37)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(test, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
                 .addComponent(btnPosta)
                 .addGap(23, 23, 23))
         );
@@ -222,7 +252,7 @@ public class ForskningsProjekt extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -240,23 +270,94 @@ public class ForskningsProjekt extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSkapaNyttProjektActionPerformed
 
     private void btnPostaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostaActionPerformed
-        if (Validering.textFaltHarVarde(txfRubrik) && Validering.textAreaHarVarde(txaText)){
+        if (Validering.textFaltHarVarde(txfRubrik) && Validering.textAreaHarVarde(txaText))
+            try
+            {
+            String sokväg = txfLaddaUppFil.getText();
+            Path path = Paths.get(sokväg);
+                  byte[] fileBytes = Files.readAllBytes(path);{
             String rubrik = txfRubrik.getText();
             String text = txaText.getText();
             String fiid = GetAutoId("SELECT MAX(FIID) FROM FORSKNINGSINLAGG");
             String tidpunkt = hemtaTidpunkt();
             String personId = getId();
             String fpid = getFpid();
-            String query = "INSERT INTO FORSKNINGSINLAGG VALUES ("+fiid+",'"+rubrik+"','"+text+"',null,'"+tidpunkt+"',"+personId+","+fpid+")";
+            
+            sokväg = path.getFileName().toString();
+            
+            String query = "INSERT INTO FORSKNINGSINLAGG VALUES ("+fiid+",'"+rubrik+"','"+text+"',fileBytes,'"+tidpunkt+"',"+personId+","+fpid+")";
             updateSql(query);
             JOptionPane.showMessageDialog(null, "Inlägget har publicerats!");
             txfRubrik.setText(null);
             txaText.setText(null);
+            
         }
-        else {
-            JOptionPane.showMessageDialog(null, "Vänligen fyll i rubrik och textfält!");
-        }
+            }
+       catch (Exception e) {
+                System.out.println(e);
+            }
     }//GEN-LAST:event_btnPostaActionPerformed
+
+    private void btnValjFilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValjFilActionPerformed
+        // TODO add your handling code here:
+              JFileChooser jfc = new JFileChooser();
+      jfc.showOpenDialog(this);
+      
+      try {
+                  File f = jfc.getSelectedFile();
+                  filepath = f.getAbsolutePath();
+                  filepath = filepath.replace('\\', '/');
+                  txfLaddaUppFil.setText(filepath);
+//                  Path path = Paths.get(filepath);
+//                  byte[] fileBytes = Files.readAllBytes(path);
+      }
+      catch (Exception e)
+      {
+          JOptionPane.showMessageDialog(rootPane, e);
+      }
+      
+    }//GEN-LAST:event_btnValjFilActionPerformed
+
+    private void testActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testActionPerformed
+        // TODO add your handling code here:
+                        filepath = txfLaddaUppFil.getText();
+        try {
+            
+           String basepath = System.getProperty("user.dir");
+           String newfilepath = basepath + "\\src\\UploadedFiles\\" + filepath; 
+           Path path = Paths.get(newfilepath);
+           if (Files.exists(path))
+                   {
+                       Files.delete(path);
+                   }
+           File file = new File(newfilepath);
+           FileOutputStream os = new FileOutputStream(file); 
+           
+           os.write(filebytes);
+           os.close();
+            
+            File pdfFile = new File(newfilepath);
+            if (pdfFile.exists())
+            {
+                if (Desktop.isDesktopSupported())
+                {
+                    Desktop.getDesktop().open(pdfFile);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(rootPane, "desktop is not supported");
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(rootPane, "File doesnt exist");
+            }
+        }
+        catch ( HeadlessException | IOException e)
+        {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
+        
+    }//GEN-LAST:event_testActionPerformed
 
         private String getId(){
         String id = null;
@@ -375,6 +476,7 @@ public class ForskningsProjekt extends javax.swing.JFrame {
     private javax.swing.JLabel lblRubrik;
     private javax.swing.JLabel lblSkrivInlagg;
     private javax.swing.JLabel lblText;
+    private java.awt.Button test;
     private javax.swing.JTextArea txaText;
     private javax.swing.JTextArea txaVisaProjekt;
     private javax.swing.JTextField txfLaddaUppFil;
