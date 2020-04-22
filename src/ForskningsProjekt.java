@@ -196,6 +196,11 @@ public class ForskningsProjekt extends javax.swing.JFrame {
         });
 
         btnTillbaka.setText("Tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -358,6 +363,11 @@ public class ForskningsProjekt extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_testActionPerformed
+
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+        this.dispose();
+        new AnvStartsida(epost).setVisible(true);
+    }//GEN-LAST:event_btnTillbakaActionPerformed
 
         private String getId(){
         String id = null;
