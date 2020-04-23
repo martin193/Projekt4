@@ -22,6 +22,7 @@ public class AdmAllaProjekt extends javax.swing.JFrame {
      */
     public AdmAllaProjekt(String e) {
         initComponents();
+        this.setLocationRelativeTo(null);
         epost = e;
         fyllcbxUtbildningsprojekt();
         fyllcbxForskningsprojekt();
