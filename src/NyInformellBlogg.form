@@ -35,7 +35,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="cbxKategorier" min="-2" pref="103" max="-2" attributes="0"/>
-                              <EmptySpace pref="50" max="32767" attributes="0"/>
+                              <EmptySpace pref="83" max="32767" attributes="0"/>
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -123,9 +123,9 @@
                   <Component id="lblForfattare" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnTaBort" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jButton1" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnTaBort" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -193,7 +193,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="blogg osv"/>
+        <Property name="text" type="java.lang.String" value="AW - Bloggen"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblBild">
@@ -220,7 +220,7 @@
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="hej d&#xe4;r tryck p&#xe5; ett inl&#xe4;gg"/>
+        <Property name="text" type="java.lang.String" value="Tryck p&#xe5; ett inl&#xe4;gg"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblRubrik">

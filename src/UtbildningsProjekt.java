@@ -149,6 +149,12 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
             }
         });
 
+        txfFil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfFilActionPerformed(evt);
+            }
+        });
+
         btnValjFil.setText("Välj");
         btnValjFil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -297,9 +303,7 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
                                         .addGap(60, 60, 60)
                                         .addComponent(btnSkapaProjekt)))
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -447,24 +451,26 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
         Connection connection = obj_DB_Connection.get_connection();
         PreparedStatement ps = null;
-                if (Validering.textFaltHarVarde(txfRubrik) && Validering.textAreaHarVarde(txaText))
-            
-        if (Validering.textFaltHarVarde(txfRubrik) && Validering.textAreaHarVarde(txaText)){
+        if (Validering.textFaltHarVarde(txfRubrik) && Validering.textAreaHarVarde(txaText))
+        {
             try
             {
-            String sokväg = jTextFieldsokvag.getText();
+
+            String sokväg = txfFil.getText();
             Path path = Paths.get(sokväg);
-                  byte[] fileBytes = Files.readAllBytes(path);
-                  
+            byte[] fileBytes = Files.readAllBytes(path);
+            
             String rubrik = txfRubrik.getText();
             String text = txaText.getText();
             String uiid = GetAutoId("SELECT MAX(UIID) FROM UTBILDNINGSINLAGG");
             String tidpunkt = hemtaTidpunkt();
             String personId = getId();
             String upid = getUpid();
-            sokväg = path.getFileName().toString();
-////            String query = "INSERT INTO UTBILDNINGSINLAGG VALUES ("+uiid+",'"+rubrik+"','"+text+"',null,'"+tidpunkt+"',"+personId+","+upid+")";
-            String query = "insert into FORSKNINGSINLAGG (UIID, RUBRIK, TEXT, FIL, TIDPUNKT, ANVANDARID, UPID, NYFIL) values"
+            
+           sokväg = path.getFileName().toString();
+            
+//            String query = "INSERT INTO FORSKNINGSINLAGG VALUES ("+fiid+",'"+rubrik+"','"+text+"','"sokväg"','"+tidpunkt+"',"+personId+","+fpid+","fileBytes")";
+            String query = "insert into UTBILDNINGSINLAGG (UIID, RUBRIK, TEXT, FIL, TIDPUNKT, ANVANDARID, UPID, NYFIL) values"
                         + " (?, ?, ?, ?, ?, ?, ?, ?)";
                 ps = connection.prepareStatement(query);
                 ps.setString(1, uiid);
@@ -480,11 +486,13 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Inlägget har publicerats!");
             txfRubrik.setText(null);
             txaText.setText(null);
+            txfFil.setText(null);
+            
         }
-                   catch (Exception e) {
+            
+       catch (Exception e) {
                 System.out.println(e);
             }
-
         }
     }//GEN-LAST:event_btnPostaActionPerformed
 
@@ -494,17 +502,18 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
 
     private void btnValjFilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValjFilActionPerformed
         // TODO add your handling code here:      JFileChooser jfc = new JFileChooser();
-                 JFileChooser jfc = new JFileChooser();
-                 jfc.showOpenDialog(this);
-                    try {
-                      File f = jfc.getSelectedFile();
+      JFileChooser jfc = new JFileChooser();
+      jfc.showOpenDialog(this);
+      
+      try {
+                  File f = jfc.getSelectedFile();
                   filepath = f.getAbsolutePath();
                   filepath = filepath.replace('\\', '/');
                   txfFil.setText(filepath);
 //                  Path path = Paths.get(filepath);
 //                  byte[] fileBytes = Files.readAllBytes(path);
       }
-                 catch (Exception e)
+      catch (Exception e)
       {
           JOptionPane.showMessageDialog(rootPane, e);
       }
@@ -565,6 +574,10 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, e);
         }
     }//GEN-LAST:event_jButtonopenActionPerformed
+
+    private void txfFilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfFilActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfFilActionPerformed
 public String GetText(String s)
     {
 	DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();

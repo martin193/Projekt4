@@ -212,7 +212,7 @@ public class NyInformellBlogg extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("blogg osv");
+        jLabel1.setText("AW - Bloggen");
 
         lblBild.setPreferredSize(new java.awt.Dimension(208, 212));
 
@@ -220,7 +220,7 @@ public class NyInformellBlogg extends javax.swing.JFrame {
         bloggRuta.setRows(5);
         jScrollPane2.setViewportView(bloggRuta);
 
-        jLabel2.setText("hej där tryck på ett inlägg");
+        jLabel2.setText("Tryck på ett inlägg");
 
         lblRubrik.setPreferredSize(new java.awt.Dimension(100, 20));
 
@@ -262,7 +262,7 @@ public class NyInformellBlogg extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(cbxKategorier, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                                 .addComponent(jLabel2)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
@@ -327,9 +327,9 @@ public class NyInformellBlogg extends javax.swing.JFrame {
                     .addComponent(lblTidpunkt, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
                     .addComponent(lblForfattare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTaBort)
-                    .addComponent(jButton1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnTaBort))
                 .addContainerGap())
         );
 
