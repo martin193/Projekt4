@@ -221,7 +221,7 @@ public class NyInformellBlogg extends javax.swing.JFrame {
         bloggRuta.setRows(5);
         jScrollPane2.setViewportView(bloggRuta);
 
-        jLabel2.setText("Tryck på ett inlägg:");
+        jLabel2.setText("Välj ett inlägg att visa:");
 
         lblRubrik.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblRubrik.setPreferredSize(new java.awt.Dimension(100, 20));

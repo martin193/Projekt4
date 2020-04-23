@@ -49,12 +49,12 @@
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="jTextField1" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButton2" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Component id="btnTaBort" min="-2" pref="140" max="-2" attributes="0"/>
-                                      <Component id="jComboBox1" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
-                                  </Group>
                                   <Component id="lblbild" alignment="0" pref="295" max="32767" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="jComboBox1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="btnTaBort" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jButton2" alignment="0" pref="157" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace min="0" pref="34" max="32767" attributes="0"/>
                           </Group>
@@ -145,7 +145,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Tryck p&#xe5; ett inl&#xe4;gg:"/>
+        <Property name="text" type="java.lang.String" value="V&#xe4;lj ett inl&#xe4;gg att visa:"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -254,9 +254,6 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JLabel" name="lblbild">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="lbl"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btntillbaka">
       <Properties>
