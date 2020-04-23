@@ -442,6 +442,7 @@ public class NyInformellBlogg extends javax.swing.JFrame {
         bloggRuta.setText("");
         lblForfattare.setText("");
         lblTidpunkt.setText("");
+        lblBild.setIcon(null);
         
 
         

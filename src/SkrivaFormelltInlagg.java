@@ -27,7 +27,7 @@ import javax.swing.JOptionPane;
  * @author Sarah
  */
 public class SkrivaFormelltInlagg extends javax.swing.JFrame {
-String filepath;
+    String filepath;
     private String epost;
 
     /**
@@ -234,7 +234,7 @@ String filepath;
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     //Lägger till nytt blogginlägg i databas FORMELL_BLOGG
-    //INLÄGGSID, TIDPUNKT och FIL EJ KLART!!!!!!   
+
     private void btnPubliceraFormelltInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPubliceraFormelltInlaggActionPerformed
        
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
@@ -242,20 +242,35 @@ String filepath;
         PreparedStatement ps = null;
         if (Validering.textFaltHarVarde(txtNyRubrik) && Validering.textAreaHarVarde(txaNyttInlägg)) {
                 try {
-                    String sokväg = txtValjFil.getText();
-                    Path path = Paths.get(sokväg);
-                    byte[] fileBytes = Files.readAllBytes(path);
+                    String sokväg = null;
+                    byte[] fileBytes = null;
+                    
+                    if (txtValjFil.getText().isEmpty()) 
+                    {
+                        //String sokväg = null;
+                    }
+                    else
+                    {
+                        sokväg = txtValjFil.getText();
+                        Path path = Paths.get(sokväg);
+                        fileBytes = Files.readAllBytes(path);
+                        sokväg = path.getFileName().toString();
+                    }
+                
                   
-            String fraga = ("select INLAGGSID from FORMELL_BLOGG order by INLAGGSID ASC");
+                    String fraga = ("select INLAGGSID from FORMELL_BLOGG order by INLAGGSID ASC");
 
-            String rubrik = txtNyRubrik.getText();
-            int kategoriID = GetKategoriID();
-            String text = txaNyttInlägg.getText();
-            int forfattareID = GetForfattare();
-            int inlaggsID = GetAutoId(fraga);
-            String tidpunkt = hemtaTidpunkt();
-            
-            sokväg = path.getFileName().toString();
+                    String rubrik = txtNyRubrik.getText();
+                    int kategoriID = GetKategoriID();
+                    String text = txaNyttInlägg.getText();
+                    int forfattareID = GetForfattare();
+                    int inlaggsID = GetAutoId(fraga);
+                    String tidpunkt = hemtaTidpunkt();
+
+                    //sokväg = path.getFileName().toString();
+
+                    //System.out.println("byte: " + fileBytes);
+                    //System.out.println("sokväg: " + sokväg);
             
 
                 String query = "insert into FORMELL_BLOGG (RUBRIK, TEXT, INLAGGSID, ANVANDARID, KATEGORI, TIDPUNKT, FIL, NYFIL) values"
@@ -272,7 +287,9 @@ String filepath;
                 ps.execute();
 
                 JOptionPane.showMessageDialog(null, "Inlägg publicerat!");
-            } catch (Exception e) {
+                } 
+            catch (Exception e) 
+            {
                 System.out.println(e);
             }
         }
