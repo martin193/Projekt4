@@ -247,7 +247,6 @@ String filepath;
                     byte[] fileBytes = Files.readAllBytes(path);
                   
             String fraga = ("select INLAGGSID from FORMELL_BLOGG order by INLAGGSID ASC");
-            System.out.println(sokväg);
 
             String rubrik = txtNyRubrik.getText();
             int kategoriID = GetKategoriID();
@@ -258,9 +257,6 @@ String filepath;
             
             sokväg = path.getFileName().toString();
             
-            System.out.println(path.getFileName().toString());  
-            System.out.println(path);
-            System.out.println(sokväg);
 
                 String query = "insert into FORMELL_BLOGG (RUBRIK, TEXT, INLAGGSID, ANVANDARID, KATEGORI, TIDPUNKT, FIL, NYFIL) values"
                         + " (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -325,9 +321,7 @@ String filepath;
                   File f = jfc.getSelectedFile();
                   filepath = f.getAbsolutePath();
                   filepath = filepath.replace('\\', '/');
-                  
-                  System.out.println("pathen:" + filepath);
-                  
+                                    
                   txtValjFil.setText(filepath);
 //                  Path path = Paths.get(filepath);
 //                  byte[] fileBytes = Files.readAllBytes(path);
@@ -387,7 +381,7 @@ String filepath;
 
         idNy = idNy + 1;
 
-        System.out.print(idNy);
+        //System.out.print(idNy);
         return idNy;
 
     }

@@ -419,7 +419,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnOppnaFil">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#xf6;ppna"/>
+        <Property name="text" type="java.lang.String" value="&#xd6;ppna"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOppnaFilActionPerformed"/>

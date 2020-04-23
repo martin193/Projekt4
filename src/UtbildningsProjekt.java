@@ -246,7 +246,7 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
 
         lblTidpunkt.setText(" ");
 
-        btnOppnaFil.setText("öppna");
+        btnOppnaFil.setText("Öppna");
         btnOppnaFil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOppnaFilActionPerformed(evt);
@@ -357,23 +357,7 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSkapaProjektActionPerformed
 
     private void cbxProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxProjektActionPerformed
-        /*String rubrik = cbxProjekt.getSelectedItem().toString();
-                
-        
-            try
-            {
-            
-            String fraga= "SELECT * FROM UTBILDNINGSINLAGG JOIN ANVANDARE ON ANVANDARE.ANVANDARID = UTBILDNINGSINLAGG.ANVANDARID JOIN UTBILDNINGSPROJEKT ON UTBILDNINGSINLAGG.UPID = UTBILDNINGSPROJEKT.UPID WHERE RUBRIK = '" + rubrik + "' ORDER BY TIDPUNKT DESC";
-                
-                
-            String hemta = GetQuery(fraga);
-                
-                
-            }
-            catch (Exception bla)
-            {
-             JOptionPane.showMessageDialog(null, "Något gick fel!");
-            }*/
+        //nah
     }//GEN-LAST:event_cbxProjektActionPerformed
 
     public String GetQuery(String s)
@@ -382,7 +366,6 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
 	Connection connection=obj_DB_Connection.get_connection();
 	PreparedStatement ps=null;
         String rubrik = null;
-        //String text = null;
         String fornamn = null;
         String efternamn = null;
         
@@ -398,9 +381,8 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
 	    ResultSet rs=ps.executeQuery();
 	    while(rs.next()){
                 rubrik = rs.getString(2);
-                //text = rs.getString(2);
-                fornamn = rs.getString(9);
-                efternamn = rs.getString(10);
+                fornamn = rs.getString(10);
+                efternamn = rs.getString(11);
                 
                 String forfattare = fornamn + " " + efternamn;
                                                 

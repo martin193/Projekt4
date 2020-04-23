@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -30,11 +31,13 @@ public class ForskningsProjekt extends javax.swing.JFrame {
     private String epost;
     private String id; 
     String filepath;
+    private byte[] filebytes;
     /**
      * Creates new sform ForskningsProjekt
      */
     public ForskningsProjekt(String e) {
         initComponents();
+        this.setLocationRelativeTo(null);
         epost = e;
         id = getId();
         fillBox();
@@ -50,8 +53,6 @@ public class ForskningsProjekt extends javax.swing.JFrame {
     private void initComponents() {
 
         lblForskningsProjekt = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txaVisaProjekt = new javax.swing.JTextArea();
         lblProjektAtkomst = new javax.swing.JLabel();
         cbxProjekt = new javax.swing.JComboBox<>();
         btnVisaProjekt = new javax.swing.JButton();
@@ -66,23 +67,32 @@ public class ForskningsProjekt extends javax.swing.JFrame {
         txfLaddaUppFil = new javax.swing.JTextField();
         btnValjFil = new javax.swing.JButton();
         btnPosta = new javax.swing.JButton();
-        test = new java.awt.Button();
         btnMinaProjekt = new javax.swing.JButton();
         btnSkapaNyttProjekt = new javax.swing.JButton();
         btnTillbaka = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblInlagg = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txtInlagg = new javax.swing.JTextArea();
+        txtSokvag = new javax.swing.JTextField();
+        btnOppnaFil = new javax.swing.JButton();
+        lblInlaggRubrik = new javax.swing.JLabel();
+        lblForfattare = new javax.swing.JLabel();
+        lblTidpunkt = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblForskningsProjekt.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lblForskningsProjekt.setText("Forskningsprojekt");
 
-        txaVisaProjekt.setColumns(20);
-        txaVisaProjekt.setRows(5);
-        jScrollPane1.setViewportView(txaVisaProjekt);
-
         lblProjektAtkomst.setText("Projekt jag har åtkomst till:");
 
         btnVisaProjekt.setText("Visa");
+        btnVisaProjekt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisaProjektActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
 
@@ -113,14 +123,6 @@ public class ForskningsProjekt extends javax.swing.JFrame {
             }
         });
 
-        test.setActionCommand("test");
-        test.setLabel("button1");
-        test.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                testActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -132,26 +134,22 @@ public class ForskningsProjekt extends javax.swing.JFrame {
                         .addComponent(lblSkrivInlagg))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(lblFil)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblRubrik)
+                            .addComponent(lblText))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txfLaddaUppFil, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnValjFil))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txfRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnPosta)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblRubrik)
-                                    .addComponent(lblText))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txfRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(158, 158, 158)
-                        .addComponent(test, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblFil))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txfLaddaUppFil, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnValjFil)))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -172,11 +170,9 @@ public class ForskningsProjekt extends javax.swing.JFrame {
                     .addComponent(lblFil)
                     .addComponent(txfLaddaUppFil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnValjFil))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(test, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
+                .addGap(39, 39, 39)
                 .addComponent(btnPosta)
-                .addGap(23, 23, 23))
+                .addGap(21, 21, 21))
         );
 
         btnMinaProjekt.setText("Mina projekt");
@@ -194,11 +190,38 @@ public class ForskningsProjekt extends javax.swing.JFrame {
         });
 
         btnTillbaka.setText("Tillbaka");
-        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTillbakaActionPerformed(evt);
+
+        tblInlagg.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Rubrik", "Författare"
+            }
+        ));
+        tblInlagg.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblInlaggMouseClicked(evt);
             }
         });
+        jScrollPane3.setViewportView(tblInlagg);
+
+        txtInlagg.setColumns(20);
+        txtInlagg.setRows(5);
+        jScrollPane4.setViewportView(txtInlagg);
+
+        btnOppnaFil.setText("Öppna");
+        btnOppnaFil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOppnaFilActionPerformed(evt);
+            }
+        });
+
+        lblInlaggRubrik.setText(" ");
+
+        lblForfattare.setText(" ");
+
+        lblTidpunkt.setText(" ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -207,24 +230,46 @@ public class ForskningsProjekt extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(394, 394, 394)
+                        .addComponent(lblProjektAtkomst)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbxProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnVisaProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(lblProjektAtkomst)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnVisaProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap()
+                                .addComponent(lblInlaggRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(lblTidpunkt, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(jScrollPane4)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(30, 30, 30)
+                                .addComponent(txtSokvag, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(44, 44, 44)
+                                .addComponent(btnOppnaFil, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(71, 71, 71)
-                                .addComponent(btnMinaProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(64, 64, 64)
-                                .addComponent(btnSkapaNyttProjekt))))
+                                .addContainerGap()
+                                .addComponent(lblForfattare, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(109, 109, 109)
+                        .addComponent(btnMinaProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60)
+                        .addComponent(btnSkapaNyttProjekt))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(330, 330, 330)
                         .addComponent(lblForskningsProjekt)))
@@ -240,19 +285,34 @@ public class ForskningsProjekt extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(lblForskningsProjekt)
                 .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblProjektAtkomst)
+                    .addComponent(cbxProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVisaProjekt))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblProjektAtkomst)
-                            .addComponent(cbxProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnVisaProjekt))
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblInlaggRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSkapaNyttProjekt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnMinaProjekt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(btnSkapaNyttProjekt, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                                .addComponent(btnMinaProjekt))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblTidpunkt)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnOppnaFil))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblForfattare)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtSokvag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -293,11 +353,7 @@ public class ForskningsProjekt extends javax.swing.JFrame {
             String fpid = getFpid();
             
             sokväg = path.getFileName().toString();
-            
-            System.out.println(path.getFileName().toString());  
-            System.out.println(path);
-            System.out.println(sokväg);
-            
+
 //            String query = "INSERT INTO FORSKNINGSINLAGG VALUES ("+fiid+",'"+rubrik+"','"+text+"','"sokväg"','"+tidpunkt+"',"+personId+","+fpid+","fileBytes")";
             String query = "insert into FORSKNINGSINLAGG (FIID, RUBRIK, TEXT, TIDPUNKT, ANVANDARID, FPID, NYFIL, FIL) values"
                         + " (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -333,14 +389,11 @@ public class ForskningsProjekt extends javax.swing.JFrame {
                   File f = jfc.getSelectedFile();
                   filepath = f.getAbsolutePath();
                   
-                  System.out.println("pathen1: " + filepath);
                   
                   filepath = filepath.replace('\\', '/');
                   txfLaddaUppFil.setText(filepath);
 //                  Path path = Paths.get(filepath);
 //                  byte[] fileBytes = Files.readAllBytes(path);
-
-                 System.out.println("pathen2: " + filepath);
       }
       catch (Exception e)
       {
@@ -348,9 +401,134 @@ public class ForskningsProjekt extends javax.swing.JFrame {
       }
     }//GEN-LAST:event_btnValjFilActionPerformed
 
-    private void testActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testActionPerformed
-        // TODO add your handling code here:
-                        filepath = txfLaddaUppFil.getText();
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+        this.dispose();
+        new AnvStartsida(epost).setVisible(true);
+    }//GEN-LAST:event_btnTillbakaActionPerformed
+
+    private void tblInlaggMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblInlaggMouseClicked
+
+        DefaultTableModel tabellen = (DefaultTableModel)tblInlagg.getModel();
+        int selectedRowIndex = tblInlagg.getSelectedRow();
+
+        String id = (tabellen.getValueAt(selectedRowIndex, 0).toString());
+        
+
+        //id är rubrik nu dock
+
+        String fraga= "SELECT * FROM FORSKNINGSINLAGG WHERE RUBRIK = '" + id + "'";
+
+        String text = GetText(fraga);
+          
+    }//GEN-LAST:event_tblInlaggMouseClicked
+
+    public String GetText(String s)
+    {
+	DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
+	Connection connection=obj_DB_Connection.get_connection();
+	PreparedStatement ps=null;
+        String rubrik = null;
+        String text = null;
+        String tidpunkt = null;
+        String fil = null;
+        
+
+	try {
+	    String query= s;
+	    ps=connection.prepareStatement(query);
+	    ResultSet rs=ps.executeQuery();
+	    while(rs.next()){
+                rubrik = rs.getString(2);
+                text = rs.getString(3);
+                tidpunkt = rs.getString(4);
+                filebytes = rs.getBytes(7);
+                fil = rs.getString(8);
+                
+	    }
+            DefaultTableModel tabellen = (DefaultTableModel)tblInlagg.getModel();
+            int selectedRowIndex = tblInlagg.getSelectedRow();
+            
+            String namn = "Av: " + (tabellen.getValueAt(selectedRowIndex, 1).toString());
+            
+            String tid = tidpunkt.substring(0, 16);
+            
+            lblInlaggRubrik.setText(rubrik);
+            txtInlagg.setText(text);    
+            lblForfattare.setText(namn);            
+            lblTidpunkt.setText(tid);
+            txtSokvag.setText(fil);
+            
+            
+	} catch (Exception e) {
+	    System.out.println(e);
+	}         
+        
+        return text;
+    }
+    
+    public String GetQuery(String s)
+    {
+	DB_connection.DB_Connection obj_DB_Connection= new DB_connection.DB_Connection();
+	Connection connection=obj_DB_Connection.get_connection();
+	PreparedStatement ps=null;
+        String rubrik = null;
+        String fornamn = null;
+        String efternamn = null;
+        
+        DefaultTableModel tabellen = (DefaultTableModel)tblInlagg.getModel();
+        int rowCount = tabellen.getRowCount();
+        for (int i = rowCount - 1; i >= 0; i--) {
+            tabellen.removeRow(i);
+        }
+        
+	try {
+	    String query= s;
+	    ps=connection.prepareStatement(query);
+	    ResultSet rs=ps.executeQuery();
+	    while(rs.next()){
+                rubrik = rs.getString(2);
+                fornamn = rs.getString(10);
+                efternamn = rs.getString(11);
+                
+                String forfattare = fornamn + " " + efternamn;
+                                                
+                DefaultTableModel tabellen1 = (DefaultTableModel) tblInlagg.getModel();
+                tabellen1.addRow(new Object[]{rubrik,forfattare});
+                
+                
+	    }
+	} catch (Exception e) {
+	    System.out.println(e);
+	} 
+        return rubrik;
+    }
+    private void btnVisaProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaProjektActionPerformed
+        String rubrik = cbxProjekt.getSelectedItem().toString();
+        
+        
+            try
+            {
+            
+            String fraga= "SELECT * FROM FORSKNINGSINLAGG JOIN ANVANDARE ON ANVANDARE.ANVANDARID = FORSKNINGSINLAGG.ANVANDARID JOIN FORSKNINGSPROJEKT ON FORSKNINGSINLAGG.FPID = FORSKNINGSPROJEKT.FPID WHERE FORSKNINGSPROJEKT.TITEL = '" + rubrik + "' ORDER BY TIDPUNKT DESC";
+                
+                
+            String hemta = GetQuery(fraga);
+                
+                
+            }
+            catch (Exception bla)
+            {
+             JOptionPane.showMessageDialog(null, "Något gick fel!");
+            }
+            
+        lblInlaggRubrik.setText("");
+        txtInlagg.setText("");
+        lblForfattare.setText("");
+        lblTidpunkt.setText("");    
+    }//GEN-LAST:event_btnVisaProjektActionPerformed
+
+    private void btnOppnaFilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOppnaFilActionPerformed
+        filepath = txtSokvag.getText();
         try {
             
            String basepath = System.getProperty("user.dir");
@@ -363,8 +541,8 @@ public class ForskningsProjekt extends javax.swing.JFrame {
            File file = new File(newfilepath);
            FileOutputStream os = new FileOutputStream(file); 
            
-           //os.write(filebytes);
-           //os.close();
+           os.write(filebytes);
+           os.close();
             
             File pdfFile = new File(newfilepath);
             if (pdfFile.exists())
@@ -385,15 +563,8 @@ public class ForskningsProjekt extends javax.swing.JFrame {
         catch ( HeadlessException | IOException e)
         {
             JOptionPane.showMessageDialog(rootPane, e);
-        }
-        
-    }//GEN-LAST:event_testActionPerformed
-
-    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
-        this.dispose();
-        new AnvStartsida(epost).setVisible(true);
-    }//GEN-LAST:event_btnTillbakaActionPerformed
-
+        }//GEN-LAST:event_btnOppnaFilActionPerformed
+    }
         private String getId(){
         String id = null;
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
@@ -460,7 +631,7 @@ public class ForskningsProjekt extends javax.swing.JFrame {
     }
     
     public String getFpid(){
-        int uPid = 0;
+        int fPid = 0;
         String titel = cbxProjekt.getSelectedItem().toString();
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
         Connection connection = obj_DB_Connection.get_connection();
@@ -468,7 +639,7 @@ public class ForskningsProjekt extends javax.swing.JFrame {
             PreparedStatement ps = connection.prepareStatement("SELECT FPID FROM FORSKNINGSPROJEKT WHERE TITEL ='"+titel+"'");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                uPid = rs.getInt(1);
+                fPid = rs.getInt(1);
 
             }
 
@@ -476,7 +647,7 @@ public class ForskningsProjekt extends javax.swing.JFrame {
             System.out.println("Internt felmeddelande: " + ex);
         }
         
-        return Integer.toString(uPid);
+        return Integer.toString(fPid);
         
     }
     
@@ -496,6 +667,7 @@ public class ForskningsProjekt extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMinaProjekt;
+    private javax.swing.JButton btnOppnaFil;
     private javax.swing.JButton btnPosta;
     private javax.swing.JButton btnSkapaNyttProjekt;
     private javax.swing.JButton btnTillbaka;
@@ -503,18 +675,23 @@ public class ForskningsProjekt extends javax.swing.JFrame {
     private javax.swing.JButton btnVisaProjekt;
     private javax.swing.JComboBox<String> cbxProjekt;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lblFil;
+    private javax.swing.JLabel lblForfattare;
     private javax.swing.JLabel lblForskningsProjekt;
+    private javax.swing.JLabel lblInlaggRubrik;
     private javax.swing.JLabel lblProjektAtkomst;
     private javax.swing.JLabel lblRubrik;
     private javax.swing.JLabel lblSkrivInlagg;
     private javax.swing.JLabel lblText;
-    private java.awt.Button test;
+    private javax.swing.JLabel lblTidpunkt;
+    private javax.swing.JTable tblInlagg;
     private javax.swing.JTextArea txaText;
-    private javax.swing.JTextArea txaVisaProjekt;
     private javax.swing.JTextField txfLaddaUppFil;
     private javax.swing.JTextField txfRubrik;
+    private javax.swing.JTextArea txtInlagg;
+    private javax.swing.JTextField txtSokvag;
     // End of variables declaration//GEN-END:variables
 }
