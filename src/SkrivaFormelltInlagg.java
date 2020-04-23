@@ -242,9 +242,9 @@ String filepath;
         PreparedStatement ps = null;
         if (Validering.textFaltHarVarde(txtNyRubrik) && Validering.textAreaHarVarde(txaNyttInlägg)) {
                 try {
-                  String sokväg = txtValjFil.getText();
-            Path path = Paths.get(sokväg);
-                  byte[] fileBytes = Files.readAllBytes(path);
+                    String sokväg = txtValjFil.getText();
+                    Path path = Paths.get(sokväg);
+                    byte[] fileBytes = Files.readAllBytes(path);
                   
             String fraga = ("select INLAGGSID from FORMELL_BLOGG order by INLAGGSID ASC");
             System.out.println(sokväg);
@@ -255,7 +255,9 @@ String filepath;
             int forfattareID = GetForfattare();
             int inlaggsID = GetAutoId(fraga);
             String tidpunkt = hemtaTidpunkt();
+            
             sokväg = path.getFileName().toString();
+            
             System.out.println(path.getFileName().toString());  
             System.out.println(path);
             System.out.println(sokväg);
@@ -323,6 +325,9 @@ String filepath;
                   File f = jfc.getSelectedFile();
                   filepath = f.getAbsolutePath();
                   filepath = filepath.replace('\\', '/');
+                  
+                  System.out.println("pathen:" + filepath);
+                  
                   txtValjFil.setText(filepath);
 //                  Path path = Paths.get(filepath);
 //                  byte[] fileBytes = Files.readAllBytes(path);

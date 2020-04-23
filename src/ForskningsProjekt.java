@@ -292,7 +292,11 @@ public class ForskningsProjekt extends javax.swing.JFrame {
             String personId = getId();
             String fpid = getFpid();
             
-           sokväg = path.getFileName().toString();
+            sokväg = path.getFileName().toString();
+            
+            System.out.println(path.getFileName().toString());  
+            System.out.println(path);
+            System.out.println(sokväg);
             
 //            String query = "INSERT INTO FORSKNINGSINLAGG VALUES ("+fiid+",'"+rubrik+"','"+text+"','"sokväg"','"+tidpunkt+"',"+personId+","+fpid+","fileBytes")";
             String query = "insert into FORSKNINGSINLAGG (FIID, RUBRIK, TEXT, TIDPUNKT, ANVANDARID, FPID, NYFIL, FIL) values"
@@ -328,10 +332,15 @@ public class ForskningsProjekt extends javax.swing.JFrame {
       try {
                   File f = jfc.getSelectedFile();
                   filepath = f.getAbsolutePath();
+                  
+                  System.out.println("pathen1: " + filepath);
+                  
                   filepath = filepath.replace('\\', '/');
                   txfLaddaUppFil.setText(filepath);
 //                  Path path = Paths.get(filepath);
 //                  byte[] fileBytes = Files.readAllBytes(path);
+
+                 System.out.println("pathen2: " + filepath);
       }
       catch (Exception e)
       {
@@ -354,8 +363,8 @@ public class ForskningsProjekt extends javax.swing.JFrame {
            File file = new File(newfilepath);
            FileOutputStream os = new FileOutputStream(file); 
            
-           os.write(filebytes);
-           os.close();
+           //os.write(filebytes);
+           //os.close();
             
             File pdfFile = new File(newfilepath);
             if (pdfFile.exists())

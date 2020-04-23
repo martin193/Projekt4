@@ -77,8 +77,8 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
         lblInlaggRubrik = new javax.swing.JLabel();
         lblForfattare = new javax.swing.JLabel();
         lblTidpunkt = new javax.swing.JLabel();
-        jTextFieldsokvag = new javax.swing.JTextField();
-        jButtonopen = new javax.swing.JButton();
+        txtSokvag = new javax.swing.JTextField();
+        btnOppnaFil = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -246,10 +246,10 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
 
         lblTidpunkt.setText(" ");
 
-        jButtonopen.setText("open");
-        jButtonopen.addActionListener(new java.awt.event.ActionListener() {
+        btnOppnaFil.setText("öppna");
+        btnOppnaFil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonopenActionPerformed(evt);
+                btnOppnaFilActionPerformed(evt);
             }
         });
 
@@ -279,9 +279,9 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(41, 41, 41)
-                        .addComponent(jTextFieldsokvag, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addComponent(jButtonopen)
+                        .addComponent(txtSokvag, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(btnOppnaFil)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -290,21 +290,18 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblProjekt)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cbxProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(26, 26, 26)
-                                        .addComponent(btnVisaProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(31, 31, 31)
-                                        .addComponent(btnMinaProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(60, 60, 60)
-                                        .addComponent(btnSkapaProjekt)))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(lblProjekt)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbxProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(btnVisaProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(btnMinaProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(60, 60, 60)
+                                .addComponent(btnSkapaProjekt))
                             .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,9 +329,7 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
                             .addComponent(btnSkapaProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnMinaProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 5, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnTillbaka)
-                            .addComponent(jButtonopen))
+                        .addComponent(btnTillbaka)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
@@ -342,7 +337,9 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
                             .addComponent(lblForfattare)
                             .addComponent(lblTidpunkt))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldsokvag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtSokvag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnOppnaFil))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -535,9 +532,9 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tblInlaggMouseClicked
 
-    private void jButtonopenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonopenActionPerformed
+    private void btnOppnaFilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOppnaFilActionPerformed
         // TODO add your handling code here:
-                        filepath = jTextFieldsokvag.getText();
+                        filepath = txtSokvag.getText();
         try {
             
            String basepath = System.getProperty("user.dir");
@@ -573,7 +570,7 @@ public class UtbildningsProjekt extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(rootPane, e);
         }
-    }//GEN-LAST:event_jButtonopenActionPerformed
+    }//GEN-LAST:event_btnOppnaFilActionPerformed
 
     private void txfFilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfFilActionPerformed
         // TODO add your handling code here:
@@ -586,6 +583,7 @@ public String GetText(String s)
         String rubrik = null;
         String text = null;
         String tidpunkt = null;
+        String fil = null;
         
 
 	try {
@@ -596,6 +594,8 @@ public String GetText(String s)
                 rubrik = rs.getString(2);
                 text = rs.getString(3);
                 tidpunkt = rs.getString(5);
+                fil = rs.getString(4);
+                filebytes = rs.getBytes(8);
                 
 	    }
             DefaultTableModel tabellen = (DefaultTableModel)tblInlagg.getModel();
@@ -609,6 +609,7 @@ public String GetText(String s)
             txtInlagg.setText(text);    
             lblForfattare.setText(namn);            
             lblTidpunkt.setText(tid);
+            txtSokvag.setText(fil);
             
             
 	} catch (Exception e) {
@@ -718,18 +719,17 @@ public String GetText(String s)
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMinaProjekt;
+    private javax.swing.JButton btnOppnaFil;
     private javax.swing.JButton btnPosta;
     private javax.swing.JButton btnSkapaProjekt;
     private javax.swing.JButton btnTillbaka;
     private javax.swing.JButton btnValjFil;
     private javax.swing.JButton btnVisaProjekt;
     private javax.swing.JComboBox<String> cbxProjekt;
-    private javax.swing.JButton jButtonopen;
     private javax.swing.JPanel jPanelBakgrund;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextField jTextFieldsokvag;
     private javax.swing.JLabel lblForfattare;
     private javax.swing.JLabel lblInlaggRubrik;
     private javax.swing.JLabel lblProjekt;
@@ -744,5 +744,6 @@ public String GetText(String s)
     private javax.swing.JTextField txfFil;
     private javax.swing.JTextField txfRubrik;
     private javax.swing.JTextArea txtInlagg;
+    private javax.swing.JTextField txtSokvag;
     // End of variables declaration//GEN-END:variables
 }
