@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 public class hanteraAnvandare extends javax.swing.JFrame {
 
     private String email;
+    private boolean combo;
 
     /**
      * Creates new form hanteraAnvandare
@@ -63,7 +64,6 @@ public class hanteraAnvandare extends javax.swing.JFrame {
         btnTaBort = new javax.swing.JButton();
         btnAvbryt = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
 
         jLabel8.setFont(new java.awt.Font("Cambria", 1, 24)); // NOI18N
         jLabel8.setText("Skapa ny användare");
@@ -123,13 +123,6 @@ public class hanteraAnvandare extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Cambria", 1, 24)); // NOI18N
         jLabel9.setText("Hantera användare");
 
-        jButton2.setText("Visa");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -165,9 +158,7 @@ public class hanteraAnvandare extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(boxAnvandare, 0, 129, Short.MAX_VALUE)
                                             .addComponent(txfFornamn))))
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(41, 41, 41))
+                                .addGap(121, 121, 121))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel7)
@@ -197,9 +188,8 @@ public class hanteraAnvandare extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(boxAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
-                .addGap(17, 17, 17)
+                    .addComponent(boxAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txfFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -272,8 +262,10 @@ public class hanteraAnvandare extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUppdateraActionPerformed
 
     private void boxAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxAnvandareActionPerformed
+        if(combo){
         setText();
         setCheckBox();
+        }
     }//GEN-LAST:event_boxAnvandareActionPerformed
 
     private void btnAvbrytActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvbrytActionPerformed
@@ -294,11 +286,8 @@ public class hanteraAnvandare extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnTaBortActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void fillBox() {
+        combo = false;
         boxAnvandare.removeAllItems();
         DB_connection.DB_Connection obj_DB_Connection = new DB_connection.DB_Connection();
         Connection connection = obj_DB_Connection.get_connection();
@@ -310,6 +299,7 @@ public class hanteraAnvandare extends javax.swing.JFrame {
             while (rs.next()) {
                 boxAnvandare.addItem(rs.getString("EPOST"));
             }
+            combo = true;
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -385,7 +375,6 @@ public class hanteraAnvandare extends javax.swing.JFrame {
     private javax.swing.JButton btnUppdatera;
     private javax.swing.JCheckBox checkAdmin;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
