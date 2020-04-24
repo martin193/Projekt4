@@ -342,10 +342,24 @@ public class ForskningsProjekt extends javax.swing.JFrame {
         {
             try
             {
+            String sokväg = null;
+                    byte[] fileBytes = null;
+                    
+                    if (txfLaddaUppFil.getText().isEmpty()) 
+                    {
+                        //String sokväg = null;
+                    }
+                    else
+                    {
+                        sokväg = txfLaddaUppFil.getText();
+                        Path path = Paths.get(sokväg);
+                        fileBytes = Files.readAllBytes(path);
+                        sokväg = path.getFileName().toString();
+                    }
 
-            String sokväg = txfLaddaUppFil.getText();
-            Path path = Paths.get(sokväg);
-            byte[] fileBytes = Files.readAllBytes(path);
+            //String sokväg = txfLaddaUppFil.getText();
+            //Path path = Paths.get(sokväg);
+            //byte[] fileBytes = Files.readAllBytes(path);
             
             String rubrik = txfRubrik.getText();
             String text = txaText.getText();
@@ -354,7 +368,7 @@ public class ForskningsProjekt extends javax.swing.JFrame {
             String personId = getId();
             String fpid = getFpid();
             
-            sokväg = path.getFileName().toString();
+            //sokväg = path.getFileName().toString();
 
 //            String query = "INSERT INTO FORSKNINGSINLAGG VALUES ("+fiid+",'"+rubrik+"','"+text+"','"sokväg"','"+tidpunkt+"',"+personId+","+fpid+","fileBytes")";
             String query = "insert into FORSKNINGSINLAGG (FIID, RUBRIK, TEXT, TIDPUNKT, ANVANDARID, FPID, NYFIL, FIL) values"
