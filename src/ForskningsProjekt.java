@@ -343,7 +343,7 @@ public class ForskningsProjekt extends javax.swing.JFrame {
             try
             {
             String sokväg = null;
-                    byte[] fileBytes = null;
+            byte[] fileBytes = null;
                     
                     if (txfLaddaUppFil.getText().isEmpty()) 
                     {
